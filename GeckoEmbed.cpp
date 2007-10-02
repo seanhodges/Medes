@@ -1,8 +1,8 @@
 #include <gtk/gtk.h>
 #include <gtkmozembed.h>
 #include <nsEmbedAPI.h>
-#include <string>
 
+#include <string>
 using namespace std;
 
 class GeckoEmbed {
@@ -12,9 +12,9 @@ class GeckoEmbed {
 		/*
 		 * Initialise gtkmozembed
 		 */
-		GeckoEmbed(void) {
-			gtk_moz_embed_set_profile_path("mozembed", "mozembed");
-			mozEmbed = GTK_MOZ_EMBED (gtk_moz_embed_new());
+		GeckoEmbed() {
+			gtk_moz_embed_set_profile_path("mozembed","mozembed");
+			mozEmbed = GTK_MOZ_EMBED(gtk_moz_embed_new());
 		}
 
 		/*
@@ -22,18 +22,19 @@ class GeckoEmbed {
 		 *
 		 * @return the GTK hbox instance
 		 */
-		GtkWidget getFrame(void) {
-			mozEmbedContainer = gtk_hbox_new(0, 0);
+		GtkWidget *getFrame(void) {
+			GtkWidget *mozEmbedContainer = gtk_hbox_new(0, 0);
 			gtk_box_pack_start(GTK_BOX(mozEmbedContainer), GTK_WIDGET(mozEmbed), TRUE, TRUE, 0);
+			return mozEmbedContainer;
 		}
 
 		/*
 		 * Redirect the Gecko engine to a given address
 		 *
-		 * @param address - a fully resolved URL
+		 * @param newUrl - a fully resolved URL
 		 */
-		void setUrl(string url) {
-			gtk_moz_embed_load_url(mozEmbed, url);
+		void setUrl(string newUrl) {
+			gtk_moz_embed_load_url(mozEmbed, newUrl.c_str());
 		}
 
 		/*
@@ -52,7 +53,6 @@ class GeckoEmbed {
 
 	private:
 
-		GtkMozWidget mozEmbed;
-		string url = "http://maps.google.co.uk";
+		GtkMozEmbed *mozEmbed;
+};
 
-}
