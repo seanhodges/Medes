@@ -5,23 +5,24 @@
  *
  * @param argc - number of arguments passed into main()
  * @param argv[] - the arguments passed into main()
+ * @param config - the application configuration settings
  */
-AppWindow::AppWindow(int argc, char *argv[]) {
+AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_init(&argc, &argv);
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	// Set up the window
-	string configTitle = "Facebook";
-	int configWidth = 800;
-	int configHeight = 600;
-	gtk_window_set_default_size(GTK_WINDOW(window), configWidth, configHeight);
-	setTitle(configTitle);
+	gtk_window_set_default_size(GTK_WINDOW(window), config.getAppWidth(), config.getAppHeight());
+	setTitle(config.getAppTitle());
 	// Attach the Gecko engine
-	gecko.init();
+	gecko.init(config);
 	AppWindow::setContent(gecko.getFrame());
 	// Set up callback events
 	setupCallbacks();
 }
 
+/**
+ * Destroy the application window
+ */
 AppWindow::~AppWindow() {
 	gecko.tearDown();
 }

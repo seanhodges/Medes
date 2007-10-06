@@ -5,7 +5,8 @@
 #include <gtkmozembed.h>
 #include <nsEmbedAPI.h>
 #include <string>
-	using namespace std;
+	using std::string;
+#include "ConfigContainer.h"
 
 class GeckoEmbed {
 
@@ -15,7 +16,7 @@ class GeckoEmbed {
 
 	public:
 
-		void init(); 
+		void init(ConfigContainer config); 
 
 		GtkWidget* getFrame(); 
 

@@ -3,14 +3,13 @@
 /**
  * Initialise the engine (must be called AFTER gtk_init())
  */
-void GeckoEmbed::init() {
+void GeckoEmbed::init(ConfigContainer config) {
 	string configProfilePath = "mozembed";
 	string configProfileName = "mozembed";
-	string configUrl = "http://maps.google.co.uk";
 	gtk_moz_embed_set_profile_path(configProfilePath.c_str(),configProfileName.c_str());
 	GtkMozEmbed *mozEmbed = GTK_MOZ_EMBED(gtk_moz_embed_new());
 	GeckoEmbed::setMozEmbed(mozEmbed);
-	GeckoEmbed::setUrl(configUrl);
+	GeckoEmbed::setUrl(config.getAppUrl());
 }
 
 /*

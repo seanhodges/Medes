@@ -3,8 +3,9 @@
 
 #include <gtk/gtk.h>
 #include <string>
-	using namespace std;
+	using std::string;
 #include "GeckoEmbed.h"
+#include "ConfigContainer.h"
 
 class AppWindow {
 
@@ -19,7 +20,7 @@ class AppWindow {
 
 	public:
 
-		AppWindow(int argc, char* argv[]); 
+		AppWindow(int argc, char* argv[], ConfigContainer config); 
 		
 		~AppWindow(); 
 
