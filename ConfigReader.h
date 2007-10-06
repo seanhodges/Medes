@@ -3,38 +3,33 @@
 
 #include <libxml/xmlreader.h>
 #include <string>
-	using namespace std;
+	using std::string;
+#include "ConfigContainer.h"
 
 class ConfigReader {
 
 	private:
 
-		template<typename T> T getSetting(string group, string key);
+		string xmlFilePath;
 
-		struct ConfigResult {
-
-			ConfigResult(ConfigReader& reader, string group, string key)
-				: reader(reader), group(group), key(key) {}
-
-			template<typename T> operator T() {
-				return reader.getSetting<T>(group, key);
-			}
-
-			ConfigReader& reader;
-				
-			string group;
-
-			string key;
-			
-		};
-
-		string xmlDoc;
+		xmlDocPtr xmlDoc;
 
 	public:
 
-		ConfigReader(string xmlPath); 
+		ConfigReader(); 
+		~ConfigReader();
 
-		ConfigResult getSetting(string group, string key);
+		xmlDocPtr getXmlDoc() { return xmlDoc; }
+		string getFilePath() { return xmlFilePath; }
+
+		void setXmlDoc(xmlDocPtr newDoc) { xmlDoc = newDoc; }
+		void setFilePath(string newFilePath) { xmlFilePath = newFilePath; }
+
+		bool loadFile(string xmlPath);
+
+		void appendConfigToContainer(ConfigContainer* config);
+
+		string getSetting(string group, string key, string defaultValue);
 
 		void changeSetting(string group, string key, string newValue);
 };
