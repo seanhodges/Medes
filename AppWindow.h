@@ -8,6 +8,15 @@
 
 class AppWindow {
 
+	private:
+		
+		void setupCallbacks(); 
+
+		static void eventDestroy(GtkWidget* widget, gpointer data); 
+
+		GtkWidget* window;
+		GeckoEmbed gecko;
+
 	public:
 
 		AppWindow(int argc, char* argv[]); 
@@ -21,15 +30,6 @@ class AppWindow {
 		void setTitle(string newTitle); 
 
 		void start(); 
-
-	private:
-		
-		void setupCallbacks(); 
-
-		static void eventDestroy(GtkWidget* widget, gpointer data); 
-
-		GtkWidget* window;
-		GeckoEmbed gecko;
 };
 
 #endif

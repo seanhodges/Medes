@@ -9,6 +9,10 @@
 
 class GeckoEmbed {
 
+	private:
+
+		GtkMozEmbed *mozEmbed;
+
 	public:
 
 		void init(); 
@@ -28,10 +32,6 @@ class GeckoEmbed {
 		void setMozEmbed(GtkMozEmbed* newMoz) {
 			mozEmbed = newMoz; 
 		}
-
-	private:
-
-		GtkMozEmbed *mozEmbed;
 };
 
 #endif
