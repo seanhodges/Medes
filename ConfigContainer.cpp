@@ -6,7 +6,7 @@
  */
 ConfigContainer::ConfigContainer() {
 	setAppUrl("about:blank");
-	setAppTitle("No Application Loaded");
+	setAppTitle("No application loaded");
 	setAppWidth(800);
 	setAppHeight(600);
 }

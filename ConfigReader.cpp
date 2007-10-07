@@ -1,6 +1,8 @@
 #include "ConfigReader.h"
 #include <libxml/tree.h>
-#include <libxml/xpath.h>
+#include <libxml/xpath.h> 
+#include <sstream>
+	using std::stringstream;
 
 /**
  * Initialise libxml
@@ -31,7 +33,37 @@ bool ConfigReader::loadFile(string xmlPath) {
  *
  * @param config - the ConfigContainer object to populate
  */
-void ConfigReader::appendConfigToContainer(ConfigContainer* config) {
+void ConfigReader::appendConfigToContainer(ConfigContainer config) {
+	xmlDocPtr doc = ConfigReader::getXmlDoc();
+	xmlNodePtr groups;
+	xmlNodePtr keys;
+	for(groups = doc->children; groups != NULL; groups = groups->next) {
+		string groupName = (char*)groups->name;
+		for(keys = groups->children; keys != NULL; keys = keys->next) {
+			string keyName = (char*)keys->name;
+			string keyValue = (char*)keys->content;
+			// Convert to a namespace config code
+			string configCode = groupName + "_" + keyName;
+			transform(configCode.begin(), configCode.end(), configCode.begin(), toupper);
+			// Set the relevant ConfigContainer setting
+			switch (ConfigReader::configCodes[configCode]) {
+				case APPLICATION_URL: config.setAppUrl(keyValue); break;
+				case APPLICATION_TITLE: config.setAppTitle(keyValue); break;
+				case APPLICATION_WINDOWWIDTH: 
+					int width;
+					stringstream ssWidth(keyValue);
+					ssWidth >> width;
+					config.setAppWidth(width); 
+					break;
+				case APPLICATION_WINDOWHEIGHT: 
+					int height;
+					stringstream ssHeight(keyValue);
+					ssHeight >> height;
+					config.setAppHeight(height); 
+					break;
+			}
+		}
+	}
 }
 
 /**
@@ -77,6 +109,8 @@ void ConfigReader::changeSetting(string group, string key, string newValue) {
 		// TODO: Create new element
 		printf("Application setting did not save\n");
 	}
+	string filePath = ConfigReader::getFilePath();
+	//xmlSaveFile((char*)filePath, ConfigReader::getXmlDoc());
 	xmlXPathFreeContext(context);
 	xmlXPathFreeObject(result);
 }

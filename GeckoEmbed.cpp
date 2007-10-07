@@ -12,7 +12,7 @@ void GeckoEmbed::init(ConfigContainer config) {
 	GeckoEmbed::setUrl(config.getAppUrl());
 }
 
-/*
+/**
  * Provide a GTK hbox containing a gtkmozembed object
  *
  * @return the GTK hbox instance
@@ -26,7 +26,7 @@ GtkWidget* GeckoEmbed::getFrame() {
 	return mozEmbedContainer;
 }
 
-/*
+/**
  * Redirect the Gecko engine to a given address
  *
  * @param newUrl - a fully resolved URL
@@ -35,14 +35,14 @@ void GeckoEmbed::setUrl(string newUrl) {
 	gtk_moz_embed_load_url(GeckoEmbed::getMozEmbed(), newUrl.c_str());
 }
 
-/*
+/**
  * Start the Gecko engine (must call before gtk_main())
  */
 void GeckoEmbed::bringUp() {
 	gtk_moz_embed_push_startup();
 }
 
-/*
+/**
  * Stop the Gecko engine (must call after gtk_main())
  */
 void GeckoEmbed::tearDown() {
