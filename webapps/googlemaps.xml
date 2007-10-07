@@ -1,6 +1,9 @@
 <?xml version="1.0" />
 <webapp>
-	<title>Google Maps</title>
-	<url>http://maps.google.co.uk</url>
-	<window width="1024" height="768" />
+	<application>
+		<title>Google Maps</title>
+		<url>http://maps.google.co.uk</url>
+		<windowwidth>1024</windowwidth>
+		<windowheight>768</windowheight>
+	</application>
 </webapp>

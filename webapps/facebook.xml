@@ -1,6 +1,9 @@
 <?xml version="1.0" />
 <webapp>
-	<title>Facebook</title>
-	<url>http://www.facebook.com</url>
-	<window width="700" height="700" />
+	<application>
+		<title>Facebook</title>
+		<url>http://www.facebook.com</url>
+		<windowwidth>700</windowwidth>
+		<windowheight>700</windowheight>
+	</application>
 </webapp>
