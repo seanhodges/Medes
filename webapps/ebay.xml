@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<webapp>
+	<application>
+		<title>eBay: The UK's Online Marketplace</title>
+		<url>http://www.ebay.co.uk</url>
+		<windowwidth>850</windowwidth>
+		<windowheight>600</windowheight>
+	</application>
+</webapp>

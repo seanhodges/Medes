@@ -1,9 +1,9 @@
-<?xml version="1.0" />
+<?xml version="1.0" ?>
 <webapp>
 	<application>
 		<title>Facebook</title>
 		<url>http://www.facebook.com</url>
-		<windowwidth>700</windowwidth>
-		<windowheight>700</windowheight>
+		<windowwidth>800</windowwidth>
+		<windowheight>600</windowheight>
 	</application>
 </webapp>

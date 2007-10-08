@@ -1,9 +1,9 @@
-<?xml version="1.0" />
+<?xml version="1.0" ?>
 <webapp>
 	<application>
 		<title>Google Maps</title>
 		<url>http://maps.google.co.uk</url>
-		<windowwidth>1024</windowwidth>
-		<windowheight>768</windowheight>
+		<windowwidth>900</windowwidth>
+		<windowheight>900</windowheight>
 	</application>
 </webapp>
