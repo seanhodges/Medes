@@ -3,6 +3,9 @@
 #include <libxml/xpath.h> 
 #include <sstream>
 	using std::stringstream;
+#include <iostream>
+	using std::cout;
+	using std::endl;
 
 /**
  * Initialise libxml
@@ -10,6 +13,12 @@
 ConfigReader::ConfigReader() {
 	xmlInitParser();
 	LIBXML_TEST_VERSION
+	// Declare config code mappings for enumeration
+	// Er, getting a bit messy now, is there a way to auto-generate this using the pre-processor?
+	ConfigReader::configCodes["APPLICATION_URL"] = APPLICATION_URL;
+	ConfigReader::configCodes["APPLICATION_TITLE"] = APPLICATION_TITLE;
+	ConfigReader::configCodes["APPLICATION_WINDOWWIDTH"] = APPLICATION_WINDOWWIDTH;
+	ConfigReader::configCodes["APPLICATION_WINDOWHEIGHT"] = APPLICATION_WINDOWHEIGHT;
 }
 
 /**
@@ -33,37 +42,46 @@ bool ConfigReader::loadFile(string xmlPath) {
  *
  * @param config - the ConfigContainer object to populate
  */
-void ConfigReader::appendConfigToContainer(ConfigContainer config) {
+void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 	xmlDocPtr doc = ConfigReader::getXmlDoc();
 	xmlNodePtr groups;
 	xmlNodePtr keys;
-	for(groups = doc->children; groups != NULL; groups = groups->next) {
+	xmlNodePtr root = doc->children;
+	// The purpose of the "->next->next" is to ignore all "text" nodes
+	for(groups = root->children->next; groups != NULL; groups = groups->next->next) {
 		string groupName = (char*)groups->name;
-		for(keys = groups->children; keys != NULL; keys = keys->next) {
+		for(keys = groups->children->next; keys != NULL; keys = keys->next->next) {
 			string keyName = (char*)keys->name;
-			string keyValue = (char*)keys->content;
+			string keyValue = (char*)xmlNodeGetContent(keys);
 			// Convert to a namespace config code
 			string configCode = groupName + "_" + keyName;
 			transform(configCode.begin(), configCode.end(), configCode.begin(), toupper);
 			// Set the relevant ConfigContainer setting
-			switch (ConfigReader::configCodes[configCode]) {
+			switch (ConfigReader::configCodes[configCode.c_str()]) {
 				case APPLICATION_URL: config.setAppUrl(keyValue); break;
 				case APPLICATION_TITLE: config.setAppTitle(keyValue); break;
-				case APPLICATION_WINDOWWIDTH: 
-					int width;
-					stringstream ssWidth(keyValue);
-					ssWidth >> width;
-					config.setAppWidth(width); 
-					break;
-				case APPLICATION_WINDOWHEIGHT: 
-					int height;
-					stringstream ssHeight(keyValue);
-					ssHeight >> height;
-					config.setAppHeight(height); 
-					break;
-			}
+				case APPLICATION_WINDOWWIDTH: config.setAppWidth(convertToInt(keyValue)); break;
+				case APPLICATION_WINDOWHEIGHT: config.setAppHeight(convertToInt(keyValue)); break;
+			};
 		}
 	}
+}
+
+/**
+ * Cast a string setting into an int
+ *
+ * @param strIn - the string to parse
+ *
+ * @return the integer value, or throw an error if parse failed
+ */
+int ConfigReader::convertToInt(string& strIn) {
+	stringstream ss(strIn);
+	int intOut = 0;
+	ss >> intOut;
+	if (ss.fail()) {
+		cout << strIn + " is not a number" << endl;
+	}
+	return intOut;
 }
 
 /**
@@ -91,13 +109,14 @@ string ConfigReader::getSetting(string group, string key, string defaultValue) {
 }
 
 /**
- * Modify a setting with a new string value
+ * Modify a setting with a new value
  *
  * @param group - the "group" node that the setting is contained in
  * @param key - the setting to change
  * @return the new setting value
  */
 void ConfigReader::changeSetting(string group, string key, string newValue) {
+	cout << "Changing application settings not yet implemented" << endl;
 	string query = "/" + group + "/" + key;
 	xmlChar* xpath = (xmlChar*)query.c_str();
 	xmlXPathContextPtr context = xmlXPathNewContext(ConfigReader::getXmlDoc());
@@ -107,7 +126,6 @@ void ConfigReader::changeSetting(string group, string key, string newValue) {
 	}
 	else {
 		// TODO: Create new element
-		printf("Application setting did not save\n");
 	}
 	string filePath = ConfigReader::getFilePath();
 	//xmlSaveFile((char*)filePath, ConfigReader::getXmlDoc());

@@ -24,8 +24,18 @@ class ConfigContainer {
 
 		void setAppUrl(string newValue) { appUrl = newValue; }
 		void setAppTitle(string newValue) { appTitle = newValue; }
-		void setAppWidth(int newValue) { appWidth = newValue; }
-		void setAppHeight(int newValue) { appHeight = newValue; }
+
+		void setAppWidth(int newValue) { 
+			// Constrain the min width
+			if (newValue > 100) 
+				appWidth = newValue; 
+		}
+
+		void setAppHeight(int newValue) { 
+			// Constrain the min height
+			if (newValue > 100) 
+				appHeight = newValue; 
+		}
 
 };
 
