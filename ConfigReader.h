@@ -4,8 +4,6 @@
 #include <libxml/xmlreader.h>
 #include <string>
 	using std::string;
-#include <map>
-	using std::map;
 #include "ConfigContainer.h"
 
 class ConfigReader {
@@ -36,15 +34,6 @@ class ConfigReader {
 		string getSetting(string group, string key, string defaultValue);
 
 		void changeSetting(string group, string key, string newValue);
-
-		enum configCodesAvailable {
-			APPLICATION_URL,
-			APPLICATION_TITLE,
-			APPLICATION_WINDOWWIDTH,
-			APPLICATION_WINDOWHEIGHT
-		};
-
-		map<string, configCodesAvailable> configCodes;
 };
 
 #endif

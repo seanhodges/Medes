@@ -13,12 +13,6 @@
 ConfigReader::ConfigReader() {
 	xmlInitParser();
 	LIBXML_TEST_VERSION
-	// Declare config code mappings for enumeration
-	// Er, getting a bit messy now, is there a way to auto-generate this using the pre-processor?
-	ConfigReader::configCodes["APPLICATION_URL"] = APPLICATION_URL;
-	ConfigReader::configCodes["APPLICATION_TITLE"] = APPLICATION_TITLE;
-	ConfigReader::configCodes["APPLICATION_WINDOWWIDTH"] = APPLICATION_WINDOWWIDTH;
-	ConfigReader::configCodes["APPLICATION_WINDOWHEIGHT"] = APPLICATION_WINDOWHEIGHT;
 }
 
 /**
@@ -57,12 +51,13 @@ void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 			string configCode = groupName + "_" + keyName;
 			transform(configCode.begin(), configCode.end(), configCode.begin(), toupper);
 			// Set the relevant ConfigContainer setting
-			switch (ConfigReader::configCodes[configCode.c_str()]) {
-				case APPLICATION_URL: config.setAppUrl(keyValue); break;
-				case APPLICATION_TITLE: config.setAppTitle(keyValue); break;
-				case APPLICATION_WINDOWWIDTH: config.setAppWidth(convertToInt(keyValue)); break;
-				case APPLICATION_WINDOWHEIGHT: config.setAppHeight(convertToInt(keyValue)); break;
-			};
+			if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); }
+			else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
+			else if (configCode == "APPLICATION_WINDOWWIDTH") { config.setAppWidth(convertToInt(keyValue)); }
+			else if (configCode == "APPLICATION_WINDOWHEIGHT") { config.setAppHeight(convertToInt(keyValue)); }
+			else {
+				cout << "<" + groupName + "><" + keyName + ">" + " is not a recognised key" << endl;
+			}
 		}
 	}
 }
