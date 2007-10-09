@@ -6,6 +6,8 @@
 #include <iostream>
 	using std::cout;
 	using std::endl;
+#include <fstream>
+	using std::fstream;
 
 /**
  * Initialise libxml
@@ -27,8 +29,19 @@ ConfigReader::~ConfigReader() {
  * Load the config XML
  */
 bool ConfigReader::loadFile(string xmlPath) {
-	setFilePath(xmlPath);
-	setXmlDoc(xmlParseFile(xmlPath.c_str()));
+	fstream fin;
+	fin.open(xmlPath.c_str());
+	if(fin.is_open()) {
+		setFilePath(xmlPath);
+		setXmlDoc(xmlParseFile(xmlPath.c_str()));
+		fin.close();
+		return true;
+	}
+	else {
+		cout << "Could not open application configuration file" << endl;
+	}
+	fin.close();
+	return false;
 }
 
 /**
