@@ -7,8 +7,10 @@ int main(int argc, char* argv[]) {
 	// Load the application configuration
 	ConfigContainer config;
 	ConfigReader reader;
-	reader.loadFile(argv[1]);
-	reader.appendConfigToContainer(config);
+	bool loaded = reader.loadFile(argv[1]);
+	if (loaded) {
+		reader.appendConfigToContainer(config);		
+	}
 
 	// Create the application window
 	AppWindow appWindow(argc, argv, config);
