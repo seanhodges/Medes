@@ -3,7 +3,7 @@
 	<application>
 		<title>Google Maps</title>
 		<url>http://maps.google.co.uk</url>
-		<windowwidth>900</windowwidth>
-		<windowheight>900</windowheight>
+		<windowwidth>1024</windowwidth>
+		<windowheight>768</windowheight>
 	</application>
 </webapp>
