@@ -1,4 +1,3 @@
-#include "ConfigReader.h"
 #include <libxml/tree.h>
 #include <libxml/xpath.h> 
 #include <sstream>
@@ -8,6 +7,7 @@
 	using std::endl;
 #include <fstream>
 	using std::fstream;
+#include "ConfigReader.h"
 
 /**
  * Initialise libxml
@@ -21,7 +21,8 @@ ConfigReader::ConfigReader() {
  * Shut down libxml
  */
 ConfigReader::~ConfigReader() {
-	xmlFreeDoc(ConfigReader::getXmlDoc());
+	// Causes a segmentation fault, think it's needed?
+	//xmlFreeDoc(ConfigReader::getXmlDoc());
 	xmlCleanupParser();
 }
 
@@ -37,10 +38,6 @@ bool ConfigReader::loadFile(string xmlPath) {
 		fin.close();
 		return true;
 	}
-	else {
-		cout << "Could not open application configuration file" << endl;
-	}
-	fin.close();
 	return false;
 }
 
