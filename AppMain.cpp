@@ -8,8 +8,8 @@
 #include "ConfigReader.h"
 
 void printUsage() {
-	cout << "application 0.1" << endl;
-	cout << "Usage: application [config file]" << endl;
+	cout << "medes 0.1" << endl;
+	cout << "Usage: medes [config file]" << endl;
 	cout << endl;
 }
 
