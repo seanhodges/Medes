@@ -1,13 +1,16 @@
+#include <stdlib.h>
 #include "GeckoEmbed.h"
 
 /**
  * Initialise the engine (must be called AFTER gtk_init())
  */
 void GeckoEmbed::init(ConfigContainer config) {
-	string configProfilePath = "mozembed";
-	string configProfileName = "mozembed";
+	string userHome = getenv("HOME");
+	string configProfilePath = userHome + "/.mozilla/medes";
+	string configProfileName = "medes-default";
 	gtk_moz_embed_set_profile_path(configProfilePath.c_str(),configProfileName.c_str());
 	GtkMozEmbed *mozEmbed = GTK_MOZ_EMBED(gtk_moz_embed_new());
+	gtk_moz_embed_set_chrome_mask(mozEmbed, GTK_MOZ_EMBED_FLAG_ALLCHROME);
 	GeckoEmbed::setMozEmbed(mozEmbed);
 	GeckoEmbed::setUrl(config.getAppUrl());
 }

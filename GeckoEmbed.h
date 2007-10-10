@@ -12,7 +12,7 @@ class GeckoEmbed {
 
 	private:
 
-		GtkMozEmbed *mozEmbed;
+		GtkMozEmbed* mozEmbed;
 
 	public:
 
