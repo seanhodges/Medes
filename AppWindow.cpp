@@ -8,6 +8,7 @@
  * @param config - the application configuration settings
  */
 AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
+	gtk_set_locale();
 	gtk_init(&argc, &argv);
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	// Set up the window
