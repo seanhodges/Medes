@@ -6,6 +6,9 @@
 #include <nsEmbedAPI.h>
 #include <string>
 	using std::string;
+#include <iostream>
+	using std::cout;
+	using std::endl;
 #include "ConfigContainer.h"
 
 class GeckoEmbed {
@@ -33,6 +36,8 @@ class GeckoEmbed {
 		void setMozEmbed(GtkMozEmbed* newMoz) {
 			mozEmbed = newMoz; 
 		}
+
+		gint open_uri_cb (GtkMozEmbed *embed, const char *uri, bool dummy);
 };
 
 #endif

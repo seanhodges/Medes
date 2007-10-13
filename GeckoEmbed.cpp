@@ -5,12 +5,16 @@
  * Initialise the engine (must be called AFTER gtk_init())
  */
 void GeckoEmbed::init(ConfigContainer config) {
+	// Set the environment
 	string userHome = getenv("HOME");
 	string configProfilePath = userHome + "/.mozilla/medes";
 	string configProfileName = "medes-default";
 	gtk_moz_embed_set_profile_path(configProfilePath.c_str(),configProfileName.c_str());
 	GtkMozEmbed *mozEmbed = GTK_MOZ_EMBED(gtk_moz_embed_new());
 	gtk_moz_embed_set_chrome_mask(mozEmbed, GTK_MOZ_EMBED_FLAG_ALLCHROME);
+	// Attach to functors
+	gtk_signal_connect(GTK_OBJECT(mozEmbed), "open_uri", GTK_SIGNAL_FUNC(open_uri_cb), false);
+	// Initial object configuration
 	GeckoEmbed::setMozEmbed(mozEmbed);
 	GeckoEmbed::setUrl(config.getAppUrl());
 }
@@ -50,5 +54,13 @@ void GeckoEmbed::bringUp() {
  */
 void GeckoEmbed::tearDown() {
 	gtk_moz_embed_pop_startup();
+}
+
+/**
+ * Capture the callback when changing page
+ */
+gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, bool dummy) {
+	cout << "Attempted page change" << endl;
+	return true;
 }
 
