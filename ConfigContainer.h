@@ -3,6 +3,8 @@
 
 #include <string>
 	using std::string;
+#include <vector>
+	using std::vector;
 
 class ConfigContainer {
 
@@ -12,6 +14,7 @@ class ConfigContainer {
 		string appTitle;
 		int appWidth;
 		int appHeight;
+		vector<string> domainList;
 
 	public:
 
@@ -21,9 +24,11 @@ class ConfigContainer {
 		string getAppTitle() { return appTitle; }
 		int getAppWidth() { return appWidth; }
 		int getAppHeight() { return appHeight; }
+		vector<string> getDomainList() { return domainList; }
 
-		void setAppUrl(string newValue) { appUrl = newValue; }
-		void setAppTitle(string newValue) { appTitle = newValue; }
+		void setAppUrl(const string &newValue) { appUrl = newValue; }
+		void setAppTitle(const string &newValue) { appTitle = newValue; }
+		void setDomainList(const vector<string> &newList) { domainList = newList; }
 
 		void setAppWidth(int newValue) { 
 			// Constrain the min width

@@ -9,5 +9,7 @@ ConfigContainer::ConfigContainer() {
 	setAppTitle("No application loaded");
 	setAppWidth(800);
 	setAppHeight(600);
+	vector<string> emptyList;
+	setDomainList(emptyList);
 }
 
