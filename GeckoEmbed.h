@@ -9,6 +9,7 @@
 #include <iostream>
 	using std::cout;
 	using std::endl;
+#include <stdlib.h>
 #include "ConfigContainer.h"
 
 class GeckoEmbed {
@@ -47,8 +48,19 @@ class GeckoEmbed {
 		 * @return true to stop redirection event, otherwise false
 		 */
 		static gint open_uri_cb(GtkMozEmbed *embed, const char *uri, bool dummy) {
-			cout << "page redirection detected" << endl;
-			return false;
+			bool cancelRedirect = false;
+			string allowed = "http://maps.google.co.uk";
+			string target = uri;
+			if (target.find(allowed) == string::npos) {
+				cout << "executing handler for domain: " + target << endl;
+				string cmd = "gnome-www-browser " + target;
+				system(cmd.c_str());
+				cancelRedirect = true;
+			}
+			else {
+				cout << "page redirection to: " + target << endl;
+			}
+			return cancelRedirect;
 		}
 };
 
