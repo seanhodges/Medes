@@ -37,7 +37,19 @@ class GeckoEmbed {
 			mozEmbed = newMoz; 
 		}
 
-		gint open_uri_cb (GtkMozEmbed *embed, const char *uri, bool dummy);
+		/**
+		 * Callback event for page redirection
+		 *
+		 * @param embed - the mozilla object
+		 * @param uri - the new URL passed to the engine
+		 * @param dummy - this is not used
+		 *
+		 * @return true to stop redirection event, otherwise false
+		 */
+		static gint open_uri_cb(GtkMozEmbed *embed, const char *uri, bool dummy) {
+			cout << "page redirection detected" << endl;
+			return false;
+		}
 };
 
 #endif
