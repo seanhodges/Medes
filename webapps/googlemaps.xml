@@ -5,5 +5,8 @@
 		<url>http://maps.google.co.uk</url>
 		<windowwidth>1024</windowwidth>
 		<windowheight>768</windowheight>
+		<domainlist>
+			<item>http://maps.google.co.uk</item>
+		</domainlist>
 	</application>
 </webapp>
