@@ -65,6 +65,7 @@ void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 			else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 			else if (configCode == "APPLICATION_WINDOWWIDTH") { config.setAppWidth(convertToInt(keyValue)); }
 			else if (configCode == "APPLICATION_WINDOWHEIGHT") { config.setAppHeight(convertToInt(keyValue)); }
+			else if (configCode == "APPLICATION_DOMAINLIST") { config.setDomainList(convertToVector(keys)); }
 			else {
 				cout << "<" + groupName + "><" + keyName + ">" + " is not a recognised key" << endl;
 			}
@@ -87,6 +88,29 @@ int ConfigReader::convertToInt(string& strIn) {
 		cout << strIn + " is not a number" << endl;
 	}
 	return intOut;
+}
+
+/**
+ * Cast the children of an XML element to a vector<string>
+ *
+ * @param xmlList - pointer to the node to parse
+ *
+ * @return the vector of items
+ */
+vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList) {
+	vector<string> out;
+	xmlNodePtr entries;
+	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
+		string entryNameCheck = (char*)entries->name;
+		if (entryNameCheck == "item") {
+			string entryValue = (char*)xmlNodeGetContent(entries);
+			out.push_back(entryValue);
+		}
+		else {
+			cout << "<" + entryNameCheck + "> is not a valid <item> entry" << endl;
+		}
+	}
+	return out;
 }
 
 /**

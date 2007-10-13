@@ -15,6 +15,7 @@ class ConfigReader {
 		xmlDocPtr xmlDoc;
 
 		int convertToInt(string& strIn);
+		vector<string> convertToVector(const xmlNodePtr& xmlList);
 
 	public:
 
