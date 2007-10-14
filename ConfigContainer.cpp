@@ -9,7 +9,12 @@ ConfigContainer::ConfigContainer() {
 	setAppTitle("No application loaded");
 	setAppWidth(800);
 	setAppHeight(600);
-	vector<string> emptyList;
-	setDomainList(emptyList);
+	vector<string> domainList;
+	domainList.push_back("about:blank");
+	setDomainList(domainList);
+}
+
+void ConfigContainer::appendDomainList(string newEntry) {
+	getDomainList().push_back(newEntry);
 }
 

@@ -24,11 +24,16 @@ class ConfigContainer {
 		string getAppTitle() { return appTitle; }
 		int getAppWidth() { return appWidth; }
 		int getAppHeight() { return appHeight; }
-		vector<string> getDomainList() { return domainList; }
+		vector<string>& getDomainList() { return domainList; }
 
 		void setAppUrl(const string &newValue) { appUrl = newValue; }
 		void setAppTitle(const string &newValue) { appTitle = newValue; }
-		void setDomainList(const vector<string> &newList) { domainList = newList; }
+
+		void setDomainList(const vector<string>& newList) { 
+			domainList = newList; 
+		}
+
+		void appendDomainList(string newEntry);
 
 		void setAppWidth(int newValue) { 
 			// Constrain the min width
