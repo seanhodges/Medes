@@ -17,17 +17,19 @@ class GeckoEmbed {
 	private:
 
 		GtkMozEmbed* mozEmbed;
+		ConfigContainer config;
 
 	public:
 
 		void init(ConfigContainer config); 
 
 		GtkWidget* getFrame(); 
+		ConfigContainer getConfig() { return config; }
 
-		void setUrl(string newUrl); 
+		void setConfig(const ConfigContainer& newConfig) { config = newConfig; }
+		void setUrl(const string& newUrl); 
 
 		void bringUp(); 
-
 		void tearDown(); 
 
 		GtkMozEmbed* getMozEmbed() const {
@@ -43,19 +45,23 @@ class GeckoEmbed {
 		 *
 		 * @param embed - the mozilla object
 		 * @param uri - the new URL passed to the engine
-		 * @param dummy - this is not used
+		 * @param parent - the parent instance for this callback
 		 *
 		 * @return true to stop redirection event, otherwise false
 		 */
-		static gint open_uri_cb(GtkMozEmbed *embed, const char *uri, bool dummy) {
-			bool cancelRedirect = false;
-			string allowed = "http://maps.google.co.uk";
+		static gint open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent) {
+			bool cancelRedirect = true;
 			string target = uri;
-			if (target.find(allowed) == string::npos) {
+			vector<string> domainList = parent.getConfig().getDomainList();
+			for (vector<string>::iterator allowed = domainList.begin(); allowed != domainList.end(); ++allowed) {
+				if (target.find(*allowed) == 0) {
+					cancelRedirect = false;
+				}
+			}
+			if (cancelRedirect) {
 				cout << "executing handler for domain: " + target << endl;
 				string cmd = "gnome-www-browser " + target;
 				system(cmd.c_str());
-				cancelRedirect = true;
 			}
 			else {
 				cout << "page redirection to: " + target << endl;
