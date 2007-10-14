@@ -14,6 +14,11 @@ ConfigContainer::ConfigContainer() {
 	setDomainList(domainList);
 }
 
+/**
+ * Add a new domain to the list
+ *
+ * @param newEntry - the URL to add
+ */
 void ConfigContainer::appendDomainList(string newEntry) {
 	getDomainList().push_back(newEntry);
 }
