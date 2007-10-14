@@ -9,6 +9,7 @@
 			<domain>http://maps.google.co.uk</domain>
 			<domain>http://www.google.co.uk/intl/en_uk/help</domain>
 			<domain>http://www.google.co.uk/help/maps</domain>
+			<domain>http://gmodules.com</domain>
 		</domainlist>
 	</application>
 </webapp>
