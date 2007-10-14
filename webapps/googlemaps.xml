@@ -6,8 +6,9 @@
 		<windowwidth>1024</windowwidth>
 		<windowheight>768</windowheight>
 		<domainlist>
-			<item>http://maps.google.co.uk</item>
-			<item>http://www.google.co.uk/intl/en_uk/help</item>
+			<domain>http://maps.google.co.uk</domain>
+			<domain>http://www.google.co.uk/intl/en_uk/help</domain>
+			<domain>http://www.google.co.uk/help/maps</domain>
 		</domainlist>
 	</application>
 </webapp>
