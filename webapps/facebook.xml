@@ -5,5 +5,10 @@
 		<url>http://www.facebook.com</url>
 		<windowwidth>800</windowwidth>
 		<windowheight>600</windowheight>
+		<domainlist>
+			<domain>www.facebook.com</domain>
+			<domain>http://ads.ak.facebook.com/ads</domain>
+			<domain>http://view.atdmt.com/MBU/iview</domain>
+		</domainlist>
 	</application>
 </webapp>

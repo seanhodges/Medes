@@ -9,5 +9,17 @@ ConfigContainer::ConfigContainer() {
 	setAppTitle("No application loaded");
 	setAppWidth(800);
 	setAppHeight(600);
+	vector<string> domainList;
+	domainList.push_back("about:blank");
+	setDomainList(domainList);
+}
+
+/**
+ * Add a new domain to the list
+ *
+ * @param newEntry - the URL to add
+ */
+void ConfigContainer::appendDomainList(string newEntry) {
+	getDomainList().push_back(newEntry);
 }
 
