@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<webapp>
+	<application>
+		<title>Google Docs</title>
+		<url>http://docs.google.com</url>
+		<windowwidth>1024</windowwidth>
+		<windowheight>768</windowheight>
+		<domainlist>
+			<domain>http://docs.google.co.uk</domain>
+		</domainlist>
+	</application>
+</webapp>
