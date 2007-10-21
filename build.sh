@@ -7,4 +7,5 @@ export MOZILLA_FIVE_HOME=/usr/lib/firefox
 
 g++ -g -o medes \
 	`pkg-config --cflags --libs gtk+-2.0,libxml-2.0,firefox-gtkmozembed` \
-	ConfigContainer.cpp ConfigReader.cpp AppWindow.cpp GeckoEmbed.cpp AppMain.cpp
+	-Iinclude \
+	src/ConfigContainer.cpp src/ConfigReader.cpp src/AppWindow.cpp src/GeckoEmbed.cpp src/AppMain.cpp
