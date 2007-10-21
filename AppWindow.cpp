@@ -47,7 +47,7 @@ void AppWindow::show() {
  *
  * @param newTitle - the new title to display
  */
-void AppWindow::setTitle(string newTitle) {
+void AppWindow::setTitle(const string& newTitle) {
 	gtk_window_set_title(GTK_WINDOW (window), newTitle.c_str());
 }
 

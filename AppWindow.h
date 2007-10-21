@@ -28,7 +28,7 @@ class AppWindow {
 
 		void show(); 
 
-		void setTitle(string newTitle); 
+		void setTitle(const string& newTitle); 
 
 		void start(); 
 };
