@@ -11,8 +11,8 @@
 	<interface>
 
 		<buttons>
-			<back enabled="false" icon="" />
-			<forward enabled="false" icon="" />
+			<back enabled="false" />
+			<forward enabled="false" />
 		</buttons>
 
 		<menu>
