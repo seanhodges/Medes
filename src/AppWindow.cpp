@@ -63,7 +63,7 @@ void AppWindow::start() {
  * Set-up the event callbacks handled in this window
  */
 void AppWindow::setupCallbacks() {
-	g_signal_connect(G_OBJECT (window), "destroy", G_CALLBACK(eventDestroy), NULL);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(eventDestroy), NULL);
 }
 
 /**
