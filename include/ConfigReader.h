@@ -4,6 +4,10 @@
 #include <libxml/xmlreader.h>
 #include <string>
 	using std::string;
+#include <vector>
+	using std::vector;
+#include <pair>
+	using std::pair;
 #include "ConfigContainer.h"
 
 class ConfigReader {
@@ -16,7 +20,7 @@ class ConfigReader {
 
 		int convertToInt(string& strIn);
 		vector<string> convertToVector(const xmlNodePtr& xmlList, string elementName);
-		vector<string> convertToGroupedVector(const xmlNodePtr& xmlList);
+		vector<pair<string, string>> convertToGroupedVector(const xmlNodePtr& xmlList);
 
 	public:
 

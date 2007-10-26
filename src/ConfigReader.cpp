@@ -114,21 +114,19 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
 }
 
 /**
- * Cast the children of an XML element to a 2D vector<string> (group->value)
+ * Cast the children of an XML element to a loose-mapped vector (group->value)
  *
  * @param xmlList - pointer to the node to parse
  *
- * @return the vector of items (key = group->value)
+ * @return the vector of items (key = pair (group, value))
  */
-vector<string> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
-	vector<string> out;
+vector<pair<string, string>> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
+	vector<pair<string, string>> out;
 	xmlNodePtr entries;
-	string entry[2];
 	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
 		string group = (char*)entries->name;
 		string entryValue = (char*)xmlNodeGetContent(entries);
-		entry[0] = group;
-		entry[1] = entryValue;
+		pair entry(group, entryValue);
 		out.push_back(entry);
 	}
 	return out;
