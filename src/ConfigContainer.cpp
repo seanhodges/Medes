@@ -23,3 +23,14 @@ void ConfigContainer::appendDomainList(string newEntry) {
 	getDomainList().push_back(newEntry);
 }
 
+/**
+ * Construct a grouped vector object
+ *
+ * @param group - a group entity
+ * @param value - a value for an entry in the given group
+ */
+GroupedVector::GroupedVector(string group, string value) {
+	this->group = group;
+	this->value = value;
+}
+

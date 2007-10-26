@@ -49,4 +49,20 @@ class ConfigContainer {
 
 };
 
+class GroupedVector {
+
+	private:
+
+		string group;
+		string value;
+
+	public:
+		
+		GroupedVector(string group, string value);
+
+		string getGroup() { return group; }
+		string getValue() { return value; }
+
+};
+
 #endif

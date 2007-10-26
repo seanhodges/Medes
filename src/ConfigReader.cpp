@@ -120,15 +120,13 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
  *
  * @return the vector of items (key = group->value)
  */
-vector<string> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
-	vector<string> out;
+vector<GroupedVector> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
+	vector<GroupedVector> out;
 	xmlNodePtr entries;
-	string entry[2];
 	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
 		string group = (char*)entries->name;
 		string entryValue = (char*)xmlNodeGetContent(entries);
-		entry[0] = group;
-		entry[1] = entryValue;
+		GroupedVector entry(group, entryValue);
 		out.push_back(entry);
 	}
 	return out;
