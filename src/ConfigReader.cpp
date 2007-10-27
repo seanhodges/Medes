@@ -118,11 +118,11 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
 }
 
 /**
- * Cast the children of an XML element to a 2D deque<string> (group->value)
+ * Cast the children of an XML element to a 2D vector<string> (group->value)
  *
  * @param xmlList - pointer to the node to parse
  *
- * @return the deque of items (key = group->value)
+ * @return the vector of items (key = group->value)
  */
 vector<GroupedEntry> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
 	vector<GroupedEntry> out;
