@@ -3,8 +3,24 @@
 
 #include <string>
 	using std::string;
-#include <vector>
-	using std::vector;
+#include <deque>
+	using std::deque;
+
+class GroupedEntry {
+
+	private:
+
+		string group;
+		string value;
+
+	public:
+		
+		GroupedEntry(string group, string value);
+
+		string getGroup() { return group; }
+		string getValue() { return value; }
+
+};
 
 class ConfigContainer {
 
@@ -14,7 +30,7 @@ class ConfigContainer {
 		string appTitle;
 		int appWidth;
 		int appHeight;
-		vector<string> domainList;
+		deque<GroupedEntry> domainRules;
 
 	public:
 
@@ -24,16 +40,16 @@ class ConfigContainer {
 		string getAppTitle() { return appTitle; }
 		int getAppWidth() { return appWidth; }
 		int getAppHeight() { return appHeight; }
-		vector<string>& getDomainList() { return domainList; }
+		deque<GroupedEntry>& getDomainRules() { return domainRules; }
 
 		void setAppUrl(const string &newValue) { appUrl = newValue; }
 		void setAppTitle(const string &newValue) { appTitle = newValue; }
 
-		void setDomainList(const vector<string>& newList) { 
-			domainList = newList; 
+		void replaceDomainRules(const deque<GroupedEntry>& newRules) { 
+			domainRules = newRules; 
 		}
 
-		void appendDomainList(string newEntry);
+		void appendDomainRules(deque<GroupedEntry> newRules);
 
 		void setAppWidth(int newValue) { 
 			// Constrain the min width
@@ -46,22 +62,6 @@ class ConfigContainer {
 			if (newValue > 100) 
 				appHeight = newValue; 
 		}
-
-};
-
-class GroupedVector {
-
-	private:
-
-		string group;
-		string value;
-
-	public:
-		
-		GroupedVector(string group, string value);
-
-		string getGroup() { return group; }
-		string getValue() { return value; }
 
 };
 

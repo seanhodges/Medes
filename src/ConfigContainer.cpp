@@ -9,27 +9,28 @@ ConfigContainer::ConfigContainer() {
 	setAppTitle("No application loaded");
 	setAppWidth(800);
 	setAppHeight(600);
-	vector<string> domainList;
-	domainList.push_back("about:blank");
-	setDomainList(domainList);
+	this->domainRules.push_front(new GroupedEntry("internal", "about:blank"));
 }
 
 /**
- * Add a new domain to the list
+ * Append a set of domain rules to the top of the main domain rules list
  *
- * @param newEntry - the URL to add
+ * @param newRules - the rules to add
  */
-void ConfigContainer::appendDomainList(string newEntry) {
-	getDomainList().push_back(newEntry);
+void ConfigContainer::appendDomainRules(deque<GroupedEntry> newRules) {
+	while(!newRules.empty()) {
+		GroupedEntry newEntry = newRules.pop_back();
+		this->domainRules.push_front(newEntry);
+	}
 }
 
 /**
- * Construct a grouped vector object
+ * Construct a grouped object
  *
  * @param group - a group entity
  * @param value - a value for an entry in the given group
  */
-GroupedVector::GroupedVector(string group, string value) {
+GroupedEntry::GroupedEntry(string group, string value) {
 	this->group = group;
 	this->value = value;
 }
