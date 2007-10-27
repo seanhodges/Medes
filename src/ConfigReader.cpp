@@ -66,15 +66,17 @@ void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 			else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 			else if (configCode == "APPLICATION_WINDOWWIDTH") { config.setAppWidth(convertToInt(keyValue)); }
 			else if (configCode == "APPLICATION_WINDOWHEIGHT") { config.setAppHeight(convertToInt(keyValue)); }
-			else if (configCode == "RULES_DOMAINS") { config.appendDomainRules(convertToGroupedDeque(keys)); }
+			else if (configCode == "RULES_DOMAINS") { config.appendDomainRules(convertToGroupedVector(keys)); }
 			else {
 				cout << "<" + groupName + "><" + keyName + ">" + " is not a recognised key" << endl;
 			}
 		}
 	}
 	// Post-parsing configuration
-	if (appNameSet)
-		config.appendDomainRules(config.getAppUrl());
+	if (appNameSet) {
+		GroupedEntry appBaseUrl("internal", config.getAppUrl());
+		config.appendDomainRules(appBaseUrl);
+	}
 }
 
 /**
@@ -122,8 +124,8 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
  *
  * @return the deque of items (key = group->value)
  */
-deque<GroupedEntry> ConfigReader::convertToGroupedDeque(const xmlNodePtr& xmlList) {
-	deque<GroupedEntry> out;
+vector<GroupedEntry> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
+	vector<GroupedEntry> out;
 	xmlNodePtr entries;
 	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
 		string group = (char*)entries->name;

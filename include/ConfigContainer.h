@@ -5,6 +5,8 @@
 	using std::string;
 #include <deque>
 	using std::deque;
+#include <vector>
+	using std::vector;
 
 class GroupedEntry {
 
@@ -15,6 +17,7 @@ class GroupedEntry {
 
 	public:
 		
+		GroupedEntry() {};
 		GroupedEntry(string group, string value);
 
 		string getGroup() { return group; }
@@ -42,14 +45,15 @@ class ConfigContainer {
 		int getAppHeight() { return appHeight; }
 		deque<GroupedEntry>& getDomainRules() { return domainRules; }
 
-		void setAppUrl(const string &newValue) { appUrl = newValue; }
-		void setAppTitle(const string &newValue) { appTitle = newValue; }
+		void setAppUrl(const string& newValue) { appUrl = newValue; }
+		void setAppTitle(const string& newValue) { appTitle = newValue; }
 
-		void replaceDomainRules(const deque<GroupedEntry>& newRules) { 
+		void replaceDomainRules(deque<GroupedEntry> newRules) { 
 			domainRules = newRules; 
 		}
 
-		void appendDomainRules(deque<GroupedEntry> newRules);
+		void appendDomainRules(vector<GroupedEntry> newRules);
+		void appendDomainRules(GroupedEntry newRule);
 
 		void setAppWidth(int newValue) { 
 			// Constrain the min width

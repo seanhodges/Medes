@@ -1,30 +1,6 @@
 #include "ConfigContainer.h"
 
 /**
- * Provide some sensible defaults for the application
- * These should be over-ridden by the config XML stack
- */
-ConfigContainer::ConfigContainer() {
-	setAppUrl("about:blank");
-	setAppTitle("No application loaded");
-	setAppWidth(800);
-	setAppHeight(600);
-	this->domainRules.push_front(new GroupedEntry("internal", "about:blank"));
-}
-
-/**
- * Append a set of domain rules to the top of the main domain rules list
- *
- * @param newRules - the rules to add
- */
-void ConfigContainer::appendDomainRules(deque<GroupedEntry> newRules) {
-	while(!newRules.empty()) {
-		GroupedEntry newEntry = newRules.pop_back();
-		this->domainRules.push_front(newEntry);
-	}
-}
-
-/**
  * Construct a grouped object
  *
  * @param group - a group entity
@@ -33,5 +9,42 @@ void ConfigContainer::appendDomainRules(deque<GroupedEntry> newRules) {
 GroupedEntry::GroupedEntry(string group, string value) {
 	this->group = group;
 	this->value = value;
+}
+
+/**
+ * Provide some sensible defaults for the application
+ * These should be over-ridden by the config XML stack
+ */
+ConfigContainer::ConfigContainer() {
+	setAppUrl("about:blank");
+	setAppTitle("No application loaded");
+	setAppWidth(800);
+	setAppHeight(600);
+	GroupedEntry defaultEntry("internal", "about:blank");
+	this->domainRules.push_front(defaultEntry);
+}
+
+/**
+ * Append a set of domain rules to the top of the main domain rules list
+ *
+ * @param newRules - the rules to add
+ */
+void ConfigContainer::appendDomainRules(vector<GroupedEntry> newRules) {
+	while(!newRules.empty()) {
+		GroupedEntry newEntry; 
+		newEntry = (GroupedEntry)newRules.back();
+		this->domainRules.push_front(newEntry);
+		newRules.pop_back();
+	}
+}
+
+/**
+ * Append a single domain rule to the top of the main domain rules list
+ *
+ * @param newRules - the rule to add
+ */
+void ConfigContainer::appendDomainRules(GroupedEntry newRule) {
+	GroupedEntry newEntry; 
+	this->domainRules.push_front(newRule);
 }
 

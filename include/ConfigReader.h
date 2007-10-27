@@ -18,7 +18,7 @@ class ConfigReader {
 
 		int convertToInt(string& strIn);
 		vector<string> convertToVector(const xmlNodePtr& xmlList, string elementName);
-		deque<GroupedEntry> convertToGroupedDeque(const xmlNodePtr& xmlList);
+		vector<GroupedEntry> convertToGroupedVector(const xmlNodePtr& xmlList);
 
 	public:
 
