@@ -20,6 +20,8 @@ ConfigContainer::ConfigContainer() {
 	setAppTitle("No application loaded");
 	setAppWidth(800);
 	setAppHeight(600);
+	setDomainDefault("external");
+	setAdvertsHidden(false);
 	GroupedEntry defaultEntry("internal", "about:blank");
 	this->domainRules.push_front(defaultEntry);
 }
