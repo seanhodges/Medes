@@ -8,7 +8,7 @@
 	</application>
 	<rules>
 		<domaindefault>external</domaindefault>
-		<hideadverts>false</false>
+		<hideadverts>false</hideadverts>
 		<domains>
 			<internal>http://maps.google</internal>
 			<internal>https://www.google</internal>
