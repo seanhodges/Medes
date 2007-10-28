@@ -1,35 +1,13 @@
 <?xml version="1.0" ?>
 <webapp>
-
 	<application>
 		<title>Ubuntu Community Documentation</title>
 		<url>https://help.ubuntu.com/community/UserDocumentation</url>
 		<windowwidth>800</windowwidth>
 		<windowheight>800</windowheight>
 	</application>
-
-	<interface>
-
-		<buttons>
-			<back enabled="false" />
-			<forward enabled="false" />
-		</buttons>
-
-		<menu>
-			<item group="Search" name="Titles">https://help.ubuntu.com/community/UserDocumentation?
-				action=fullsearch&amp;
-				context=180&amp;
-				value={{Enter a search term}}&amp;
-				titlesearch=Titles
-			</item>
-			<item group="Search" name="Full-text">https://help.ubuntu.com/community/UserDocumentation?
-				action=fullsearch&amp;
-				context=180&amp;
-				value={{Enter a search term}}&amp;
-				fullsearch=Text
-			</item>
-		</menu>
-
-	</interface>
-
+	<rules>
+		<domaindefault>external</domaindefault>
+		<hideadverts>false</hideadverts>
+	</rules>
 </webapp>

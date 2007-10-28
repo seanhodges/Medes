@@ -7,10 +7,11 @@
 		<windowheight>600</windowheight>
 	</application>
 	<rules>
+		<domaindefault>external</domaindefault>
+		<dropadverts>false</dropadverts>
 		<domains>
 			<internal>https://login.facebook.com</internal>
 			<advert>http://ads.ak.facebook.com/ads</advert>
-			<domain>http://view.atdmt.com/MBU/iview</domain>
 			<internal>facebook.com</internal>
 		</domains>
 	</rules>

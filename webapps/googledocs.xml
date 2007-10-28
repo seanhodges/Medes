@@ -7,6 +7,8 @@
 		<windowheight>768</windowheight>
 	</application>
 	<rules>
+		<domaindefault>external</domaindefault>
+		<hideadverts>false</hideadverts>
 		<domains>
 			<internal>http://docs.google</internal>
 			<internal>https://www.google</internal>

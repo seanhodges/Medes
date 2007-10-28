@@ -6,4 +6,12 @@
 		<windowwidth>850</windowwidth>
 		<windowheight>600</windowheight>
 	</application>
+	<rules>
+		<domaindefault>external</domaindefault>
+		<hideadverts>true</hideadverts>
+		<domains>
+			<internal>.ebayobjects.</internal>
+			<internal>.ebay.</internal>
+		</domains>
+	</rules>
 </webapp>
