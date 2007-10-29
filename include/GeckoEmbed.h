@@ -1,4 +1,4 @@
-#ifndef GECKEMBED_DEFINED
+#ifndef GECKOEMBED_DEFINED
 #define GECKOEMBED_DEFINED
 
 #include <gtk/gtk.h>
