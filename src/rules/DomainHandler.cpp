@@ -2,75 +2,94 @@
 
 /**
  * Initialise the handler
+ *
+ * @param config - the config container containing the rules for this handler
  */
 DomainHandler::DomainHandler(ConfigContainer config)
 	: Handler::Handler(config.getDomainRules(), config.getDomainDefault()) {
-	this->allowRedirect = true;
+	this->allowRedirect = false;
+	this->dropAdverts = true;
 }
 
 /**
- * Check for the existance of a rule in this handler
+ * Check that a rule matches the target URL
+ *
+ * @param rule - the rule to interrogate
+ * @param target - the target URL being matched
+ *
+ * @return true if a successful match was found
  */
-bool DomainHandler::hasRule(string ruleName) { 
+bool DomainHandler::ruleMatches(GroupedEntry rule, string target) { 
+	// TODO: add some regex matching in the future
+	if (target.find(rule.getValue())) {
+		return true;
+	}
 	return false;
 }
 
 /**
- * Run a rule matching the given name
+ * Match and run a rule matching the given name
+ *
+ * @param rule - the rule to execute
+ * @param target - the URL to execute
  */
-void DomainHandler::execRule(string ruleName, string target) { }
+void DomainHandler::execRule(GroupedEntry rule, string target) {
+	string ruleName = rule.getGroup();
+	// Declare new domain rules here
+	if (ruleName == "internal") { handleInternal(target); }
+	else if (ruleName == "external") { handleExternal(target); }
+	else if (ruleName == "advert") { handleAdvert(target); }
+	else if (ruleName == "drop") { handleDrop(target); }
+	else { 
+		cout << "(!!!) rule is not recognised and could not be applied: " + ruleName << endl; 
+	}
+}
 
 /**
- * Callback event for page redirection
+ * Action an internal domain rule
  *
- * @param embed - the mozilla object
- * @param uri - the new URL passed to the engine
- * @param parent - the parent instance for this callback
- *
- * @return true to stop redirection event, otherwise false
+ * @param target - the target URL
  */
-/*gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent) {
-	bool ruleFound = false;
-	bool cancelRedirect = true;
-	string target = uri;
-	deque<GroupedEntry> domainRules = parent.getConfig().getDomainRules();
-	for (deque<GroupedEntry>::iterator it = domainRules.begin(); it != domainRules.end(); it++) {
-		GroupedEntry entry = *it;
-		if (target.find(entry.getValue()) == 0) {
-			// A target rule has been found (break after valid rule)
-			if (entry.getGroup() == "internal") {
-				cout << "page redirection to: " + target << endl;
-				cancelRedirect = false;
-				ruleFound = true;
-				break;
-			}
-			else if (entry.getGroup() == "external") {
-				cout << "executing handler for domain: " + target << endl;
-				string cmd = "gnome-www-browser " + target;
-				system(cmd.c_str());
-				cancelRedirect = true;
-				ruleFound = true;
-				break;
-			}
-			else if (entry.getGroup() == "advert") {
-				cout << "dropping advert: " + target << endl;
-				cancelRedirect = true;
-				ruleFound = true;
-				break;
-			}
-			else if (entry.getGroup() == "drop") {
-				cout << "dropping domain target: " + target << endl;
-				cancelRedirect = true;
-				ruleFound = true;
-				break;
-			}
-			else {
-				cout << "(!!!) ignoring unknown target rule: " + entry.getGroup() << endl;
-			}
-		}
+void DomainHandler::handleInternal(string target) {
+	cout << "page redirection to: " + target << endl;
+	this->allowRedirect = true;
+}
+
+/**
+ * Action an external domain rule
+ *
+ * @param target - the target URL
+ */
+void DomainHandler::handleExternal(string target) {
+	cout << "executing handler for domain: " + target << endl;
+	string cmd = "gnome-www-browser " + target;
+	system(cmd.c_str());
+	this->allowRedirect = false;
+}
+
+/**
+ * Action an advert domain rule
+ *
+ * @param target - the target URL
+ */
+void DomainHandler::handleAdvert(string target) {
+	if (this->dropAdverts) {
+		cout << "dropping advert: " + target << endl;
+		this->allowRedirect = false;
 	}
-	if (!ruleFound) {
-		cout << "(!!!) no rule set for target domain: " + target << endl;
+	else {
+		cout << "accepting advert: " + target << endl;
+		this->allowRedirect = true;
 	}
-	return cancelRedirect;
-}*/
+}
+
+/**
+ * Action an drop domain rule
+ *
+ * @param target - the target URL
+ */
+void DomainHandler::handleDrop(string target) {
+	cout << "page redirection to: " + target << endl;
+	this->allowRedirect = false;
+}
+

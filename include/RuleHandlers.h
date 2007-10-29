@@ -3,6 +3,9 @@
 
 #include <string>
 	using std::string;
+#include <iostream>
+	using std::cout;
+	using std::endl;
 #include "ConfigContainer.h"
 
 class Handler {
@@ -23,8 +26,8 @@ class Handler {
 
 		bool runRules(string target);
 
-		virtual bool hasRule(string ruleName) {}
-		virtual void execRule(string ruleName, string target) {}
+		virtual bool ruleMatches(GroupedEntry rule, string target) {}
+		virtual void execRule(GroupedEntry rule, string target) {}
 
 };
 
@@ -33,15 +36,19 @@ class DomainHandler : public Handler {
 	private:
 		
 		bool allowRedirect;
+		bool dropAdverts;
+
+		void handleInternal(string target);
+		void handleExternal(string target);
+		void handleAdvert(string target);
+		void handleDrop(string target);
 	
 	public:
 
 		DomainHandler(ConfigContainer config);
 
-		bool isRedirectAllowed() { return allowRedirect; }
-
-		bool hasRule(string ruleName);
-		void execRule(string ruleName, string target);
+		bool ruleMatches(GroupedEntry rule, string target);
+		void execRule(GroupedEntry rule, string target);
 
 };
 

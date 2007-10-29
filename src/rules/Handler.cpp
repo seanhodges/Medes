@@ -1,8 +1,5 @@
 #include <deque>
 	using std::deque;
-#include <iostream>
-	using std::cout;
-	using std::endl;
 #include "RuleHandlers.h"
 
 /**
@@ -22,15 +19,19 @@ bool Handler::runRules(string target) {
 	bool ruleFound = false;
 	deque<GroupedEntry> ruleList = getRuleList();
 	for (deque<GroupedEntry>::iterator it = ruleList.begin(); it != ruleList.end(); it++) {
-		GroupedEntry entry = *it;
-		if (hasRule(entry.getGroup())) {
-			ruleFound = execRule(entry.getGroup(), entry.getValue());
+		GroupedEntry rule = *it;
+		if (ruleMatches(rule, target)) {
+			execRule(rule, target);
+			ruleFound = true;
 			// Break after first rule found
-			if (ruleFound) break;
+			break;
 		}
 	}
 	if (!ruleFound) {
-		cout << "(!!!) no rule set for target: " + target << endl;
+		cout << "no rule applied to target, using default rule for: " + target << endl;
+		// Run the default rule on this target
+		GroupedEntry defaultRuleObject(this->defaultRule, target);
+		execRule(defaultRuleObject, target);
 	}
 	return ruleFound;
 }
