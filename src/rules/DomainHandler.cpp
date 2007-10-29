@@ -4,7 +4,7 @@
  * Initialise the handler
  */
 DomainHandler::DomainHandler(ConfigContainer config)
-								: Handler::Handler(config) {
+	: Handler::Handler(config.getDomainRules(), config.getDomainDefault()) {
 	this->allowRedirect = true;
 }
 

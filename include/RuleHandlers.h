@@ -9,20 +9,22 @@ class Handler {
 
 	private:
 
-		ConfigContainer config;
+		deque<GroupedEntry> ruleList;
+		string defaultRule;
 	
 	protected:
 
-		ConfigContainer getConfig() { return config; }
+		deque<GroupedEntry> getRuleList() { return ruleList; }
+		string getDefaultRule() { return defaultRule; }
 
 	public:
 
-		Handler(ConfigContainer config);
+		Handler(deque<GroupedEntry> ruleList, string defaultRule);
 
 		bool runRules(string target);
 
-		virtual bool hasRule(string ruleName) {};
-		virtual void execRule(string ruleName, string target) {};
+		virtual bool hasRule(string ruleName) {}
+		virtual void execRule(string ruleName, string target) {}
 
 };
 
