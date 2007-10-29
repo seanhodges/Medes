@@ -24,10 +24,9 @@ bool Handler::runRules(string target) {
 	for (deque<GroupedEntry>::iterator it = ruleList.begin(); it != ruleList.end(); it++) {
 		GroupedEntry entry = *it;
 		if (hasRule(entry.getGroup())) {
-			execRule(entry.getGroup(), entry.getValue());
-			ruleFound = true;
+			ruleFound = execRule(entry.getGroup(), entry.getValue());
 			// Break after first rule found
-			break;
+			if (ruleFound) break;
 		}
 	}
 	if (!ruleFound) {
