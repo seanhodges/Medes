@@ -6,8 +6,11 @@
 		<windowwidth>800</windowwidth>
 		<windowheight>800</windowheight>
 	</application>
-	<rules>
-		<domaindefault>external</domaindefault>
-		<hideadverts>false</hideadverts>
-	</rules>
+	<domains>
+		<default>external</default>
+		<dropadverts>false</dropadverts>
+		<rules>
+			<internal>https://help.ubuntu.com</internal>
+		</rules>
+	</domains>
 </webapp>

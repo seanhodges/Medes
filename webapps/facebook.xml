@@ -6,13 +6,14 @@
 		<windowwidth>800</windowwidth>
 		<windowheight>600</windowheight>
 	</application>
-	<rules>
-		<domaindefault>external</domaindefault>
+	<domains>
+		<default>external</default>
 		<dropadverts>false</dropadverts>
-		<domains>
+		<rules>
 			<internal>https://login.facebook.com</internal>
 			<advert>http://ads.ak.facebook.com/ads</advert>
-			<internal>facebook.com</internal>
-		</domains>
-	</rules>
+			<internal>http://www.facebook</internal>
+			<internal>http://bathac.facebook</internal>
+		</rules>
+	</domains>
 </webapp>
