@@ -5,11 +5,23 @@
 		<url>http://maps.google.co.uk</url>
 		<windowwidth>1024</windowwidth>
 		<windowheight>768</windowheight>
-		<domainlist>
-			<domain>http://maps.google.co.uk</domain>
-			<domain>http://www.google.co.uk/intl/en_uk/help</domain>
-			<domain>http://www.google.co.uk/help/maps</domain>
-			<domain>http://gmodules.com</domain>
-		</domainlist>
 	</application>
+	<domains>
+		<default>external</default>
+		<dropadverts>false</dropadverts>
+		<rules>
+			<external>http://maps.google.co.uk/local_url</external>
+			<internal>http://maps.google</internal>
+			<internal>https://www.google</internal>
+			<internal>http://www.google.co.uk/intl/en_uk/help</internal>
+			<internal>http://www.google.co.uk/help/maps</internal>
+			<internal>http://gmodules</internal>
+			<external>http://www.google</external>
+			<external>http://images.google</external>
+			<external>http://news.google</external>
+			<external>http://groups.google</external>
+			<external>http://scholar.google</external>
+			<advert>http://adwords.google</advert>
+		</rules>
+	</domains>
 </webapp>

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "GeckoEmbed.h"
+#include "RuleHandlers.h"
 
 /**
  * Initialise the engine (must be called AFTER gtk_init())
@@ -55,5 +56,21 @@ void GeckoEmbed::bringUp() {
  */
 void GeckoEmbed::tearDown() {
 	gtk_moz_embed_pop_startup();
+}
+
+/**
+ * Callback event for page redirection
+ *
+ * @param embed - the mozilla object
+ * @param uri - the new URL passed to the engine
+ * @param parent - the parent instance for this callback
+ *
+ * @return true to stop redirection event, otherwise false
+ */
+gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent) {
+	DomainHandler handler(parent.getConfig());
+	string target = uri;
+	handler.runRules(target);
+	return !handler.isRedirectAllowed();
 }
 

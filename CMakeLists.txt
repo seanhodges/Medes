@@ -17,5 +17,5 @@ link_libraries(${GTK2_LIBRARIES})
 link_libraries(${GTKMOZEMBED_LIBRARIES})
 link_libraries(${XML2_LIBRARIES})
 
-add_executable(medes src/AppMain.cpp src/AppWindow.cpp src/ConfigContainer.cpp src/ConfigReader.cpp src/GeckoEmbed.cpp)
+add_executable(medes src/AppMain.cpp src/AppWindow.cpp src/ConfigContainer.cpp src/ConfigReader.cpp src/GeckoEmbed.cpp src/rules/Handler.cpp src/rules/DomainHandler.cpp)
 

@@ -5,12 +5,15 @@
 		<url>http://www.facebook.com</url>
 		<windowwidth>800</windowwidth>
 		<windowheight>600</windowheight>
-		<domainlist>
-			<domain>https://login.facebook.com</domain>
-			<domain>http://www.facebook.com</domain>
-			<domain>http://bathac.facebook.com</domain>
-			<domain>http://ads.ak.facebook.com/ads</domain>
-			<domain>http://view.atdmt.com/MBU/iview</domain>
-		</domainlist>
 	</application>
+	<domains>
+		<default>external</default>
+		<dropadverts>false</dropadverts>
+		<rules>
+			<internal>https://login.facebook.com</internal>
+			<advert>http://ads.ak.facebook.com/ads</advert>
+			<internal>http://www.facebook</internal>
+			<internal>http://bathac.facebook</internal>
+		</rules>
+	</domains>
 </webapp>

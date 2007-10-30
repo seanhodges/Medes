@@ -6,8 +6,6 @@
 	using std::string;
 #include <vector>
 	using std::vector;
-#include <pair>
-	using std::pair;
 #include "ConfigContainer.h"
 
 class ConfigReader {
@@ -19,8 +17,9 @@ class ConfigReader {
 		xmlDocPtr xmlDoc;
 
 		int convertToInt(string& strIn);
+		bool convertToBoolean(string& strIn);
 		vector<string> convertToVector(const xmlNodePtr& xmlList, string elementName);
-		vector<pair<string, string>> convertToGroupedVector(const xmlNodePtr& xmlList);
+		vector<GroupedEntry> convertToGroupedVector(const xmlNodePtr& xmlList);
 
 	public:
 

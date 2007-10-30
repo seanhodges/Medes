@@ -3,18 +3,42 @@
 
 #include <string>
 	using std::string;
+#include <deque>
+	using std::deque;
 #include <vector>
 	using std::vector;
+
+class GroupedEntry {
+
+	private:
+
+		string group;
+		string value;
+
+	public:
+		
+		GroupedEntry() {};
+		GroupedEntry(string group, string value);
+
+		string getGroup() { return group; }
+		string getValue() { return value; }
+
+};
 
 class ConfigContainer {
 
 	private:
 		
+		// Application
 		string appUrl;
 		string appTitle;
 		int appWidth;
 		int appHeight;
-		vector<string> domainList;
+
+		// Rules
+		string domainDefault;
+		bool hideAdverts;
+		deque<GroupedEntry> domainRules;
 
 	public:
 
@@ -24,28 +48,29 @@ class ConfigContainer {
 		string getAppTitle() { return appTitle; }
 		int getAppWidth() { return appWidth; }
 		int getAppHeight() { return appHeight; }
-		vector<string>& getDomainList() { return domainList; }
+		string getDomainDefault() { return domainDefault; }
+		bool isAdvertsHidden() { return hideAdverts; }
+		deque<GroupedEntry>& getDomainRules() { return domainRules; }
 
-		void setAppUrl(const string &newValue) { appUrl = newValue; }
-		void setAppTitle(const string &newValue) { appTitle = newValue; }
-
-		void setDomainList(const vector<string>& newList) { 
-			domainList = newList; 
-		}
-
-		void appendDomainList(string newEntry);
-
-		void setAppWidth(int newValue) { 
+		void setAppUrl(const string& appUrl) { this->appUrl = appUrl; }
+		void setAppTitle(const string& appTitle) { this->appTitle = appTitle; }
+		void setAppWidth(int appWidth) { 
 			// Constrain the min width
-			if (newValue > 100) 
-				appWidth = newValue; 
+			if (appWidth > 100) 
+				this->appWidth = appWidth; 
 		}
-
-		void setAppHeight(int newValue) { 
+		void setAppHeight(int appHeight) { 
 			// Constrain the min height
-			if (newValue > 100) 
-				appHeight = newValue; 
+			if (appHeight > 100) 
+				this->appHeight = appHeight; 
 		}
+		void setDomainDefault(string domainDefault) { this->domainDefault = domainDefault; }
+		void setAdvertsHidden(bool hideAdverts) { this->hideAdverts = hideAdverts; }
+		void replaceDomainRules(deque<GroupedEntry> newRules) { 
+			domainRules = newRules; 
+		}
+		void appendDomainRules(vector<GroupedEntry> newRules);
+		void appendDomainRules(GroupedEntry newRule);
 
 };
 

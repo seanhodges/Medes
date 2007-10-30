@@ -15,6 +15,9 @@ void printUsage() {
 
 int main(int argc, char* argv[]) {
 
+	// Set MOZILLA_FIVE_HOME for gtkmozembed to work
+	setenv("MOZILLA_FIVE_HOME", "/usr/lib/firefox", 0);
+
 	// Read the arguments passed in
 	string targetAppXML;
 	if (argc > 1) {

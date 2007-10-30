@@ -47,6 +47,7 @@ bool ConfigReader::loadFile(string xmlPath) {
  * @param config - the ConfigContainer object to populate
  */
 void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
+	bool appNameSet = false;
 	xmlDocPtr doc = ConfigReader::getXmlDoc();
 	xmlNodePtr groups;
 	xmlNodePtr keys;
@@ -61,18 +62,18 @@ void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 			string configCode = groupName + "_" + keyName;
 			transform(configCode.begin(), configCode.end(), configCode.begin(), toupper);
 			// Set the relevant ConfigContainer setting
-			if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); }
+			if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); appNameSet = true; }
 			else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 			else if (configCode == "APPLICATION_WINDOWWIDTH") { config.setAppWidth(convertToInt(keyValue)); }
 			else if (configCode == "APPLICATION_WINDOWHEIGHT") { config.setAppHeight(convertToInt(keyValue)); }
-			else if (configCode == "APPLICATION_DOMAINLIST") { config.setDomainList(convertToVector(keys, "domain")); }
+			else if (configCode == "DOMAINS_DEFAULT") { config.setDomainDefault(keyValue); }
+			else if (configCode == "DOMAINS_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
+			else if (configCode == "DOMAINS_RULES") { config.appendDomainRules(convertToGroupedVector(keys)); }
 			else {
 				cout << "<" + groupName + "><" + keyName + ">" + " is not a recognised key" << endl;
 			}
 		}
 	}
-	// Post-parsing configuration
-	config.appendDomainList(config.getAppUrl());
 }
 
 /**
@@ -90,6 +91,17 @@ int ConfigReader::convertToInt(string& strIn) {
 		cout << strIn + " is not a number" << endl;
 	}
 	return intOut;
+}
+
+/**
+ * Cast a string setting into an boolean
+ *
+ * @param strIn - the string to parse
+ *
+ * @return the boolean value
+ */
+bool ConfigReader::convertToBoolean(string& strIn) {
+	return (strIn == "true");
 }
 
 /**
@@ -120,13 +132,13 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
  *
  * @return the vector of items (key = pair (group, value))
  */
-vector<pair<string, string>> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
-	vector<pair<string, string>> out;
+vector<GroupedEntry> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
+	vector<GroupedEntry> out;
 	xmlNodePtr entries;
 	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
 		string group = (char*)entries->name;
 		string entryValue = (char*)xmlNodeGetContent(entries);
-		pair entry(group, entryValue);
+		GroupedEntry entry(group, entryValue);
 		out.push_back(entry);
 	}
 	return out;
