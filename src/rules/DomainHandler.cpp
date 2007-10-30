@@ -21,7 +21,7 @@ DomainHandler::DomainHandler(ConfigContainer config)
  */
 bool DomainHandler::ruleMatches(GroupedEntry rule, string target) { 
 	// TODO: add some regex matching in the future
-	if (target.find(rule.getValue())) {
+	if (target.find(rule.getValue()) == 0) {
 		return true;
 	}
 	return false;

@@ -17,6 +17,7 @@ class ConfigReader {
 		xmlDocPtr xmlDoc;
 
 		int convertToInt(string& strIn);
+		bool convertToBoolean(string& strIn);
 		vector<string> convertToVector(const xmlNodePtr& xmlList, string elementName);
 		vector<GroupedEntry> convertToGroupedVector(const xmlNodePtr& xmlList);
 

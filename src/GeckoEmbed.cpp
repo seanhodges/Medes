@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "GeckoEmbed.h"
+#include "RuleHandlers.h"
 
 /**
  * Initialise the engine (must be called AFTER gtk_init())
@@ -67,47 +68,9 @@ void GeckoEmbed::tearDown() {
  * @return true to stop redirection event, otherwise false
  */
 gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent) {
-	bool ruleFound = false;
-	bool cancelRedirect = true;
+	DomainHandler handler(parent.getConfig());
 	string target = uri;
-	deque<GroupedEntry> domainRules = parent.getConfig().getDomainRules();
-	for (deque<GroupedEntry>::iterator it = domainRules.begin(); it != domainRules.end(); it++) {
-		GroupedEntry entry = *it;
-		if (target.find(entry.getValue()) == 0) {
-			// A target rule has been found (break after valid rule)
-			if (entry.getGroup() == "internal") {
-				cout << "page redirection to: " + target << endl;
-				cancelRedirect = false;
-				ruleFound = true;
-				break;
-			}
-			else if (entry.getGroup() == "external") {
-				cout << "executing handler for domain: " + target << endl;
-				string cmd = "gnome-www-browser " + target;
-				system(cmd.c_str());
-				cancelRedirect = true;
-				ruleFound = true;
-				break;
-			}
-			else if (entry.getGroup() == "advert") {
-				cout << "dropping advert: " + target << endl;
-				cancelRedirect = true;
-				ruleFound = true;
-				break;
-			}
-			else if (entry.getGroup() == "drop") {
-				cout << "dropping domain target: " + target << endl;
-				cancelRedirect = true;
-				ruleFound = true;
-				break;
-			}
-			else {
-				cout << "(!!!) ignoring unknown target rule: " + entry.getGroup() << endl;
-			}
-		}
-	}
-	if (!ruleFound) {
-		cout << "(!!!) no rule set for target domain: " + target << endl;
-	}
-	return cancelRedirect;
+	handler.runRules(target);
+	return !handler.isRedirectAllowed();
 }
+

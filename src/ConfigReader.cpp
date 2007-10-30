@@ -66,16 +66,13 @@ void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 			else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 			else if (configCode == "APPLICATION_WINDOWWIDTH") { config.setAppWidth(convertToInt(keyValue)); }
 			else if (configCode == "APPLICATION_WINDOWHEIGHT") { config.setAppHeight(convertToInt(keyValue)); }
-			else if (configCode == "RULES_DOMAINS") { config.appendDomainRules(convertToGroupedVector(keys)); }
+			else if (configCode == "DOMAINS_DEFAULT") { config.setDomainDefault(keyValue); }
+			else if (configCode == "DOMAINS_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
+			else if (configCode == "DOMAINS_RULES") { config.appendDomainRules(convertToGroupedVector(keys)); }
 			else {
 				cout << "<" + groupName + "><" + keyName + ">" + " is not a recognised key" << endl;
 			}
 		}
-	}
-	// Post-parsing configuration
-	if (appNameSet) {
-		GroupedEntry appBaseUrl("internal", config.getAppUrl());
-		config.appendDomainRules(appBaseUrl);
 	}
 }
 
@@ -94,6 +91,17 @@ int ConfigReader::convertToInt(string& strIn) {
 		cout << strIn + " is not a number" << endl;
 	}
 	return intOut;
+}
+
+/**
+ * Cast a string setting into an boolean
+ *
+ * @param strIn - the string to parse
+ *
+ * @return the boolean value
+ */
+bool ConfigReader::convertToBoolean(string& strIn) {
+	return (strIn == "true");
 }
 
 /**
