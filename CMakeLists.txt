@@ -44,6 +44,8 @@ set_target_properties(medes
 	PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE
 )
 
+install(DIRECTORY webapps DESTINATION share/medes)
+
 install(TARGETS medes 
 	RUNTIME DESTINATION bin
 )
