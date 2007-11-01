@@ -13,6 +13,16 @@ void printUsage() {
 	cout << endl;
 }
 
+vector *getTargetConfigs() {
+	// Load the config files in this order
+	vector<string>targetConfig;
+	targetConfig.push_back("../share/medes/global.xml");
+	targetConfig.push_back("../share/medes/adverts.xml");
+	targetConfig.push_back("../share/medes/webapps/" + targetAppXML);
+	targetConfig.push_back("~/.medes/webapps/" + targetAppXML);
+	return targetConfig;
+}
+
 int main(int argc, char* argv[]) {
 
 	// Set MOZILLA_FIVE_HOME for gtkmozembed to work
@@ -28,17 +38,15 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	// Load the application configuration
+	// Load the configuration files
+	vector targetConfig = getTargetConfigs();
 	ConfigContainer config;
 	ConfigReader reader;
-	bool loaded = reader.loadFile(targetAppXML);
-	if (loaded) {
-		reader.appendConfigToContainer(config);		
-	}
-	else {
-		cout << "Error: could not read config file: " + targetAppXML << endl;
-		printUsage();
-		return 1;
+	for (vector<String>::iterator it = *targetConfig.begin(); it != *targetConfig.end(); it++) {
+		bool loaded = reader.loadFile(*it);
+		if (loaded) {
+			reader.appendConfigToContainer(config);		
+		}
 	}
 
 	// Create the application window
