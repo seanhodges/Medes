@@ -1,2 +1,5 @@
 medes
 build
+CMakeFiles
+cmake_install.cmake
+Makefile
