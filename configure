@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cmake .
+
+if [ $? -eq 0 ]; then
+	echo "\nConfiguration complete, please run \"make\" followed by \"sudo make install\".\n"
+else
+	echo "\nThere were problems configuring the build, please check the messages above.\n"
+fi
+
