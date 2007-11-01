@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Facebook
+GenericName=Facebook
+Comment=Community Portal
+Exec=medes /usr/local/share/medes/webapps/facebook.xml
+Icon=facebook
+Terminal=false
+Type=Application
+Categories=Network;Medes;

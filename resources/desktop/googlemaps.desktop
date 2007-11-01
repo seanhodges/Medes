@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Google Maps
+GenericName=Google Maps
+Comment=
+Exec=medes /usr/local/share/medes/webapps/googlemaps.xml
+Icon=googlemaps
+Terminal=false
+Type=Application
+Categories=Office;Maps;
