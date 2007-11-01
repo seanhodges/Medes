@@ -1,0 +1,25 @@
+body {
+	background: #CCCFDF;
+}
+
+h1 {
+	color: #FE1111;
+	text-align: center;
+}
+
+h2 {
+	color: #AA1111;
+	text-align: center;
+}
+
+p {
+	padding: 20px 50px 0px 50px;
+}
+
+div.heading {
+	margin: 20px 50px 0px 50px;
+	border: solid;
+	border-width: 2px;
+	border-color: black;
+	background: #FEFEBF;
+}

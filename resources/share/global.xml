@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<webapp>
+	<application>
+		<title>Welcome to Medes!</title>
+		<url>/usr/local/share/medes_home.html</url>
+		<windowwidth>800</windowwidth>
+		<windowheight>600</windowheight>
+	</application>
+	<domains>
+		<rules>
+			<internal>file:///usr/local/share/medes_home.html</internal>
+		</rules>
+	</domains>
+</webapp>
