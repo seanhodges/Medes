@@ -32,13 +32,15 @@ ConfigReader::~ConfigReader() {
 bool ConfigReader::loadFile(string xmlPath) {
 	fstream fin;
 	fin.open(xmlPath.c_str());
-	if(fin.is_open()) {
+	// This condition is required for files that could not be opened,
+	// however, it does not work if config file is read-only...
+	//if(fin.is_open()) {
 		setFilePath(xmlPath);
 		setXmlDoc(xmlParseFile(xmlPath.c_str()));
 		fin.close();
 		return true;
-	}
-	return false;
+	//}
+	//return false;
 }
 
 /**
