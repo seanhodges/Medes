@@ -13,12 +13,12 @@ void printUsage() {
 	cout << endl;
 }
 
-vector *getTargetConfigs() {
+vector<string> getTargetConfigs(string targetAppXML) {
 	// Load the config files in this order
-	vector<string>targetConfig;
-	targetConfig.push_back("../share/medes/global.xml");
-	targetConfig.push_back("../share/medes/adverts.xml");
-	targetConfig.push_back("../share/medes/webapps/" + targetAppXML);
+	vector<string> targetConfig;
+	targetConfig.push_back("/usr/local/share/medes/global.xml");
+	targetConfig.push_back("/usr/local/share/medes/adverts.xml");
+	targetConfig.push_back("/usr/local/share/medes/webapps/" + targetAppXML);
 	targetConfig.push_back("~/.medes/webapps/" + targetAppXML);
 	return targetConfig;
 }
@@ -39,14 +39,20 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Load the configuration files
-	vector targetConfig = getTargetConfigs();
+	vector<string> targetConfig = getTargetConfigs(targetAppXML);
 	ConfigContainer config;
 	ConfigReader reader;
-	for (vector<String>::iterator it = *targetConfig.begin(); it != *targetConfig.end(); it++) {
+	for (vector<string>::iterator it = targetConfig.begin(); it != targetConfig.end(); it++) {
+		cout << "loading " + *it + "...";
 		bool loaded = reader.loadFile(*it);
 		if (loaded) {
+			cout << " success";
 			reader.appendConfigToContainer(config);		
 		}
+		else {
+			cout << " not found";
+		}
+		cout << endl;
 	}
 
 	// Create the application window

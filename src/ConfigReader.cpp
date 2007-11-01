@@ -6,7 +6,7 @@
 	using std::cout;
 	using std::endl;
 #include <fstream>
-	using std::fstream;
+	using std::ifstream;
 #include "ConfigReader.h"
 
 /**
@@ -30,17 +30,14 @@ ConfigReader::~ConfigReader() {
  * Load the config XML
  */
 bool ConfigReader::loadFile(string xmlPath) {
-	fstream fin;
-	fin.open(xmlPath.c_str());
-	// This condition is required for files that could not be opened,
-	// however, it does not work if config file is read-only...
-	//if(fin.is_open()) {
+	ifstream fin(xmlPath.c_str());
+	if(fin) {
 		setFilePath(xmlPath);
 		setXmlDoc(xmlParseFile(xmlPath.c_str()));
 		fin.close();
 		return true;
-	//}
-	//return false;
+	}
+	return false;
 }
 
 /**
