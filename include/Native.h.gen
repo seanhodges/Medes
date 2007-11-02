@@ -6,7 +6,6 @@
  * Please ensure you are editing include/Native.h.gen.
  */
 
-// The location of the application resources
 #define APP_RESOURCE_PATH "${CMAKE_INSTALL_PREFIX}/share/medes"
 #define MOZILLA_FIVE_HOME "${GTKMOZEMBED_LIBRARY_DIRS}"
 
