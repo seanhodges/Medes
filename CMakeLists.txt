@@ -20,17 +20,17 @@ pkg_check_modules(GTK2 REQUIRED gtk+-2.0)
 pkg_check_modules(GTKMOZEMBED REQUIRED firefox-gtkmozembed)
 pkg_check_modules(XML2 REQUIRED libxml-2.0)
 
+configure_file(
+	${CMAKE_HOME_DIRECTORY}/include/Native.h.gen 
+	${CMAKE_HOME_DIRECTORY}/include/Native.h
+	ESCAPE_QUOTES
+)
+
 include_directories(
 	${GTK2_INCLUDE_DIRS} 
 	${GTKMOZEMBED_INCLUDE_DIRS} 
 	${XML2_INCLUDE_DIRS} 
 	${MEDES_INCLUDE_DIRS}
-)
-
-configure_file(
-	${CMAKE_HOME_DIRECTORY}/include/Native.h.gen 
-	${CMAKE_HOME_DIRECTORY}/include/Native.h
-	ESCAPE_QUOTES
 )
 
 link_directories(
