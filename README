@@ -7,6 +7,7 @@ Compiling the source
 --------------------
 
 Medes depends on the following components, corresponding Ubuntu packages are in brackets:
+- CMake			(cmake)
 - gtkmozembed 	(firefox-dev)
 - GTK 2.x		(libgtk2.0-dev)
 - pkg-config	(pkg-config)
