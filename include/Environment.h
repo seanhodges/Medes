@@ -16,10 +16,11 @@ class Environment {
 		Environment();
 
 		// XML config files
-		string getSystemGlobalXMLPath() { return APP_RESOURCE_PATH; }
-		string getSystemAdvertXMLPath() { return APP_RESOURCE_PATH; }
-		string getSystemWebAppXMLPath() { return (string)APP_RESOURCE_PATH + "webapps/"; }
-		string getUserWebAppXMLPath() { return userHomePath + "webapps/"; }
+		string getGlobalXMLPath() { return (string)APP_RESOURCE_PATH + "/global.xml"; }
+		string getAdvertXMLPath() { return (string)APP_RESOURCE_PATH + "/adverts.xml"; }
+
+		string getGlobalWebAppPath() { return (string)APP_RESOURCE_PATH + "/webapps/"; }
+		string getUserWebAppPath() { return userHomePath + "/webapps/"; }
 
 		// Location for Gecko profile
 		string getUserProfilePath() { return userHomePath; }

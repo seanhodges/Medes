@@ -3,6 +3,7 @@
 #include <iostream>
 	using std::cout;
 	using std::endl;
+#include "Environment.h"
 #include "AppWindow.h"
 #include "ConfigContainer.h"
 #include "ConfigReader.h"
@@ -14,12 +15,13 @@ void printUsage() {
 }
 
 vector<string> getTargetConfigs(string targetAppXML) {
+	Environment env;
 	// Load the config files in this order
 	vector<string> targetConfig;
-	targetConfig.push_back("/usr/local/share/medes/global.xml");
-	targetConfig.push_back("/usr/local/share/medes/adverts.xml");
-	targetConfig.push_back("/usr/local/share/medes/webapps/" + targetAppXML);
-	targetConfig.push_back("/home/sean/.medes/webapps/" + targetAppXML);
+	targetConfig.push_back(env.getGlobalXMLPath());
+	targetConfig.push_back(env.getAdvertXMLPath());
+	targetConfig.push_back(env.getGlobalWebAppPath() + targetAppXML);
+	targetConfig.push_back(env.getUserWebAppPath() + targetAppXML);
 	return targetConfig;
 }
 

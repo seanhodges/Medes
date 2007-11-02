@@ -7,6 +7,6 @@
  */
 
 // The location of the application resources
-#define APP_RESOURCE_PATH "/usr/local/share/medes"
+#define APP_RESOURCE_PATH "/home/sean/build-medes-test/share/medes"
 
 #endif
