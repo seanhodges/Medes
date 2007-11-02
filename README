@@ -1,0 +1,26 @@
+Medes - Lightweight Web Application container
+
+Sean Hodges, 2007
+
+
+Compiling the source
+--------------------
+
+Medes depends on the following components, corresponding Ubuntu packages are in brackets:
+- gtkmozembed 	(firefox-dev)
+- GTK 2.x		(libgtk2.0-dev)
+- pkg-config	(pkg-config)
+- XML2			(libxml2-dev)
+
+Perform the following steps to compile and install:
+
+./configure
+make
+sudo make install
+
+
+Troubleshooting
+---------------
+
+TBC...
+
