@@ -9,6 +9,7 @@ set(MEDES_SRC
 	src/AppWindow.cpp 
 	src/ConfigContainer.cpp 
 	src/ConfigReader.cpp 
+	src/Environment.cpp
 	src/GeckoEmbed.cpp 
 	src/rules/Handler.cpp 
 	src/rules/DomainHandler.cpp
@@ -24,6 +25,12 @@ include_directories(
 	${GTKMOZEMBED_INCLUDE_DIRS} 
 	${XML2_INCLUDE_DIRS} 
 	${MEDES_INCLUDE_DIRS}
+)
+
+configure_file(
+	${CMAKE_HOME_DIRECTORY}/include/Native.h.gen 
+	${CMAKE_HOME_DIRECTORY}/include/Native.h
+	ESCAPE_QUOTES
 )
 
 link_directories(

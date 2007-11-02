@@ -9,7 +9,7 @@
 
 void printUsage() {
 	cout << "medes 0.1" << endl;
-	cout << "Usage: medes [config file]" << endl;
+	cout << "Usage: medes [webapp name]" << endl;
 	cout << endl;
 }
 
@@ -19,7 +19,7 @@ vector<string> getTargetConfigs(string targetAppXML) {
 	targetConfig.push_back("/usr/local/share/medes/global.xml");
 	targetConfig.push_back("/usr/local/share/medes/adverts.xml");
 	targetConfig.push_back("/usr/local/share/medes/webapps/" + targetAppXML);
-	targetConfig.push_back("~/.medes/webapps/" + targetAppXML);
+	targetConfig.push_back("/home/sean/.medes/webapps/" + targetAppXML);
 	return targetConfig;
 }
 
@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 	// Read the arguments passed in
 	string targetAppXML;
 	if (argc > 1) {
-		targetAppXML = (string)argv[1];
+		targetAppXML = (string)argv[1] + ".xml";
 	}
 	else {
 		printUsage();
