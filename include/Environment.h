@@ -20,10 +20,10 @@ class Environment {
 		string getAdvertXMLPath() { return (string)APP_RESOURCE_PATH + "/adverts.xml"; }
 
 		string getGlobalWebAppPath() { return (string)APP_RESOURCE_PATH + "/webapps/"; }
-		string getUserWebAppPath() { return userHomePath + "/webapps/"; }
+		string getUserWebAppPath() { return userHomePath + "/.medes/webapps/"; }
 
 		// Location for Gecko profile
-		string getUserProfilePath() { return userHomePath; }
+		string getUserProfilePath() { return userHomePath + "/.medes/mozilla/"; }
 
 };
 

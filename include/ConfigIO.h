@@ -41,37 +41,37 @@ class ConfigReader : public ConfigIO {
 
 		void resolveConfigCode(string configCode, ConfigContainer &config, string groupName, xmlNodePtr &key);
 
-		int convertToInt(string& strIn);
-		bool convertToBoolean(string& strIn);
-		vector<string> convertToVector(const xmlNodePtr& xmlList, string elementName);
-		vector<GroupedEntry> convertToGroupedVector(const xmlNodePtr& xmlList);
+		int convertToInt(string &strIn);
+		bool convertToBoolean(string &strIn);
+		vector<string> convertToVector(const xmlNodePtr &xmlList, string elementName);
+		vector<GroupedEntry> convertToGroupedVector(const xmlNodePtr &xmlList);
 
 	public:
 
 		ConfigReader(); 
-		~ConfigReader() { };
+		~ConfigReader() {};
 
 		bool loadConfig(string xmlPath);
 
-		void appendConfigToContainer(ConfigContainer& config);
+		void appendConfigToContainer(ConfigContainer &config);
 
 };
 
-/*class ConfigWriter : public ConfigIO {
+class ConfigWriter : public ConfigIO {
 
 	private:
 
-		string convertForXML(int& intIn);
-		string convertForXML(bool& boolIn);
-		string convertForXML(deque& dequeIn);
-		string convertForXML(vector& vectorIn);
+		string convertForXML(int intIn);
+		string convertForXML(bool boolIn);
+		string convertForXML(const vector<string> &vectorIn, string elementName);
+		string convertForXML(const vector<GroupedEntry> &vectorIn);
 
 	public:
 
 		ConfigWriter(); 
-		~ConfigWriter();
+		~ConfigWriter() {};
 
-		void saveWindowGeometry(ConfigContainer& config);
-};*/
+		void saveWindowGeometry(ConfigContainer &config);
+};
 
 #endif
