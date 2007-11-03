@@ -13,9 +13,11 @@ class AppWindow {
 		
 		void setupCallbacks(); 
 
-		static void eventDestroy(GtkWidget* widget, gpointer data); 
+		static void eventDestroy(GtkWindow* window, AppWindow &parent); 
 
-		GtkWidget* window;
+		ConfigContainer config;
+
+		GtkWindow* window;
 		GeckoEmbed gecko;
 
 	public:
@@ -24,12 +26,13 @@ class AppWindow {
 		
 		~AppWindow(); 
 
+		ConfigContainer getConfig() { return config; }
+
+		void setConfig(ConfigContainer &config) { this->config = config; }
 		void setContent(GtkWidget* gtkWidget); 
-
-		void show(); 
-
 		void setTitle(const string& newTitle); 
 
+		void show(); 
 		void start(); 
 };
 

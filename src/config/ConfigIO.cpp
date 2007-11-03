@@ -49,13 +49,10 @@ bool ConfigIO::loadFile(string xmlPath) {
 bool ConfigIO::saveFile(string xmlPath = "") {
 	// Default to overwriting last loaded file
 	if (xmlPath == "") xmlPath = this->xmlFilePath;
-	ofstream fout(xmlPath.c_str());
-	if(fout) {
-		xmlSaveFile(xmlPath.c_str(), this->xmlDoc);
-		fout.close();
-		return true;
-	}
-	return false;
+	cout << "Saving to " + xmlPath << endl;
+	int success = xmlSaveFile(xmlPath.c_str(), this->xmlDoc);
+	cout << success << endl;
+	return true;
 }
 
 /**
@@ -93,7 +90,7 @@ void ConfigIO::changeSetting(string group, string key, string newValue) {
 	// TODO: Finish and test this method
 	string query = "/" + group + "/" + key;
 	xmlChar* xpath = (xmlChar*)query.c_str();
-	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
+	/*xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
 	xmlXPathObjectPtr result = xmlXPathEvalExpression(xpath, context);
 	if (!xmlXPathNodeSetIsEmpty(result->nodesetval)) {
 		result->nodesetval->nodeTab[0]->content = (xmlChar*)newValue.c_str();
@@ -102,6 +99,6 @@ void ConfigIO::changeSetting(string group, string key, string newValue) {
 		// TODO: Create new element
 	}
 	xmlXPathFreeContext(context);
-	xmlXPathFreeObject(result);
+	xmlXPathFreeObject(result);*/
 }
 

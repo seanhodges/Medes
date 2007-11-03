@@ -1,4 +1,5 @@
 #include "AppWindow.h"
+#include "ConfigIO.h"
 
 /**
  * Create the application window
@@ -10,9 +11,9 @@
 AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_set_locale();
 	gtk_init(&argc, &argv);
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	// Set up the window
-	gtk_window_set_default_size(GTK_WINDOW(window), config.getAppWidth(), config.getAppHeight());
+	gtk_window_set_default_size(window, config.getAppWidth(), config.getAppHeight());
 	setTitle(config.getAppTitle());
 	// Attach the Gecko engine
 	gecko.init(config);
@@ -39,7 +40,7 @@ void AppWindow::setContent(GtkWidget* gtkWidget) {
  * Show the application window
  */
 void AppWindow::show() {
-	gtk_widget_show_all(window);
+	gtk_widget_show_all(GTK_WIDGET(window));
 }
 
 /**
@@ -48,7 +49,7 @@ void AppWindow::show() {
  * @param newTitle - the new title to display
  */
 void AppWindow::setTitle(const string& newTitle) {
-	gtk_window_set_title(GTK_WINDOW (window), newTitle.c_str());
+	gtk_window_set_title(window, newTitle.c_str());
 }
 
 /**
@@ -63,22 +64,25 @@ void AppWindow::start() {
  * Set-up the event callbacks handled in this window
  */
 void AppWindow::setupCallbacks() {
-	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(eventDestroy), NULL);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(eventDestroy), this);
 }
 
 /**
  * Destroy this window (handled internally by an event)
  *
  * @param *window - reference to the window object
- * @param data - unused data from glib
+ * @param parent - the owner of this callback
  */
-void AppWindow::eventDestroy(GtkWidget* window, gpointer data) {
+void AppWindow::eventDestroy(GtkWindow* window, AppWindow& parent) {
 	// Save window geometry to user config on exit
-	/*config = getConfig();
-	config.setWindowWidth(window.get_width());
-	config.setWindowHeight(window.get_height());
+	ConfigContainer config = parent.getConfig();
+	int width;
+	int height;
+	gtk_window_get_size(window, &width, &height);
+	config.setAppWidth(width);
+	config.setAppHeight(height);
 	ConfigWriter writer;
-	writer.saveWindowGeometry(config);*/
+	writer.saveWindowGeometry(config);
 	gtk_main_quit();
 }
 
