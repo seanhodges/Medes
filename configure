@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cmake .
+cmake -D CMAKE_INSTALL_PREFIX:STRING="/usr" .
 
 if [ $? -eq 0 ]; then
 	echo "\nConfiguration complete, please run \"make\" followed by \"sudo make install\".\n"

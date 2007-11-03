@@ -1,6 +1,7 @@
 medes
 build
 CMakeFiles
+CMakeCache.txt
 cmake_install.cmake
 Makefile
 include/Native.h
