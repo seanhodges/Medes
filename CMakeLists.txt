@@ -7,8 +7,9 @@ set(MEDES_INCLUDE_DIRS
 set(MEDES_SRC
 	src/AppMain.cpp 
 	src/AppWindow.cpp 
-	src/ConfigContainer.cpp 
-	src/ConfigReader.cpp 
+	src/config/ConfigContainer.cpp 
+	src/config/ConfigIO.cpp 
+	src/config/ConfigReader.cpp 
 	src/Environment.cpp
 	src/GeckoEmbed.cpp 
 	src/rules/Handler.cpp 

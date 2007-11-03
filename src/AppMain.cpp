@@ -6,7 +6,7 @@
 #include "Environment.h"
 #include "AppWindow.h"
 #include "ConfigContainer.h"
-#include "ConfigReader.h"
+#include "ConfigIO.h"
 
 void printUsage() {
 	cout << "medes 0.1" << endl;
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 	ConfigReader reader;
 	for (vector<string>::iterator it = targetConfig.begin(); it != targetConfig.end(); it++) {
 		cout << "loading " + *it + "...";
-		bool loaded = reader.loadFile(*it);
+		bool loaded = reader.loadConfig(*it);
 		if (loaded) {
 			cout << " success";
 			reader.appendConfigToContainer(config);		

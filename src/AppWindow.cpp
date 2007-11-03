@@ -69,10 +69,16 @@ void AppWindow::setupCallbacks() {
 /**
  * Destroy this window (handled internally by an event)
  *
- * @param *widget - reference to the window object
+ * @param *window - reference to the window object
  * @param data - unused data from glib
  */
-void AppWindow::eventDestroy(GtkWidget* widget, gpointer data) {
+void AppWindow::eventDestroy(GtkWidget* window, gpointer data) {
+	// Save window geometry to user config on exit
+	/*config = getConfig();
+	config.setWindowWidth(window.get_width());
+	config.setWindowHeight(window.get_height());
+	ConfigWriter writer;
+	writer.saveWindowGeometry(config);*/
 	gtk_main_quit();
 }
 
