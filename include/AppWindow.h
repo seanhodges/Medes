@@ -13,7 +13,8 @@ class AppWindow {
 		
 		void setupCallbacks(); 
 
-		static void eventDestroy(GtkWindow* window, AppWindow &parent); 
+		static void eventDestroy(GtkWindow *window, AppWindow &parent); 
+		static void eventResize(GtkWindow *window, AppWindow &parent); 
 
 		ConfigContainer config;
 
@@ -26,11 +27,12 @@ class AppWindow {
 		
 		~AppWindow(); 
 
-		ConfigContainer getConfig() { return config; }
+		//ConfigContainer getConfig() { return config; }
+		ConfigContainer *getConfig() { return &config; }
 
 		void setConfig(ConfigContainer &config) { this->config = config; }
-		void setContent(GtkWidget* gtkWidget); 
-		void setTitle(const string& newTitle); 
+		void setContent(GtkWidget *gtkWidget); 
+		void setTitle(string newTitle); 
 
 		void show(); 
 		void start(); 

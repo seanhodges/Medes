@@ -27,7 +27,9 @@ class ConfigIO {
 		void setXmlDoc(xmlDocPtr newDoc) { xmlDoc = newDoc; }
 		void setFilePath(string newFilePath) { xmlFilePath = newFilePath; }
 
+		void newFile();
 		bool loadFile(string xmlPath);
+		bool saveFile();
 		bool saveFile(string xmlPath);
 
 		string getSetting(string group, string key, string defaultValue);
@@ -71,7 +73,7 @@ class ConfigWriter : public ConfigIO {
 		ConfigWriter(); 
 		~ConfigWriter() {};
 
-		void saveWindowGeometry(ConfigContainer &config);
+		void saveWindowGeometry(ConfigContainer *config);
 };
 
 #endif

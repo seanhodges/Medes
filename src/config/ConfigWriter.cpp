@@ -14,7 +14,11 @@ ConfigWriter::ConfigWriter()
 	// Currently, always saves to userWebAppPath,
 	// this avoids permissions problems, and keeps things simple for now
 	Environment env;
-	loadFile(env.getUserWebAppPath() + "googlemaps.xml");
+	string target = env.getUserWebAppPath() + "googlemaps.xml";
+	bool success = loadFile(target);
+	if (!success) {
+		newFile();
+	}
 }
 
 /**
@@ -22,11 +26,10 @@ ConfigWriter::ConfigWriter()
  *
  * @param config - the ConfigContainer object to read
  */
-void ConfigWriter::saveWindowGeometry(ConfigContainer& config) {
-	changeSetting("application", "windowwidth", convertForXML(config.getAppWidth()));
-	changeSetting("application", "windowheight", convertForXML(config.getAppHeight()));
-	Environment env;
-	saveFile(env.getUserWebAppPath() + "googlemaps.xml");
+void ConfigWriter::saveWindowGeometry(ConfigContainer *config) {
+	changeSetting("application", "windowwidth", convertForXML(config->getAppWidth()));
+	changeSetting("application", "windowheight", convertForXML(config->getAppHeight()));
+	saveFile();
 }
 
 /**
@@ -37,11 +40,14 @@ void ConfigWriter::saveWindowGeometry(ConfigContainer& config) {
  * @return the string value
  */
 string ConfigWriter::convertForXML(int intIn) {
-	string strOut;
+	string strOut = "0";
 	stringstream ss(strOut);
 	ss << intIn;
 	if (ss.fail()) {
 		cout << intIn + " is not a number" << endl;
+	}
+	else {
+		ss >> strOut;
 	}
 	return strOut;
 }

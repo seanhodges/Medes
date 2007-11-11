@@ -20,9 +20,12 @@ ConfigIO::ConfigIO() {
  * Shut down libxml
  */
 ConfigIO::~ConfigIO() {
-	// Causes a segmentation fault, think it's needed?
-	//xmlFreeDoc(ConfigReader::getXmlDoc());
+	xmlFreeDoc(this->xmlDoc);
 	xmlCleanupParser();
+}
+
+void ConfigIO::newFile() {
+	this->xmlDoc = xmlNewDoc(BAD_CAST "1.0");
 }
 
 /**
@@ -31,7 +34,8 @@ ConfigIO::~ConfigIO() {
  * @param xmlPath - the file path to the config XML
  */
 bool ConfigIO::loadFile(string xmlPath) {
-	ifstream fin(xmlPath.c_str());
+	ifstream fin;
+	fin.open(xmlPath.c_str());
 	if(fin) {
 		this->xmlFilePath = xmlPath;
 		this->xmlDoc = xmlParseFile(xmlPath.c_str());
@@ -42,17 +46,25 @@ bool ConfigIO::loadFile(string xmlPath) {
 }
 
 /**
- * Save a config XML
+ * Overwrite the config XML
  *
- * @param xmlPath - (optional) save to this path
+ * @return true if the save was successful
  */
-bool ConfigIO::saveFile(string xmlPath = "") {
-	// Default to overwriting last loaded file
-	if (xmlPath == "") xmlPath = this->xmlFilePath;
+bool ConfigIO::saveFile() {
+	return saveFile(this->xmlFilePath);
+}
+
+/**
+ * Save the config XML to a defined location
+ *
+ * @param xmlPath - the target file path to save to
+ *
+ * @return true if the save was successful
+ */
+bool ConfigIO::saveFile(string xmlPath) {
 	cout << "Saving to " + xmlPath << endl;
-	int success = xmlSaveFile(xmlPath.c_str(), this->xmlDoc);
-	cout << success << endl;
-	return true;
+	int fileSize = xmlSaveFormatFile(xmlPath.c_str(), this->xmlDoc, 1);
+	return (fileSize > -1);
 }
 
 /**
@@ -88,17 +100,20 @@ string ConfigIO::getSetting(string group, string key, string defaultValue) {
  */
 void ConfigIO::changeSetting(string group, string key, string newValue) {
 	// TODO: Finish and test this method
-	string query = "/" + group + "/" + key;
+	string query = "/webapp/" + group + "/" + key;
 	xmlChar* xpath = (xmlChar*)query.c_str();
-	/*xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
+	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
 	xmlXPathObjectPtr result = xmlXPathEvalExpression(xpath, context);
-	if (!xmlXPathNodeSetIsEmpty(result->nodesetval)) {
-		result->nodesetval->nodeTab[0]->content = (xmlChar*)newValue.c_str();
+	xmlNodeSetPtr resultNodes = result->nodesetval;
+	if (!xmlXPathNodeSetIsEmpty(resultNodes)) {
+		cout << "changing " << query << " to " << newValue << endl;
+		xmlNodeSetContent(resultNodes->nodeTab[0], (xmlChar*)newValue.c_str());
 	}
 	else {
 		// TODO: Create new element
+		cout << "NOT SUPPOSED TO BE HERE!" << endl;
 	}
 	xmlXPathFreeContext(context);
-	xmlXPathFreeObject(result);*/
+	xmlXPathFreeObject(result);
 }
 
