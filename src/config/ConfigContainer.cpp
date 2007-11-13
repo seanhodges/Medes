@@ -1,14 +1,29 @@
 #include "ConfigContainer.h"
 
 /**
- * Construct a grouped object
+ * Construct a rule pod
  *
  * @param group - a group entity
  * @param value - a value for an entry in the given group
  */
-GroupedEntry::GroupedEntry(string group, string value) {
+Rule::Rule(string group, string value) {
 	this->group = group;
 	this->value = value;
+}
+
+/**
+ * Construct a geometry pod
+ *
+ * @param left - left position of object
+ * @param top - top position of object
+ * @param width - width of object
+ * @param height - height of object
+ */
+Geometry::Geometry(int left, int top, int width, int height) {
+	this->left = left;
+	this->top = top;
+	if (width > 100) this->width = width; 
+	if (height > 100) this->height = height; 
 }
 
 /**
@@ -18,11 +33,11 @@ GroupedEntry::GroupedEntry(string group, string value) {
 ConfigContainer::ConfigContainer() {
 	setAppUrl("about:blank");
 	setAppTitle("No application loaded");
-	setAppWidth(800);
-	setAppHeight(600);
+	Geometry geom(0, 0, 640, 480);
+	setWindowGeom(geom);
 	setDomainDefault("external");
 	setAdvertsHidden(false);
-	GroupedEntry defaultEntry("internal", "about:blank");
+	Rule defaultEntry("internal", "about:blank");
 	this->domainRules.push_front(defaultEntry);
 }
 
@@ -31,10 +46,10 @@ ConfigContainer::ConfigContainer() {
  *
  * @param newRules - the rules to add
  */
-void ConfigContainer::appendDomainRules(vector<GroupedEntry> newRules) {
+void ConfigContainer::appendDomainRules(vector<Rule> newRules) {
 	while(!newRules.empty()) {
-		GroupedEntry newEntry; 
-		newEntry = (GroupedEntry)newRules.back();
+		Rule newEntry; 
+		newEntry = (Rule)newRules.back();
 		this->domainRules.push_front(newEntry);
 		newRules.pop_back();
 	}
@@ -45,8 +60,8 @@ void ConfigContainer::appendDomainRules(vector<GroupedEntry> newRules) {
  *
  * @param newRules - the rule to add
  */
-void ConfigContainer::appendDomainRules(GroupedEntry newRule) {
-	GroupedEntry newEntry; 
+void ConfigContainer::appendDomainRules(Rule newRule) {
+	Rule newEntry; 
 	this->domainRules.push_front(newRule);
 }
 

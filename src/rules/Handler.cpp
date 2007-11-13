@@ -5,7 +5,7 @@
 /**
  * Initialise the handler
  */
-Handler::Handler(deque<GroupedEntry> ruleList, string defaultRule) {
+Handler::Handler(deque<Rule> ruleList, string defaultRule) {
 	this->ruleList = ruleList;
 	this->defaultRule = defaultRule;
 }
@@ -17,9 +17,9 @@ Handler::Handler(deque<GroupedEntry> ruleList, string defaultRule) {
  */
 bool Handler::runRules(string target) { 
 	bool ruleFound = false;
-	deque<GroupedEntry> ruleList = getRuleList();
-	for (deque<GroupedEntry>::iterator it = ruleList.begin(); it != ruleList.end(); it++) {
-		GroupedEntry rule = *it;
+	deque<Rule> ruleList = getRuleList();
+	for (deque<Rule>::iterator it = ruleList.begin(); it != ruleList.end(); it++) {
+		Rule rule = *it;
 		if (ruleMatches(rule, target)) {
 			execRule(rule, target);
 			ruleFound = true;
@@ -30,7 +30,7 @@ bool Handler::runRules(string target) {
 	if (!ruleFound) {
 		cout << "no rule applied to target, using default rule for: " + target << endl;
 		// Run the default rule on this target
-		GroupedEntry defaultRuleObject(this->defaultRule, target);
+		Rule defaultRuleObject(this->defaultRule, target);
 		execRule(defaultRuleObject, target);
 	}
 	return ruleFound;

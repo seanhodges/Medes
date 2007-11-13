@@ -19,7 +19,7 @@ DomainHandler::DomainHandler(ConfigContainer config)
  *
  * @return true if a successful match was found
  */
-bool DomainHandler::ruleMatches(GroupedEntry rule, string target) { 
+bool DomainHandler::ruleMatches(Rule rule, string target) { 
 	// TODO: add some regex matching in the future
 	if (target.find(rule.getValue()) == 0) {
 		return true;
@@ -33,7 +33,7 @@ bool DomainHandler::ruleMatches(GroupedEntry rule, string target) {
  * @param rule - the rule to execute
  * @param target - the URL to execute
  */
-void DomainHandler::execRule(GroupedEntry rule, string target) {
+void DomainHandler::execRule(Rule rule, string target) {
 	string ruleName = rule.getGroup();
 	// Declare new domain rules here
 	if (ruleName == "internal") { handleInternal(target); }

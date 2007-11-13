@@ -12,20 +12,20 @@ class Handler {
 
 	private:
 
-		deque<GroupedEntry> ruleList;
+		deque<Rule> ruleList;
 		string defaultRule;
 	
 	protected:
 
-		deque<GroupedEntry> getRuleList() { return ruleList; }
+		deque<Rule> getRuleList() { return ruleList; }
 		string getDefaultRule() { return defaultRule; }
 
-		virtual bool ruleMatches(GroupedEntry rule, string target) {}
-		virtual void execRule(GroupedEntry rule, string target) {}
+		virtual bool ruleMatches(Rule rule, string target) {}
+		virtual void execRule(Rule rule, string target) {}
 
 	public:
 
-		Handler(deque<GroupedEntry> ruleList, string defaultRule);
+		Handler(deque<Rule> ruleList, string defaultRule);
 
 		bool runRules(string target);
 
@@ -43,8 +43,8 @@ class DomainHandler : public Handler {
 		void handleAdvert(string target);
 		void handleDrop(string target);
 	
-		bool ruleMatches(GroupedEntry rule, string target);
-		void execRule(GroupedEntry rule, string target);
+		bool ruleMatches(Rule rule, string target);
+		void execRule(Rule rule, string target);
 
 	public:
 

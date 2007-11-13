@@ -46,15 +46,27 @@ int main(int argc, char* argv[]) {
 	ConfigReader reader;
 	for (vector<string>::iterator it = targetConfig.begin(); it != targetConfig.end(); it++) {
 		cout << "loading " + *it + "...";
+		string status = "";
+		string errors = "";
 		bool loaded = reader.loadConfig(*it);
 		if (loaded) {
-			cout << " success";
-			reader.appendConfigToContainer(config);		
+			// Parse the config file, if it loaded successfully
+			bool success = reader.appendConfigToContainer(config);		
+			errors = reader.getParseErrors();
+			if (success) {
+				if (errors == "") status = " success";
+				else status = " completed with errors (see below)";
+			}
+			else status = " failed";
 		}
 		else {
-			cout << " not found";
+			status = " not found";
 		}
-		cout << endl;
+		cout << status << endl;
+		if (errors != "") {
+			// Display any reported parse errors
+			cout << errors;
+		}
 	}
 
 	// Create the application window

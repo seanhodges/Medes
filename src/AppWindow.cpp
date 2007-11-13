@@ -13,7 +13,8 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_init(&argc, &argv);
 	this->window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	// Set up the window
-	gtk_window_set_default_size(this->window, config.getAppWidth(), config.getAppHeight());
+	Geometry geom = config.getWindowGeom();
+	gtk_window_set_default_size(this->window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
 	// Attach the Gecko engine
 	gecko.init(config);
@@ -95,8 +96,8 @@ void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {
 bool AppWindow::eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow& parent) {
 	// Retrieve the new window size 
 	ConfigContainer *config = parent.getConfig();
-	config->setAppWidth(event->width);
-	config->setAppHeight(event->height);
+	Geometry geom(event->x, event->y, event->width, event->height);
+	config->setWindowGeom(geom);
 	// Always return false, otherwise the event may not trigger properly (GTK will cancel, but Xorg will honour it)
 	return false;
 }

@@ -9,10 +9,16 @@
  * Create a new ConfigReader object
  */
 ConfigReader::ConfigReader() 
-	: ConfigIO::ConfigIO() {}
+	: ConfigIO::ConfigIO() {
+	this->errors = "";
+}
 
 /**
  * Load a config XML for reading
+ *
+ * @param xmlPath - the local path to the config XML
+ *
+ * @return true if the config was loaded successfully
  */
 bool ConfigReader::loadConfig(string xmlPath) {
 	return loadFile(xmlPath);
@@ -22,8 +28,11 @@ bool ConfigReader::loadConfig(string xmlPath) {
  * Process the contents of the config XML and set values into a given ConfigContainer
  *
  * @param config - the ConfigContainer object to populate
+ *
+ * @return true if the config was parsed successfully
  */
-void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
+bool ConfigReader::appendConfigToContainer(ConfigContainer& config) {
+	bool success = true;
 	xmlDocPtr doc = getXmlDoc();
 	xmlNodePtr groups;
 	xmlNodePtr keys;
@@ -40,6 +49,7 @@ void ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 			resolveConfigCode(configCode, config, groupName, keys);
 		}
 	}
+	return success;
 }
 
 /**
@@ -55,13 +65,12 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
 	string keyValue = (char*)xmlNodeGetContent(key);
 	if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); }
 	else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
-	else if (configCode == "APPLICATION_WINDOWWIDTH") { config.setAppWidth(convertToInt(keyValue)); }
-	else if (configCode == "APPLICATION_WINDOWHEIGHT") { config.setAppHeight(convertToInt(keyValue)); }
+	else if (configCode == "APPLICATION_WINDOWGEOMETRY") { config.setWindowGeom(convertToGeometry(key)); }
 	else if (configCode == "DOMAINS_DEFAULT") { config.setDomainDefault(keyValue); }
 	else if (configCode == "DOMAINS_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
 	else if (configCode == "DOMAINS_RULES") { config.appendDomainRules(convertToGroupedVector(key)); }
 	else {
-		cout << "<" + groupName + "><" + keyName + ">" + " is not a recognised key" << endl;
+		this->errors += ("<" + groupName + "><" + keyName + ">" + " is not a recognised key\n");
 	}
 }
 
@@ -72,12 +81,12 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
  *
  * @return the integer value, or throw an error if parse failed
  */
-int ConfigReader::convertToInt(string& strIn) {
+int ConfigReader::convertToInt(string strIn) {
 	stringstream ss(strIn);
 	int intOut = 0;
 	ss >> intOut;
 	if (ss.fail()) {
-		cout << strIn + " is not a number" << endl;
+		this->errors += (strIn + " is not a number\n");
 	}
 	return intOut;
 }
@@ -89,7 +98,7 @@ int ConfigReader::convertToInt(string& strIn) {
  *
  * @return the boolean value
  */
-bool ConfigReader::convertToBoolean(string& strIn) {
+bool ConfigReader::convertToBoolean(string strIn) {
 	return (strIn == "true");
 }
 
@@ -121,15 +130,36 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
  *
  * @return the vector of items (key = group->value)
  */
-vector<GroupedEntry> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
-	vector<GroupedEntry> out;
+vector<Rule> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
+	vector<Rule> out;
 	xmlNodePtr entries;
 	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
 		string group = (char*)entries->name;
 		string entryValue = (char*)xmlNodeGetContent(entries);
-		GroupedEntry entry(group, entryValue);
+		Rule entry(group, entryValue);
 		out.push_back(entry);
 	}
+	return out;
+}
+
+/**
+ * Cast the children of an XML element to a Geometry
+ *
+ * @param xmlList - pointer to the node to parse
+ *
+ * @return the geometry shape
+ */
+Geometry ConfigReader::convertToGeometry(const xmlNodePtr& xmlList) {
+	xmlNodePtr entries;
+	entries = xmlList->children->next;
+	int left = convertToInt((string)(char*)xmlNodeGetContent(entries));
+	entries = xmlList->children->next->next;
+	int top = convertToInt((string)(char*)xmlNodeGetContent(entries));
+	entries = xmlList->children->next->next;
+	int width = convertToInt((string)(char*)xmlNodeGetContent(entries));
+	entries = xmlList->children->next->next;
+	int height = convertToInt((string)(char*)xmlNodeGetContent(entries));
+	Geometry out(left, top, width, height);
 	return out;
 }
 

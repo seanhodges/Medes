@@ -41,12 +41,15 @@ class ConfigReader : public ConfigIO {
 
 	private:
 
+		string errors;
+
 		void resolveConfigCode(string configCode, ConfigContainer &config, string groupName, xmlNodePtr &key);
 
-		int convertToInt(string &strIn);
-		bool convertToBoolean(string &strIn);
+		int convertToInt(string strIn);
+		bool convertToBoolean(string strIn);
 		vector<string> convertToVector(const xmlNodePtr &xmlList, string elementName);
-		vector<GroupedEntry> convertToGroupedVector(const xmlNodePtr &xmlList);
+		vector<Rule> convertToGroupedVector(const xmlNodePtr &xmlList);
+		Geometry convertToGeometry(const xmlNodePtr &xmlList);
 
 	public:
 
@@ -54,8 +57,9 @@ class ConfigReader : public ConfigIO {
 		~ConfigReader() {};
 
 		bool loadConfig(string xmlPath);
+		string getParseErrors() { return this->errors; };
 
-		void appendConfigToContainer(ConfigContainer &config);
+		bool appendConfigToContainer(ConfigContainer &config);
 
 };
 
@@ -66,7 +70,8 @@ class ConfigWriter : public ConfigIO {
 		string convertForXML(int intIn);
 		string convertForXML(bool boolIn);
 		string convertForXML(const vector<string> &vectorIn, string elementName);
-		string convertForXML(const vector<GroupedEntry> &vectorIn);
+		string convertForXML(const vector<Rule> &vectorIn);
+		string convertForXML(Geometry geom);
 
 	public:
 

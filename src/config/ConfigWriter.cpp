@@ -27,8 +27,7 @@ ConfigWriter::ConfigWriter()
  * @param config - the ConfigContainer object to read
  */
 void ConfigWriter::saveWindowGeometry(ConfigContainer *config) {
-	changeSetting("application", "windowwidth", convertForXML(config->getAppWidth()));
-	changeSetting("application", "windowheight", convertForXML(config->getAppHeight()));
+	changeSetting("application", "windowgeometry", convertForXML(config->getWindowGeom()));
 	saveFile();
 }
 
@@ -79,15 +78,26 @@ string ConfigWriter::convertForXML(const vector<string> &vectorIn, string elemen
 }
 
 /**
- * Cast a grouped vector to an XML-friendly string
+ * Cast a rule vector to an XML-friendly string
  *
  * @param vectorIn - the vector to convert into XML
- * @param elementName - all child nodes will have this name
  *
  * @return the XML as a string
  */
-string ConfigWriter::convertForXML(const vector<GroupedEntry> &vectorIn) {
+string ConfigWriter::convertForXML(const vector<Rule> &vectorIn) {
 	//TODO: Complete this implementation
 	return "";
+}
+
+/**
+ * Cast a geometry to an XML-friendly string
+ *
+ * @param geomIn - the geometry to convert into XML
+ *
+ * @return the XML as a string
+ */
+string ConfigWriter::convertForXML(Geometry vectorIn) {
+	//TODO: Complete this implementation
+	return "<left>0</left><top>0</top><width>500</width><height>300</height>";
 }
 
