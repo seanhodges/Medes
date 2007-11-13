@@ -14,6 +14,7 @@ class AppWindow {
 		void setupCallbacks(); 
 
 		static void eventDestroy(GtkWindow *window, AppWindow &parent); 
+		static bool eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow &parent); 
 		static void eventResize(GtkWindow *window, AppWindow &parent); 
 
 		ConfigContainer config;
@@ -27,7 +28,6 @@ class AppWindow {
 		
 		~AppWindow(); 
 
-		//ConfigContainer getConfig() { return config; }
 		ConfigContainer *getConfig() { return &config; }
 
 		void setConfig(ConfigContainer &config) { this->config = config; }
