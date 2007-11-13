@@ -15,7 +15,6 @@ class AppWindow {
 
 		static void eventDestroy(GtkWindow *window, AppWindow &parent); 
 		static bool eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow &parent); 
-		static void eventResize(GtkWindow *window, AppWindow &parent); 
 
 		ConfigContainer config;
 

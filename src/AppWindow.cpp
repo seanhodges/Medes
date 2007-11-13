@@ -67,7 +67,6 @@ void AppWindow::setupCallbacks() {
 	// Add new signal events here
 	g_signal_connect(G_OBJECT(this->window), "destroy", G_CALLBACK(eventDestroy), this);
 	g_signal_connect(G_OBJECT(this->window), "configure-event", G_CALLBACK(eventWindowProperty), this);
-	//g_signal_connect(G_OBJECT(this->window), "check-resize", G_CALLBACK(eventResize), this);
 }
 
 /**
@@ -95,27 +94,10 @@ void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {
  */
 bool AppWindow::eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow& parent) {
 	// Retrieve the new window size 
-	cout << "x:" << event->x << " y:" << event->y << " w:" << event->width << " h:" << event->height << endl;
 	ConfigContainer *config = parent.getConfig();
 	config->setAppWidth(event->width);
 	config->setAppHeight(event->height);
-	// Always return false, otherwise the event will not trigger properly (GTK will cancel, but Xorg will honour it)
+	// Always return false, otherwise the event may not trigger properly (GTK will cancel, but Xorg will honour it)
 	return false;
-}
-
-/**
- * Triggered when window has resized (handled internally by an event)
- *
- * @param *window - reference to the window object
- * @param parent - the owner of this callback
- */
-void AppWindow::eventResize(GtkWindow *window, AppWindow& parent) {
-	// Retrieve the new window size 
-	int width;
-	int height;
-	gtk_window_get_size(window, &width, &height);
-	ConfigContainer *config = parent.getConfig();
-	config->setAppWidth(width);
-	config->setAppHeight(height);
 }
 
