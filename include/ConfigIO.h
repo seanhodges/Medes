@@ -27,13 +27,17 @@ class ConfigIO {
 		void setXmlDoc(xmlDocPtr newDoc) { xmlDoc = newDoc; }
 		void setFilePath(string newFilePath) { xmlFilePath = newFilePath; }
 
-		void newFile();
-		bool loadFile(string xmlPath);
-		bool saveFile();
-		bool saveFile(string xmlPath);
-
 		string getSetting(string group, string key, string defaultValue);
 		void changeSetting(string group, string key, string newValue);
+	
+	public:
+
+		void newFile();
+
+		bool loadFile(string xmlPath);
+
+		bool saveFile();
+		bool saveFile(string xmlPath);
 
 };
 
@@ -56,7 +60,6 @@ class ConfigReader : public ConfigIO {
 		ConfigReader(); 
 		~ConfigReader() {};
 
-		bool loadConfig(string xmlPath);
 		string getParseErrors() { return this->errors; };
 
 		bool appendConfigToContainer(ConfigContainer &config);

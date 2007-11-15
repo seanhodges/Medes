@@ -3,8 +3,12 @@
 	<application>
 		<title>Welcome to Medes!</title>
 		<url>/usr/local/share/medes/medes_home.html</url>
-		<windowwidth>800</windowwidth>
-		<windowheight>600</windowheight>
+		<windowgeometry>
+			<left>0</left>
+			<top>0</top>
+			<width>800</width>
+			<height>600</height>
+		</windowgeometry>
 	</application>
 	<domains>
 		<rules>

@@ -14,6 +14,7 @@
 ConfigIO::ConfigIO() {
 	xmlInitParser();
 	LIBXML_TEST_VERSION
+	newFile();
 }
 
 /**

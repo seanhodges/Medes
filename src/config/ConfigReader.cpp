@@ -14,17 +14,6 @@ ConfigReader::ConfigReader()
 }
 
 /**
- * Load a config XML for reading
- *
- * @param xmlPath - the local path to the config XML
- *
- * @return true if the config was loaded successfully
- */
-bool ConfigReader::loadConfig(string xmlPath) {
-	return loadFile(xmlPath);
-}
-
-/**
  * Process the contents of the config XML and set values into a given ConfigContainer
  *
  * @param config - the ConfigContainer object to populate
@@ -151,14 +140,21 @@ vector<Rule> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
  */
 Geometry ConfigReader::convertToGeometry(const xmlNodePtr& xmlList) {
 	xmlNodePtr entries;
-	entries = xmlList->children->next;
-	int left = convertToInt((string)(char*)xmlNodeGetContent(entries));
-	entries = xmlList->children->next->next;
-	int top = convertToInt((string)(char*)xmlNodeGetContent(entries));
-	entries = xmlList->children->next->next;
-	int width = convertToInt((string)(char*)xmlNodeGetContent(entries));
-	entries = xmlList->children->next->next;
-	int height = convertToInt((string)(char*)xmlNodeGetContent(entries));
+	int left = 0;
+	int top = 0;
+	int width = 0;
+	int height = 0;
+	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
+		string dimension = (char*)entries->name;
+		string value = (char*)xmlNodeGetContent(entries);
+		if (dimension == "left") left = convertToInt(value);
+		else if (dimension == "top") top = convertToInt(value);
+		else if (dimension == "width") width = convertToInt(value);
+		else if (dimension == "height") height = convertToInt(value);
+		else {
+			cout << "geometry part " << dimension << " not understood" << endl;
+		}
+	}
 	Geometry out(left, top, width, height);
 	return out;
 }

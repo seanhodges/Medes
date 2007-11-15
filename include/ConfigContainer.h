@@ -50,6 +50,8 @@ class ConfigContainer {
 
 	private:
 		
+		string saveToConfig;
+
 		// Application
 		string appUrl;
 		string appTitle;
@@ -64,6 +66,7 @@ class ConfigContainer {
 
 		ConfigContainer();
 
+		string getSaveToConfig() { return saveToConfig; }
 		string getAppUrl() { return appUrl; }
 		string getAppTitle() { return appTitle; }
 		Geometry getWindowGeom() { return windowGeom; }
@@ -71,8 +74,9 @@ class ConfigContainer {
 		bool isAdvertsHidden() { return hideAdverts; }
 		deque<Rule>& getDomainRules() { return domainRules; }
 
-		void setAppUrl(const string& appUrl) { this->appUrl = appUrl; }
-		void setAppTitle(const string& appTitle) { this->appTitle = appTitle; }
+		void setSaveToConfig(string saveToConfig) { this->saveToConfig = saveToConfig; }
+		void setAppUrl(string appUrl) { this->appUrl = appUrl; }
+		void setAppTitle(string appTitle) { this->appTitle = appTitle; }
 		void setWindowGeom(Geometry windowGeom) { this->windowGeom = windowGeom; }
 		void setDomainDefault(string domainDefault) { this->domainDefault = domainDefault; }
 		void setAdvertsHidden(bool hideAdverts) { this->hideAdverts = hideAdverts; }

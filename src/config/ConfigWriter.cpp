@@ -17,6 +17,7 @@ ConfigWriter::ConfigWriter()
 	string target = env.getUserWebAppPath() + "googlemaps.xml";
 	bool success = loadFile(target);
 	if (!success) {
+		// Create a new config file if it does not yet exist
 		newFile();
 	}
 }
@@ -28,7 +29,10 @@ ConfigWriter::ConfigWriter()
  */
 void ConfigWriter::saveWindowGeometry(ConfigContainer *config) {
 	changeSetting("application", "windowgeometry", convertForXML(config->getWindowGeom()));
-	saveFile();
+	bool success = saveFile();
+	if (!success) {
+		cout << "warning: cannot save the window geometry to the local user config" << endl;
+	}
 }
 
 /**
@@ -98,6 +102,6 @@ string ConfigWriter::convertForXML(const vector<Rule> &vectorIn) {
  */
 string ConfigWriter::convertForXML(Geometry vectorIn) {
 	//TODO: Complete this implementation
-	return "<left>0</left><top>0</top><width>500</width><height>300</height>";
+	return "";
 }
 

@@ -3,12 +3,12 @@
 	<application>
 		<title>Google Maps</title>
 		<url>http://maps.google.co.uk</url>
-		<geometry>
+		<windowgeometry>
 			<left>0</left>
 			<top>0</top>
 			<width>1024</width>
 			<height>768</height>
-		</geometry>
+		</windowgeometry>
 	</application>
 	<domains>
 		<default>external</default>

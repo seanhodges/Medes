@@ -31,6 +31,7 @@ Geometry::Geometry(int left, int top, int width, int height) {
  * These should be over-ridden by the config XML stack
  */
 ConfigContainer::ConfigContainer() {
+	setSaveToConfig("save.xml");
 	setAppUrl("about:blank");
 	setAppTitle("No application loaded");
 	Geometry geom(0, 0, 640, 480);

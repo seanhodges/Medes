@@ -77,9 +77,10 @@ void AppWindow::setupCallbacks() {
  * @param parent - the owner of this callback
  */
 void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {
-	// Save window geometry to user config on exit
+	// Save window geometry to user session on exit
 	ConfigContainer *config = parent.getConfig();
 	ConfigWriter writer;
+	writer.loadFile(config->getSaveToConfig());
 	writer.saveWindowGeometry(config);
 	gtk_main_quit();
 }

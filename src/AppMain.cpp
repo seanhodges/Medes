@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 		cout << "loading " + *it + "...";
 		string status = "";
 		string errors = "";
-		bool loaded = reader.loadConfig(*it);
+		bool loaded = reader.loadFile(*it);
 		if (loaded) {
 			// Parse the config file, if it loaded successfully
 			bool success = reader.appendConfigToContainer(config);		
@@ -68,6 +68,9 @@ int main(int argc, char* argv[]) {
 			cout << errors;
 		}
 	}
+	// User session is saved to last opened config file
+	if ((int)targetConfig.size() > 0)
+		config.setSaveToConfig(targetConfig.back());
 
 	// Create the application window
 	AppWindow appWindow(argc, argv, config);
