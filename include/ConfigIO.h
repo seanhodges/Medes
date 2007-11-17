@@ -13,8 +13,9 @@ class ConfigIO {
 	private:
 
 		string xmlFilePath;
-
 		xmlDocPtr xmlDoc;
+
+		xmlNodePtr buildAncestors(vector<string> parents); 
 
 	protected:
 

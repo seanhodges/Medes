@@ -25,8 +25,13 @@ ConfigIO::~ConfigIO() {
 	xmlCleanupParser();
 }
 
+/**
+ * Create a new config file
+ */
 void ConfigIO::newFile() {
 	this->xmlDoc = xmlNewDoc(BAD_CAST "1.0");
+	xmlNodePtr root_element = xmlNewNode(NULL, BAD_CAST "webapp");
+	xmlDocSetRootElement(this->xmlDoc, root_element);
 }
 
 /**
@@ -36,9 +41,9 @@ void ConfigIO::newFile() {
  */
 bool ConfigIO::loadFile(string xmlPath) {
 	ifstream fin;
+	this->xmlFilePath = xmlPath;
 	fin.open(xmlPath.c_str());
 	if(fin) {
-		this->xmlFilePath = xmlPath;
 		this->xmlDoc = xmlParseFile(xmlPath.c_str());
 		fin.close();
 		return true;
@@ -100,7 +105,6 @@ string ConfigIO::getSetting(string group, string key, string defaultValue) {
  * @return the new setting value
  */
 void ConfigIO::changeSetting(string group, string key, string newValue) {
-	// TODO: Finish and test this method
 	string query = "/webapp/" + group + "/" + key;
 	xmlChar* xpath = (xmlChar*)query.c_str();
 	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
@@ -111,10 +115,44 @@ void ConfigIO::changeSetting(string group, string key, string newValue) {
 		xmlNodeSetContent(resultNodes->nodeTab[0], (xmlChar*)newValue.c_str());
 	}
 	else {
-		// TODO: Create new element
-		cout << "NOT SUPPOSED TO BE HERE!" << endl;
+		// Create new child element
+		cout << "setting " << query << " to " << newValue << endl;
+		vector<string> parents;
+		parents.push_back(group);
+		parents.push_back(key);
+		xmlNodePtr newNode = buildAncestors(parents);
+		xmlNodeAddContent(newNode, (xmlChar*)newValue.c_str());
 	}
 	xmlXPathFreeContext(context);
 	xmlXPathFreeObject(result);
 }
 
+/**
+ * Build the path up to a target node
+ *
+ * @param parents - array of parent nodes to check/create
+ *
+ * @return the target node 
+ */
+xmlNodePtr ConfigIO::buildAncestors(vector<string> parents) {
+	cout << "building path to node" << endl;
+	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
+	string query = "/webapp";
+	xmlNodePtr parentNode = xmlDocGetRootElement(this->xmlDoc);
+	xmlNodePtr newNode; 
+	// Traverse the required ancestors, and create them as required
+	for (vector<string>::iterator it = parents.begin(); it != parents.end(); it++) {
+		query = query + "/" + *it;
+		xmlChar* xpath = (xmlChar*)query.c_str();
+		xmlXPathObjectPtr result = xmlXPathEvalExpression(xpath, context);
+		xmlNodeSetPtr resultNodes = result->nodesetval;
+		if (xmlXPathNodeSetIsEmpty(resultNodes)) {
+			// This ancestor does not exist, create it
+			cout << "creating ancestor \"" << *it << "\"" << endl;
+			newNode = xmlNewChild(parentNode, NULL, BAD_CAST (xmlChar*)it->c_str(), NULL);
+		}
+		// Move up the query
+		parentNode = xmlNodePtr(newNode);
+	}
+	return parentNode;
+}

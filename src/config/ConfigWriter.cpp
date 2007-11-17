@@ -10,16 +10,8 @@
  * Create a new ConfigWriter object
  */
 ConfigWriter::ConfigWriter() 
-	: ConfigIO::ConfigIO() {
-	// Currently, always saves to userWebAppPath,
-	// this avoids permissions problems, and keeps things simple for now
-	Environment env;
-	string target = env.getUserWebAppPath() + "googlemaps.xml";
-	bool success = loadFile(target);
-	if (!success) {
-		// Create a new config file if it does not yet exist
-		newFile();
-	}
+	: ConfigIO::ConfigIO() { 
+	newFile();
 }
 
 /**
