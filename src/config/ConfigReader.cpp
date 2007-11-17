@@ -26,16 +26,23 @@ bool ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 	xmlNodePtr groups;
 	xmlNodePtr keys;
 	xmlNodePtr root = doc->children;
-	// The purpose of the "->next->next" is to ignore all "text" nodes
-	for(groups = root->children->next; groups != NULL; groups = groups->next->next) {
-		string groupName = (char*)groups->name;
-		for(keys = groups->children->next; keys != NULL; keys = keys->next->next) {
-			string keyName = (char*)keys->name;
-			// Convert to a namespace config code
-			string configCode = groupName + "_" + keyName;
-			transform(configCode.begin(), configCode.end(), configCode.begin(), toupper);
-			// Set the relevant ConfigContainer setting
-			resolveConfigCode(configCode, config, groupName, keys);
+	if (root->children != NULL) {
+		for(groups = root->children->next; groups != NULL; groups = groups->next) {
+			if (groups->type == XML_ELEMENT_NODE) {
+				string groupName = (char*)groups->name;
+				if (groups->children != NULL) {
+					for(keys = groups->children->next; keys != NULL; keys = keys->next->next) {
+						if (keys->type == XML_ELEMENT_NODE) {
+							string keyName = (char*)keys->name;
+							// Convert to a namespace config code
+							string configCode = groupName + "_" + keyName;
+							transform(configCode.begin(), configCode.end(), configCode.begin(), toupper);
+							// Set the relevant ConfigContainer setting
+							resolveConfigCode(configCode, config, groupName, keys);
+						}
+					}
+				}
+			}
 		}
 	}
 	return success;
@@ -102,11 +109,13 @@ bool ConfigReader::convertToBoolean(string strIn) {
 vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string elementName) {
 	vector<string> out;
 	xmlNodePtr entries;
-	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
-		string entryNameCheck = (char*)entries->name;
-		if (entryNameCheck == elementName) {
-			string entryValue = (char*)xmlNodeGetContent(entries);
-			out.push_back(entryValue);
+	for(entries = xmlList->children; entries != NULL; entries = entries->next) {
+		if (entries->type == XML_ELEMENT_NODE) {
+			string entryNameCheck = (char*)entries->name;
+			if (entryNameCheck == elementName) {
+				string entryValue = (char*)xmlNodeGetContent(entries);
+				out.push_back(entryValue);
+			}
 		}
 	}
 	return out;
@@ -122,11 +131,13 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
 vector<Rule> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
 	vector<Rule> out;
 	xmlNodePtr entries;
-	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
-		string group = (char*)entries->name;
-		string entryValue = (char*)xmlNodeGetContent(entries);
-		Rule entry(group, entryValue);
-		out.push_back(entry);
+	for(entries = xmlList->children; entries != NULL; entries = entries->next) {
+		if (entries->type == XML_ELEMENT_NODE) {
+			string group = (char*)entries->name;
+			string entryValue = (char*)xmlNodeGetContent(entries);
+			Rule entry(group, entryValue);
+			out.push_back(entry);
+		}
 	}
 	return out;
 }
@@ -144,15 +155,17 @@ Geometry ConfigReader::convertToGeometry(const xmlNodePtr& xmlList) {
 	int top = 0;
 	int width = 0;
 	int height = 0;
-	for(entries = xmlList->children->next; entries != NULL; entries = entries->next->next) {
-		string dimension = (char*)entries->name;
-		string value = (char*)xmlNodeGetContent(entries);
-		if (dimension == "left") left = convertToInt(value);
-		else if (dimension == "top") top = convertToInt(value);
-		else if (dimension == "width") width = convertToInt(value);
-		else if (dimension == "height") height = convertToInt(value);
-		else {
-			cout << "geometry part " << dimension << " not understood" << endl;
+	for(entries = xmlList->children; entries != NULL; entries = entries->next) {
+		if (entries->type == XML_ELEMENT_NODE) {
+			string dimension = (char*)entries->name;
+			string value = (char*)xmlNodeGetContent(entries);
+			if (dimension == "left") left = convertToInt(value);
+			else if (dimension == "top") top = convertToInt(value);
+			else if (dimension == "width") width = convertToInt(value);
+			else if (dimension == "height") height = convertToInt(value);
+			else {
+				cout << "geometry part " << dimension << " not understood" << endl;
+			}
 		}
 	}
 	Geometry out(left, top, width, height);

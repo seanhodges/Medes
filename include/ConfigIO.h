@@ -16,6 +16,7 @@ class ConfigIO {
 		xmlDocPtr xmlDoc;
 
 		xmlNodePtr buildAncestors(vector<string> parents); 
+		xmlNodePtr findSetting(string group, string key);
 
 	protected:
 
@@ -30,6 +31,7 @@ class ConfigIO {
 
 		string getSetting(string group, string key, string defaultValue);
 		void changeSetting(string group, string key, string newValue);
+		void changeSetting(string group, string key, vector<xmlNodePtr> newValue);
 	
 	public:
 
@@ -75,7 +77,7 @@ class ConfigWriter : public ConfigIO {
 		string convertForXML(bool boolIn);
 		string convertForXML(const vector<string> &vectorIn, string elementName);
 		string convertForXML(const vector<Rule> &vectorIn);
-		string convertForXML(Geometry geom);
+		vector<xmlNodePtr> convertForXML(Geometry geom);
 
 	public:
 

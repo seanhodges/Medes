@@ -61,7 +61,7 @@ string ConfigWriter::convertForXML(bool boolIn) {
 }
 
 /**
- * Cast a vector to an XML-friendly string
+ * Cast a vector to an XML structure
  *
  * @param vectorIn - the vector to convert into XML
  * @param elementName - all child nodes will have this name
@@ -74,7 +74,7 @@ string ConfigWriter::convertForXML(const vector<string> &vectorIn, string elemen
 }
 
 /**
- * Cast a rule vector to an XML-friendly string
+ * Cast a rule vector to an XML structure
  *
  * @param vectorIn - the vector to convert into XML
  *
@@ -86,14 +86,27 @@ string ConfigWriter::convertForXML(const vector<Rule> &vectorIn) {
 }
 
 /**
- * Cast a geometry to an XML-friendly string
+ * Cast a geometry to an XML structure
  *
  * @param geomIn - the geometry to convert into XML
  *
- * @return the XML as a string
+ * @return the XML as a node
  */
-string ConfigWriter::convertForXML(Geometry vectorIn) {
+vector<xmlNodePtr> ConfigWriter::convertForXML(Geometry geomIn) {
 	//TODO: Complete this implementation
-	return "";
+	vector<xmlNodePtr> out;
+	xmlNodePtr leftNode = xmlNewNode(NULL, BAD_CAST "left");
+	xmlNodeSetContent(leftNode, (xmlChar*)convertForXML(geomIn.getLeft()).c_str());
+	out.push_back(leftNode);
+	xmlNodePtr topNode = xmlNewNode(NULL, BAD_CAST "top");
+	xmlNodeSetContent(topNode, (xmlChar*)convertForXML(geomIn.getTop()).c_str());
+	out.push_back(topNode);
+	xmlNodePtr widthNode = xmlNewNode(NULL, BAD_CAST "width");
+	xmlNodeSetContent(widthNode, (xmlChar*)convertForXML(geomIn.getWidth()).c_str());
+	out.push_back(widthNode);
+	xmlNodePtr heightNode = xmlNewNode(NULL, BAD_CAST "height");
+	xmlNodeSetContent(heightNode, (xmlChar*)convertForXML(geomIn.getHeight()).c_str());
+	out.push_back(heightNode);
+	return out;
 }
 

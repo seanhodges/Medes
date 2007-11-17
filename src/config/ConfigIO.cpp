@@ -105,26 +105,48 @@ string ConfigIO::getSetting(string group, string key, string defaultValue) {
  * @return the new setting value
  */
 void ConfigIO::changeSetting(string group, string key, string newValue) {
+	xmlNodePtr keyNode = findSetting(group, key);
+	cout << "changing content to " << newValue << endl;
+	xmlNodeSetContent(keyNode, (xmlChar*)newValue.c_str());
+}
+
+void ConfigIO::changeSetting(string group, string key, vector<xmlNodePtr> newValue) {
+	xmlNodePtr keyNode = findSetting(group, key);
+	cout << "applying XML structure to \"" << keyNode->name << "\"" << endl;
+	// Delete old contents
+	xmlNodePtr keyChild = keyNode->xmlChildrenNode;
+	while (keyChild != NULL) {
+		xmlUnlinkNode(keyChild);
+		keyChild = keyNode->xmlChildrenNode;
+	}
+	// Add new contents
+	for (vector<xmlNodePtr>::iterator it = newValue.begin(); it != newValue.end(); it++) {
+		xmlAddChild(keyNode, (xmlNodePtr)*it);
+	}
+}
+
+xmlNodePtr ConfigIO::findSetting(string group, string key) {
+	xmlNodePtr out;
 	string query = "/webapp/" + group + "/" + key;
 	xmlChar* xpath = (xmlChar*)query.c_str();
 	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
 	xmlXPathObjectPtr result = xmlXPathEvalExpression(xpath, context);
 	xmlNodeSetPtr resultNodes = result->nodesetval;
+	cout << "finding " << query << endl;
 	if (!xmlXPathNodeSetIsEmpty(resultNodes)) {
-		cout << "changing " << query << " to " << newValue << endl;
-		xmlNodeSetContent(resultNodes->nodeTab[0], (xmlChar*)newValue.c_str());
+		// Alter an existing child element
+		out = resultNodes->nodeTab[0];
 	}
 	else {
 		// Create new child element
-		cout << "setting " << query << " to " << newValue << endl;
 		vector<string> parents;
 		parents.push_back(group);
 		parents.push_back(key);
-		xmlNodePtr newNode = buildAncestors(parents);
-		xmlNodeAddContent(newNode, (xmlChar*)newValue.c_str());
+		out = buildAncestors(parents);
 	}
 	xmlXPathFreeContext(context);
 	xmlXPathFreeObject(result);
+	return out;
 }
 
 /**
