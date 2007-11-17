@@ -13,6 +13,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_init(&argc, &argv);
 	this->window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	// Set up the window
+	setConfig(config);
 	Geometry geom = config.getWindowGeom();
 	gtk_window_set_default_size(this->window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
