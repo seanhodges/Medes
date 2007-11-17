@@ -106,13 +106,11 @@ string ConfigIO::getSetting(string group, string key, string defaultValue) {
  */
 void ConfigIO::changeSetting(string group, string key, string newValue) {
 	xmlNodePtr keyNode = findSetting(group, key);
-	cout << "changing content to " << newValue << endl;
 	xmlNodeSetContent(keyNode, (xmlChar*)newValue.c_str());
 }
 
 void ConfigIO::changeSetting(string group, string key, vector<xmlNodePtr> newValue) {
 	xmlNodePtr keyNode = findSetting(group, key);
-	cout << "applying XML structure to \"" << keyNode->name << "\"" << endl;
 	// Delete old contents
 	xmlNodePtr keyChild = keyNode->xmlChildrenNode;
 	while (keyChild != NULL) {
@@ -132,7 +130,6 @@ xmlNodePtr ConfigIO::findSetting(string group, string key) {
 	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
 	xmlXPathObjectPtr result = xmlXPathEvalExpression(xpath, context);
 	xmlNodeSetPtr resultNodes = result->nodesetval;
-	cout << "finding " << query << endl;
 	if (!xmlXPathNodeSetIsEmpty(resultNodes)) {
 		// Alter an existing child element
 		out = resultNodes->nodeTab[0];
@@ -157,7 +154,6 @@ xmlNodePtr ConfigIO::findSetting(string group, string key) {
  * @return the target node 
  */
 xmlNodePtr ConfigIO::buildAncestors(vector<string> parents) {
-	cout << "building path to node" << endl;
 	xmlXPathContextPtr context = xmlXPathNewContext(this->xmlDoc);
 	string query = "/webapp";
 	xmlNodePtr parentNode = xmlDocGetRootElement(this->xmlDoc);
@@ -170,7 +166,6 @@ xmlNodePtr ConfigIO::buildAncestors(vector<string> parents) {
 		xmlNodeSetPtr resultNodes = result->nodesetval;
 		if (xmlXPathNodeSetIsEmpty(resultNodes)) {
 			// This ancestor does not exist, create it
-			cout << "creating ancestor \"" << *it << "\"" << endl;
 			newNode = xmlNewChild(parentNode, NULL, BAD_CAST (xmlChar*)it->c_str(), NULL);
 		}
 		// Move up the query
