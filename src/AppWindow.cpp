@@ -15,6 +15,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	// Set up the window
 	setConfig(config);
 	Geometry geom = config.getWindowGeom();
+	gtk_window_move(this->window, geom.getLeft(), geom.getTop());
 	gtk_window_set_default_size(this->window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
 	// Attach the Gecko engine
