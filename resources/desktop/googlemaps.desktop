@@ -2,7 +2,7 @@
 Name=Google Maps
 GenericName=Google Maps
 Comment=
-Exec=medes /usr/local/share/medes/webapps/googlemaps.xml
+Exec=medes googlemaps
 Icon=googlemaps
 Terminal=false
 Type=Application

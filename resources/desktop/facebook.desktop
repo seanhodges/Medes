@@ -2,7 +2,7 @@
 Name=Facebook
 GenericName=Facebook
 Comment=Community Portal
-Exec=medes /usr/local/share/medes/webapps/facebook.xml
+Exec=medes facebook
 Icon=facebook
 Terminal=false
 Type=Application
