@@ -1,0 +1,14 @@
+Source: medes
+Section: web
+Priority: extra
+Maintainer: Sean Hodges <seanhodges@bluebottle.com>
+Build-Depends: debhelper (>= 5), cmake (>= 2), pkg-config (>= 0.22), firefox-dev (>= 2)), libgtk2.0-dev (>= 2), libxml2-dev (>= 2)
+Standards-Version: 3.7.2
+
+Package: medes
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, firefox (>= 2), libxml2 (>= 2)
+Description: A lightweight web application runtime
+ Medes allows your to run an on-line web application outside of the browser,
+ it's purpose is to integrate existing web applications to the desktop with 
+ no requirements to modify the server-side components.
