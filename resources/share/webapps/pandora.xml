@@ -2,17 +2,17 @@
 <webapp>
 	<application>
 		<title>Pandora Radio</title>
-		<url>http://pandora.com</url>
+		<url>http://pandora.com?cmd=mini</url>
 		<windowgeometry>
 			<left>0</left>
 			<top>0</top>
-			<width>350</width>
-			<height>200</height>
+			<width>730</width>
+			<height>400</height>
 		</windowgeometry>
 	</application>
 	<domains>
 		<rules>
-			<internal>https://pandora.com</internal>
+			<internal>http://pandora.com</internal>
 		</rules>
 	</domains>
 </webapp>
