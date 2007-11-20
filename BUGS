@@ -1,0 +1,11 @@
+20 November, 2007
+
+- Does not create the ~/.medes/webapps directory structure required for user profiles
+- Creates user profiles for webapps that do not exist
+- Window is repositioned approx. 5px right and 20px south of the last saved position
+- Missing some .desktop entries and icons for remaining example webapps
+- Mozilla profile should be moved inside ~/.medes (currently in .mozilla)
+- Requires a basic Mozilla profile template to be copied in place to avoid Firefox-esque messages etc
+- Needs a simple context menu and menu bar (for now)
+- Start building Debian packages for the application
+- Seperate the webapps from the build, these should be individual Debian packages
