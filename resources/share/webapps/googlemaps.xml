@@ -3,16 +3,8 @@
 	<application>
 		<title>Google Maps</title>
 		<url>http://maps.google.co.uk</url>
-		<windowgeometry>
-			<left>0</left>
-			<top>0</top>
-			<width>1024</width>
-			<height>768</height>
-		</windowgeometry>
 	</application>
 	<domains>
-		<default>external</default>
-		<dropadverts>false</dropadverts>
 		<rules>
 			<external>http://maps.google.co.uk/local_url</external>
 			<internal>http://maps.google</internal>

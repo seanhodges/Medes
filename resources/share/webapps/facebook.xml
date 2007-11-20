@@ -3,12 +3,8 @@
 	<application>
 		<title>Facebook</title>
 		<url>http://www.facebook.com</url>
-		<windowwidth>800</windowwidth>
-		<windowheight>600</windowheight>
 	</application>
 	<domains>
-		<default>external</default>
-		<dropadverts>false</dropadverts>
 		<rules>
 			<internal>https://login.facebook.com</internal>
 			<advert>http://ads.ak.facebook.com/ads</advert>

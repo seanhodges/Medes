@@ -6,4 +6,4 @@ Exec=medes facebook
 Icon=facebook
 Terminal=false
 Type=Application
-Categories=Network;Medes;
+Categories=Application;Network;Medes;

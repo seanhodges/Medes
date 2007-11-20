@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Pandora Radio
+GenericName=Pandora Radio
+Comment=Online Radio Service
+Exec=medes pandora
+Icon=pandora
+Terminal=false
+Type=Application
+Categories=Application;AudioVideo;Audio;Medes;

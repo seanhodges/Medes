@@ -3,14 +3,11 @@
 	<application>
 		<title>Ubuntu Community Documentation</title>
 		<url>https://help.ubuntu.com/community/UserDocumentation</url>
-		<windowwidth>800</windowwidth>
-		<windowheight>800</windowheight>
 	</application>
 	<domains>
-		<default>external</default>
-		<dropadverts>false</dropadverts>
 		<rules>
 			<internal>https://help.ubuntu.com</internal>
+			<internal>https://wiki.ubuntu.com</internal>
 		</rules>
 	</domains>
 </webapp>

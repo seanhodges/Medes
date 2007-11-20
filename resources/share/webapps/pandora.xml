@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<webapp>
+	<application>
+		<title>Pandora Radio</title>
+		<url>http://pandora.com</url>
+		<windowgeometry>
+			<left>0</left>
+			<top>0</top>
+			<width>350</width>
+			<height>200</height>
+		</windowgeometry>
+	</application>
+	<domains>
+		<rules>
+			<internal>https://pandora.com</internal>
+		</rules>
+	</domains>
+</webapp>

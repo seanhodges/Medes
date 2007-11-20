@@ -6,4 +6,4 @@ Exec=medes googlemaps
 Icon=googlemaps
 Terminal=false
 Type=Application
-Categories=Office;Maps;
+Categories=Application;Office;Maps;Medes;
