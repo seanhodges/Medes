@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "GeckoEmbed.h"
+#include "Environment.h"
 #include "RuleHandlers.h"
 
 /**
@@ -7,9 +8,9 @@
  */
 void GeckoEmbed::init(ConfigContainer config) {
 	// Set the environment
-	string userHome = getenv("HOME");
-	string configProfilePath = userHome + "/.mozilla/medes";
-	string configProfileName = "medes-default";
+	Environment env;
+	string configProfilePath = env.getUserGeckoProfilePath();
+	string configProfileName = "medes-gecko";
 	gtk_moz_embed_set_profile_path(configProfilePath.c_str(),configProfileName.c_str());
 	GtkMozEmbed *mozEmbed = GTK_MOZ_EMBED(gtk_moz_embed_new());
 	gtk_moz_embed_set_chrome_mask(mozEmbed, GTK_MOZ_EMBED_FLAG_ALLCHROME);

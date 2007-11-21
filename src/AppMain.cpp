@@ -3,10 +3,14 @@
 #include <iostream>
 	using std::cout;
 	using std::endl;
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 #include "Environment.h"
 #include "AppWindow.h"
 #include "ConfigContainer.h"
 #include "ConfigIO.h"
+
+namespace fs = boost::filesystem;
 
 void printUsage() {
 	cout << "medes 0.1" << endl;
@@ -27,8 +31,28 @@ vector<string> getTargetConfigs(string targetAppXML) {
 
 int main(int argc, char* argv[]) {
 
+	Environment env;
+
 	// Set MOZILLA_FIVE_HOME for gtkmozembed to work
 	setenv("MOZILLA_FIVE_HOME", MOZILLA_FIVE_HOME, 0);
+
+	// Build the user profile if it doesnt exist yet
+	cout << "checking for user profile" << endl;
+	fs::path profilePath(env.getUserProfilePath());
+	if (!fs::exists(profilePath)) {
+		cout << "user profile directory does not exist, creating a new one" << endl;
+		int profileCreated = fs::create_directory(profilePath);
+		// Build the profile, stopping if something fails to create/copy
+		if (profileCreated) profileCreated = fs::create_directory(env.getUserGeckoProfilePath());
+		if (profileCreated) profileCreated = fs::create_directory(env.getUserWebAppPath());
+		if (profileCreated) {
+			cout << "new profile has been created" << endl;
+		}
+		else {
+			cout << "error: could not create new profile" << endl;
+			return 1;
+		}
+	}
 
 	// Read the arguments passed in
 	string targetAppXML;

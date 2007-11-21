@@ -15,15 +15,15 @@ class Environment {
 		
 		Environment();
 
+		// User profile path
+		string getUserProfilePath() { return userHomePath + "/.medes/"; }
+
 		// XML config files
 		string getGlobalXMLPath() { return (string)APP_RESOURCE_PATH + "/global.xml"; }
 		string getAdvertXMLPath() { return (string)APP_RESOURCE_PATH + "/adverts.xml"; }
-
 		string getGlobalWebAppPath() { return (string)APP_RESOURCE_PATH + "/webapps/"; }
-		string getUserWebAppPath() { return userHomePath + "/.medes/webapps/"; }
-
-		// Location for Gecko profile
-		string getUserProfilePath() { return userHomePath + "/.medes/mozilla/"; }
+		string getUserWebAppPath() { return getUserProfilePath() + "webapps/"; }
+		string getUserGeckoProfilePath() { return getUserProfilePath() + "mozilla/"; }
 
 };
 
