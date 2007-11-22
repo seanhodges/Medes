@@ -4,5 +4,4 @@
 - Window is repositioned approx. 5px right and 20px south of the last saved position
 - Requires a basic Mozilla profile template to be copied in place to avoid Firefox-esque messages etc
 - Needs a simple context menu and menu bar (for now)
-- Start building Debian packages for the application
 - Seperate the webapps from the build, these should be individual Debian packages
