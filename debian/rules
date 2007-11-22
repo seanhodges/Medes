@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-# Sample debian/rules that uses debhelper.
+# Medes debian/rules
+# Written by Sean Hodges
+#
 # This file was originally written by Joey Hess and Craig Small.
 # As a special exception, when this file is copied by dh-make into a
 # dh-make output file, you may use that output file without restriction.
@@ -8,8 +10,6 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
-
-
 
 
 CFLAGS = -Wall -g
@@ -21,32 +21,25 @@ else
 endif
 
 configure: configure-stamp
+
 configure-stamp:
 	dh_testdir
-	# Add here commands to configure the package.
-
+	cmake -D CMAKE_INSTALL_PREFIX:STRING="/usr" .
 	touch configure-stamp
-
 
 build: build-stamp
 
 build-stamp: configure-stamp 
 	dh_testdir
-
-	# Add here commands to compile the package.
 	$(MAKE)
 	#docbook-to-man debian/medes.sgml > medes.1
-
 	touch $@
 
 clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-
-	# Add here commands to clean up after the build process.
 	-$(MAKE) clean
-
 	dh_clean 
 
 install: build
@@ -54,8 +47,6 @@ install: build
 	dh_testroot
 	dh_clean -k 
 	dh_installdirs
-
-	# Add here commands to install the package into debian/medes.
 	$(MAKE) DESTDIR=$(CURDIR)/debian/medes install
 
 
