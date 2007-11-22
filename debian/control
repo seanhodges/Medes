@@ -2,7 +2,8 @@ Source: medes
 Section: web
 Priority: extra
 Maintainer: Sean Hodges <seanhodges@bluebottle.com>
-Build-Depends: debhelper (>= 5), cmake (>= 2), pkg-config (>= 0.22), firefox-dev (>= 2)), libgtk2.0-dev, libxml2-dev, libboost-filesystem-dev, libboost-dev
+Build-Depends: debhelper (>= 5), cmake (>= 2), pkg-config (>= 0.22), firefox-dev (>= 2)),
+ libgtk2.0-dev, libxml2-dev, libboost-filesystem-dev, libboost-dev
 Standards-Version: 3.7.2
 
 Package: medes
