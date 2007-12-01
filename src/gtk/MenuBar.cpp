@@ -13,7 +13,7 @@ void MenuBar::init(vector<MenuElement> menuItems) {
 	cout << "menu building started" << endl;
 	menuWidget = gtk_menu_bar_new();
 	// Create the menu items
-	for (vector<MenuElement>::iterator it = menuItems.end() - 1; it != menuItems.begin(); it--) {
+	for (vector<MenuElement>::iterator it = menuItems.end() - 1; it >= menuItems.begin(); it--) {
 		MenuGroup parentGroup = getMenuGroup(it->getGroup());
 		MenuItem newItem(it->getLabel(), it->getTarget());
 		gtk_menu_shell_append(GTK_MENU_SHELL(parentGroup.getMenuWidget()), newItem.getItemWidget());

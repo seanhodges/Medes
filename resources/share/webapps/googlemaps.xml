@@ -30,7 +30,6 @@
 			<item label="Maps Help" group="Help">http://maps.google.co.uk/support/?hl=en_GB</item>
 			<item label="Take a Tour" group="Help">http://www.google.co.uk/intl/en_uk/help/maps/tour/</item>
 			<item label="About Google Maps" group="Help">http://maps.google.co.uk/support/bin/topic.py?topic=10778</item>
-			<item label="About Google Maps" group="Help">http://maps.google.co.uk/support/bin/topic.py?topic=10778</item>
 		</menubar>
 	</interface>
 </webapp>
