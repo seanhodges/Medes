@@ -27,6 +27,21 @@ Geometry::Geometry(int left, int top, int width, int height) {
 }
 
 /**
+ * Construct a menu element pod
+ *
+ * @param label - caption for menu element
+ * @param group - name of menu section this element will be grouped in
+ * @param condition - only show/enable this element if the condition returns true (ignored if "")
+ * @param target - target URL action for this menu element
+ */
+MenuElement::MenuElement(string label, string group, string condition, string target) {
+	this->label = label;
+	this->group = group;
+	this->condition = condition;
+	this->target = target;
+}
+
+/**
  * Provide some sensible defaults for the application
  * These should be over-ridden by the config XML stack
  */
@@ -49,8 +64,7 @@ ConfigContainer::ConfigContainer() {
  */
 void ConfigContainer::appendDomainRules(vector<Rule> newRules) {
 	while(!newRules.empty()) {
-		Rule newEntry; 
-		newEntry = (Rule)newRules.back();
+		Rule newEntry = (Rule)newRules.back();
 		this->domainRules.push_front(newEntry);
 		newRules.pop_back();
 	}
@@ -62,7 +76,50 @@ void ConfigContainer::appendDomainRules(vector<Rule> newRules) {
  * @param newRules - the rule to add
  */
 void ConfigContainer::appendDomainRules(Rule newRule) {
-	Rule newEntry; 
 	this->domainRules.push_front(newRule);
+}
+
+/**
+ * Append a set of menu items to the menu bar
+ *
+ * @param newItems - the menu items to add
+ */
+void ConfigContainer::appendMenuBar(vector<MenuElement> newItems) {
+	while(!newItems.empty()) {
+		MenuElement newItem = (MenuElement)newItems.back();
+		this->menuBar.push_back(newItem);
+		newItems.pop_back();
+	}
+}
+
+/**
+ * Append a single menu item to the menu bar
+ *
+ * @param newItem - the menu item to add
+ */
+void ConfigContainer::appendMenuBar(MenuElement newItem) {
+	this->menuBar.push_back(newItem);
+}
+
+/**
+ * Append a set of menu items to the context menu 
+ * 
+ * @param newItems - the menu items to add
+ */
+void ConfigContainer::appendContextMenu(vector<MenuElement> newItems) {
+	while(!newItems.empty()) {
+		MenuElement newItem = (MenuElement)newItems.back();
+		this->contextMenu.push_back(newItem);
+		newItems.pop_back();
+	}
+}
+
+/**
+ * Append a single menu item to the context menu 
+ *
+ * @param newItem - the menu item to add
+ */
+void ConfigContainer::appendContextMenu(MenuElement newItem) {
+	this->contextMenu.push_back(newItem);
 }
 

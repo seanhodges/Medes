@@ -6,6 +6,7 @@
 	using std::string;
 #include "GeckoEmbed.h"
 #include "ConfigContainer.h"
+#include "MenuBar.h"
 
 class AppWindow {
 
@@ -19,6 +20,8 @@ class AppWindow {
 		ConfigContainer config;
 
 		GtkWindow* window;
+		GtkWidget* windowContainer;
+		MenuBar menuBar;
 		GeckoEmbed gecko;
 
 	public:
@@ -30,7 +33,7 @@ class AppWindow {
 		ConfigContainer *getConfig() { return &config; }
 
 		void setConfig(ConfigContainer &config) { this->config = config; }
-		void setContent(GtkWidget *gtkWidget); 
+		void setContent(GtkWidget *gtkWidget, bool stretch); 
 		void setTitle(string newTitle); 
 
 		void show(); 

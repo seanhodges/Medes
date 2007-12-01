@@ -65,6 +65,7 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
 	else if (configCode == "DOMAINS_DEFAULT") { config.setDomainDefault(keyValue); }
 	else if (configCode == "DOMAINS_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
 	else if (configCode == "DOMAINS_RULES") { config.appendDomainRules(convertToGroupedVector(key)); }
+	else if (configCode == "INTERFACE_MENUBAR") { config.appendMenuBar(convertToMenu(key)); }
 	else {
 		this->errors += ("<" + groupName + "><" + keyName + ">" + " is not a recognised key\n");
 	}
@@ -169,6 +170,35 @@ Geometry ConfigReader::convertToGeometry(const xmlNodePtr& xmlList) {
 		}
 	}
 	Geometry out(left, top, width, height);
+	return out;
+}
+
+/**
+ * Cast the children of an XML element to a vector of MenuElements
+ *
+ * @param xmlList - pointer to the node to parse
+ *
+ * @return the vector
+ */
+vector<MenuElement> ConfigReader::convertToMenu(const xmlNodePtr& xmlList) {
+	vector<MenuElement> out;
+	xmlNodePtr entries;
+	for(entries = xmlList->children; entries != NULL; entries = entries->next) {
+		if (entries->type == XML_ELEMENT_NODE) {
+			string label = "";
+			string group = "";
+			string condition = "";
+			xmlChar* xmlLabel = xmlGetProp(entries, (xmlChar*)"label");
+			if (xmlLabel != 0) label = (char*)xmlLabel;
+			xmlChar* xmlGroup = xmlGetProp(entries, (xmlChar*)"group");
+			if (xmlGroup != 0) group = (char*)xmlGroup;
+			xmlChar* xmlCondition = xmlGetProp(entries, (xmlChar*)"condition");
+			if (xmlCondition != 0) condition = (char*)xmlCondition;
+			string target = (char*)xmlNodeGetContent(entries);
+			MenuElement entry(label, group, condition, target);
+			out.push_back(entry);
+		}
+	}
 	return out;
 }
 

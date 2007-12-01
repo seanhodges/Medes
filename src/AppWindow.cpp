@@ -11,18 +11,27 @@
 AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_set_locale();
 	gtk_init(&argc, &argv);
-	this->window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+	window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+	windowContainer = gtk_vbox_new(false, 0);
+
 	// Set up the window
 	setConfig(config);
 	Geometry geom = config.getWindowGeom();
-	gtk_window_move(this->window, geom.getLeft(), geom.getTop());
-	gtk_window_set_default_size(this->window, geom.getWidth(), geom.getHeight());
+	gtk_window_move(window, geom.getLeft(), geom.getTop());
+	gtk_window_set_default_size(window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
+
+	// Attach the menu bar
+	menuBar.init(config.getMenuBar());
+	setContent(menuBar.getMenuWidget(), false);
+
 	// Attach the Gecko engine
 	gecko.init(config);
-	AppWindow::setContent(gecko.getFrame());
-	// Set up callback events
+	setContent(gecko.getFrame(), true);
+
+	// Set up window callback events
 	setupCallbacks();
+
 }
 
 /**
@@ -34,16 +43,21 @@ AppWindow::~AppWindow() {
 
 /**
  * Attach a GtkWidget to this window
+ *
+ * @param gtkWidget - the widget to place on the window
+ * @param stretch - if this is true, the widget is stretched to fill remaining space on the window
  */
-void AppWindow::setContent(GtkWidget* gtkWidget) {
-	gtk_container_add(GTK_CONTAINER(this->window), gtkWidget);
+void AppWindow::setContent(GtkWidget* gtkWidget, bool stretch) {
+	gtk_box_pack_start(GTK_BOX(windowContainer), gtkWidget, stretch, stretch, 0);
 }
 
 /**
  * Show the application window
  */
 void AppWindow::show() {
-	gtk_widget_show_all(GTK_WIDGET(this->window));
+	// Add the parent container to the window
+	gtk_container_add(GTK_CONTAINER(window), windowContainer);
+	gtk_widget_show_all(GTK_WIDGET(window));
 }
 
 /**
@@ -52,7 +66,7 @@ void AppWindow::show() {
  * @param newTitle - the new title to display
  */
 void AppWindow::setTitle(string newTitle) {
-	gtk_window_set_title(this->window, newTitle.c_str());
+	gtk_window_set_title(window, newTitle.c_str());
 }
 
 /**
@@ -68,8 +82,8 @@ void AppWindow::start() {
  */
 void AppWindow::setupCallbacks() {
 	// Add new signal events here
-	g_signal_connect(G_OBJECT(this->window), "destroy", G_CALLBACK(eventDestroy), this);
-	g_signal_connect(G_OBJECT(this->window), "configure-event", G_CALLBACK(eventWindowProperty), this);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(eventDestroy), this);
+	g_signal_connect(G_OBJECT(window), "configure-event", G_CALLBACK(eventWindowProperty), this);
 }
 
 /**

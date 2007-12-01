@@ -24,6 +24,7 @@ set(MEDES_SRC
 	src/config/ConfigWriter.cpp 
 	src/rules/Handler.cpp 
 	src/rules/DomainHandler.cpp
+	src/gtk/MenuBar.cpp
 )
 
 find_package(PkgConfig)

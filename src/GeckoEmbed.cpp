@@ -17,9 +17,9 @@ void GeckoEmbed::init(ConfigContainer config) {
 	// Attach to functors
 	gtk_signal_connect(GTK_OBJECT(mozEmbed), "open_uri", GTK_SIGNAL_FUNC(&GeckoEmbed::open_uri_cb), this);
 	// Initial object configuration
-	GeckoEmbed::setMozEmbed(mozEmbed);
-	GeckoEmbed::setConfig(config);
-	GeckoEmbed::setUrl(config.getAppUrl());
+	setMozEmbed(mozEmbed);
+	setConfig(config);
+	setUrl(config.getAppUrl());
 }
 
 /**
