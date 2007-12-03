@@ -25,7 +25,8 @@ class MenuItem {
 		string getTarget() { return target; }
 		GtkWidget *getItemWidget() { return itemWidget; }
 
-		static bool eventClick(GtkWidget *item, GdkEvent *event, MenuItem& parent);
+		void setupCallbacks();
+		static bool eventClick(GtkWidget *item, GdkEvent *event, MenuItem &parent);
 };
 
 class MenuGroup {
@@ -43,6 +44,7 @@ class MenuGroup {
 		MenuGroup(string label); 
 
 		void addItem(string label, MenuItem item);
+		MenuItem &getItem(string label);
 
 		GtkWidget *getMenuWidget() { return menuWidget; }
 		GtkWidget *getItemWidget() { return itemWidget; }
@@ -56,7 +58,7 @@ class MenuBar {
 		map<string, MenuGroup> groups;
 
 	public:
-		
+
 		MenuBar() {}
 
 		void init(vector<MenuElement> menuItems);
