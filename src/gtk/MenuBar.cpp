@@ -12,13 +12,24 @@
 void MenuBar::init(vector<MenuElement> menuItems) {
 	cout << "menu building started" << endl;
 	menuWidget = gtk_menu_bar_new();
+	testGroup = MenuGroup("hellogroup");
+	testItem = MenuItem("helloitem", "works");
+	gtk_menu_bar_append(GTK_MENU_BAR(menuWidget), testGroup.getItemWidget());
+	gtk_menu_shell_append(GTK_MENU_SHELL(testGroup.getMenuWidget()), testItem.getItemWidget());
+	GtkWidget *testWidget = testItem.getItemWidget();
+	gtk_signal_connect(GTK_OBJECT(testWidget), "activate", GTK_SIGNAL_FUNC(&MenuBar::testEvent), testItem);
+
 	// Create the menu items
-	for (vector<MenuElement>::iterator it = menuItems.end() - 1; it >= menuItems.begin(); it--) {
+	/*for (vector<MenuElement>::iterator it = menuItems.end() - 1; it >= menuItems.begin(); it--) {
 		MenuGroup parentGroup = getMenuGroup(it->getGroup());
 		MenuItem newItem(it->getLabel(), it->getTarget());
 		parentGroup.addItem(it->getLabel(), newItem);
-	}
+	}*/
 	cout << "menu building complete" << endl;
+}
+
+void testEvent(MenuItem &testItem) {
+	cout << "success" << endl;
 }
 
 /**
@@ -68,7 +79,7 @@ MenuGroup::MenuGroup(string label) {
  * @param label - the caption for this item
  * @param item - the new MenuItem to add
  */
-void MenuGroup::addItem(string label, MenuItem item) {
+void MenuGroup::addItem(string label, MenuItem &item) {
 	gtk_menu_shell_append(GTK_MENU_SHELL(menuWidget), item.getItemWidget());
 	items[label] = item;
 }
@@ -92,7 +103,7 @@ MenuItem::MenuItem(string label, string target) {
 	this->label = label;
 	this->target = target;
 	itemWidget = gtk_menu_item_new_with_label(label.c_str());
-	setupCallbacks();
+	//setupCallbacks(this);
 	cout << "\tcreated menu item " << label << endl;
 }
 

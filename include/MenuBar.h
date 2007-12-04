@@ -43,7 +43,7 @@ class MenuGroup {
 		MenuGroup() {}
 		MenuGroup(string label); 
 
-		void addItem(string label, MenuItem item);
+		void addItem(string label, MenuItem &item);
 		MenuItem &getItem(string label);
 
 		GtkWidget *getMenuWidget() { return menuWidget; }
@@ -56,6 +56,8 @@ class MenuBar {
 
 		GtkWidget *menuWidget;
 		map<string, MenuGroup> groups;
+		MenuGroup testGroup;
+		MenuItem testItem;
 
 	public:
 
@@ -64,6 +66,8 @@ class MenuBar {
 		void init(vector<MenuElement> menuItems);
 		MenuGroup &getMenuGroup(string label);
 		GtkWidget *getMenuWidget();
+
+		static void testEvent(MenuItem &testItem);
 };
 
 #endif
