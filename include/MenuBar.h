@@ -26,7 +26,7 @@ class MenuItem {
 		GtkWidget *getItemWidget() { return itemWidget; }
 
 		void setupCallbacks();
-		static bool eventClick(GtkWidget *item, GdkEvent *event, MenuItem &parent);
+		static bool eventClick(GtkWidget *item, GdkEvent *event, MenuItem *parent);
 };
 
 class MenuGroup {
@@ -67,7 +67,7 @@ class MenuBar {
 		MenuGroup &getMenuGroup(string label);
 		GtkWidget *getMenuWidget();
 
-		static void testEvent(MenuItem &testItem);
+		static bool testEvent(GtkWidget *item, GdkEvent *event, MenuItem *testItem);
 };
 
 #endif
