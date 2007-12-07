@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
 		bool loaded = reader.loadFile(*it);
 		if (loaded) {
 			// Parse the config file, if it loaded successfully
-			bool success = reader.appendConfigToContainer(config);		
+			bool success = reader.appendConfigToContainer(config);
 			errors = reader.getParseErrors();
 			if (success) {
 				if (errors == "") status = " success";
@@ -96,6 +96,7 @@ int main(int argc, char* argv[]) {
 	if ((int)targetConfig.size() > 0)
 		config.setSaveToConfig(targetConfig.back());
 
+    cout << "Creating appwindow" << std::endl;
 	// Create the application window
 	AppWindow appWindow(argc, argv, config);
 	appWindow.show();

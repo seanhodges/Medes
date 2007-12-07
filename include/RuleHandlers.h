@@ -14,18 +14,19 @@ class Handler {
 
 		deque<Rule> ruleList;
 		string defaultRule;
-	
+
 	protected:
 
 		deque<Rule> getRuleList() { return ruleList; }
 		string getDefaultRule() { return defaultRule; }
 
-		virtual bool ruleMatches(Rule rule, string target) {}
+		virtual bool ruleMatches(Rule rule, string target) { return true; }
 		virtual void execRule(Rule rule, string target) {}
 
 	public:
 
 		Handler(deque<Rule> ruleList, string defaultRule);
+        virtual ~Handler() {}
 
 		bool runRules(string target);
 
@@ -34,7 +35,7 @@ class Handler {
 class DomainHandler : public Handler {
 
 	private:
-		
+
 		bool allowRedirect;
 		bool dropAdverts;
 
@@ -42,13 +43,15 @@ class DomainHandler : public Handler {
 		void handleExternal(string target);
 		void handleAdvert(string target);
 		void handleDrop(string target);
-	
+
 		bool ruleMatches(Rule rule, string target);
 		void execRule(Rule rule, string target);
 
 	public:
 
 		DomainHandler(ConfigContainer config);
+		virtual ~DomainHandler() {}
+
 		bool isRedirectAllowed() { return allowRedirect; }
 
 };

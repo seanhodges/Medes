@@ -11,24 +11,24 @@
 class AppWindow {
 
 	private:
-		
-		void setupCallbacks(); 
 
-		static void eventDestroy(GtkWindow *window, AppWindow &parent); 
-		static bool eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow &parent); 
+		void setupCallbacks();
+
+		static void eventDestroy(GtkWindow *window, AppWindow &parent);
+		static bool eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow &parent);
 
 		ConfigContainer config;
 
 		GtkWindow* window;
 		GtkWidget* windowContainer;
-		MenuBar menuBar;
+		MenuBar* menuBar;
 		GeckoEmbed gecko;
 
 	public:
 
-		AppWindow(int argc, char* argv[], ConfigContainer config); 
-		
-		~AppWindow(); 
+		AppWindow(int argc, char* argv[], ConfigContainer config);
+
+		~AppWindow();
 
 		ConfigContainer *getConfig() { return &config; }
 
@@ -39,11 +39,11 @@ class AppWindow {
 		MenuItem testItem;
 
 		void setConfig(ConfigContainer &config) { this->config = config; }
-		void setContent(GtkWidget *gtkWidget, bool stretch); 
-		void setTitle(string newTitle); 
+		void setContent(GtkWidget *gtkWidget, bool stretch);
+		void setTitle(string newTitle);
 
-		void show(); 
-		void start(); 
+		void show();
+		void start();
 };
 
 #endif

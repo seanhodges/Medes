@@ -10,7 +10,9 @@
  */
 AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_set_locale();
-	gtk_init(&argc, &argv);
+	std::cout << "Locale set" << std::endl;
+	gtk_init(0, 0);
+	std::cout << "GTK init called" << std::endl;
 	window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	windowContainer = gtk_vbox_new(false, 0);
 
@@ -22,19 +24,20 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	setTitle(config.getAppTitle());
 
 	// Attach the menu bar
-	//menuBar.init(config.getMenuBar());
-	//setContent(menuBar.getMenuWidget(), false);
+	menuBar = new MenuBar();
+	menuBar->init(config.getMenuBar());
+	setContent(menuBar->getMenuWidget(), false);
 
-	menuWidget = gtk_menu_bar_new();
+/*	menuWidget = gtk_menu_bar_new();
 	testGroup = MenuGroup("hellogroup");
 	testItem = MenuItem("helloitem", "works");
 	gtk_menu_bar_append(GTK_MENU_BAR(menuWidget), testGroup.getItemWidget());
 	gtk_menu_shell_append(GTK_MENU_SHELL(testGroup.getMenuWidget()), testItem.getItemWidget());
 	testWidget = testItem.getItemWidget();
 	//gtk_signal_connect(GTK_OBJECT(testWidget), "activate", GTK_SIGNAL_FUNC(&AppWindow::testEvent), &testItem);
-	gtk_signal_connect(GTK_OBJECT(testWidget), "activate", G_CALLBACK(testEvent), this->testItem);
-	setContent(menuWidget, false);
-	
+	gtk_signal_connect(GTK_OBJECT(testWidget), "activate", G_CALLBACK(testEvent), &this->testItem);
+	setContent(menuWidget, false);*/
+
 	// Attach the Gecko engine
 	gecko.init(config);
 	setContent(gecko.getFrame(), true);
@@ -46,6 +49,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 
 bool AppWindow::testEvent(GtkWidget *item, GdkEvent *event, MenuItem *parent) {
 	cout << "success" << parent->getLabel() << " " << parent->getTarget() << endl;
+	return true;
 }
 
 /**
@@ -53,6 +57,8 @@ bool AppWindow::testEvent(GtkWidget *item, GdkEvent *event, MenuItem *parent) {
  */
 AppWindow::~AppWindow() {
 	gecko.tearDown();
+	delete menuBar;
+	menuBar = NULL;
 }
 
 /**
@@ -125,7 +131,7 @@ void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {
  * @return always false
  */
 bool AppWindow::eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow& parent) {
-	// Retrieve the new window size 
+	// Retrieve the new window size
 	ConfigContainer *config = parent.getConfig();
 	Geometry geom(event->x, event->y, event->width, event->height);
 	config->setWindowGeom(geom);

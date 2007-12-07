@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	GtkWidget *topLevelWindow;
 	GtkWidget *topLevelVBox;
