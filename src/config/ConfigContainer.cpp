@@ -51,10 +51,12 @@ ConfigContainer::ConfigContainer() {
 	setAppTitle("No application loaded");
 	Geometry geom(0, 0, 640, 480);
 	setWindowGeom(geom);
-	setDomainDefault("external");
+	setHttpDefaultRule("external");
+	setJavascriptDefaultRule("allow");
 	setAdvertsHidden(false);
-	Rule defaultEntry("internal", "about:blank");
-	this->domainRules.push_front(defaultEntry);
+	// Add about:blank as allowed, in case something else screws up
+	Rule defaultHttpEntry("internal", "about:blank");
+	this->httpRules.push_front(defaultHttpEntry);
 }
 
 /**
@@ -62,10 +64,10 @@ ConfigContainer::ConfigContainer() {
  *
  * @param newRules - the rules to add
  */
-void ConfigContainer::appendDomainRules(vector<Rule> newRules) {
+void ConfigContainer::appendHttpRules(vector<Rule> newRules) {
 	while(!newRules.empty()) {
 		Rule newEntry = (Rule)newRules.back();
-		this->domainRules.push_front(newEntry);
+		this->httpRules.push_front(newEntry);
 		newRules.pop_back();
 	}
 }
@@ -75,8 +77,30 @@ void ConfigContainer::appendDomainRules(vector<Rule> newRules) {
  *
  * @param newRules - the rule to add
  */
-void ConfigContainer::appendDomainRules(Rule newRule) {
-	this->domainRules.push_front(newRule);
+void ConfigContainer::appendHttpRules(Rule newRule) {
+	this->httpRules.push_front(newRule);
+}
+
+/**
+ * Append a set of js rules to the top of the main js rules list
+ *
+ * @param newRules - the rules to add
+ */
+void ConfigContainer::appendJavascriptRules(vector<Rule> newRules) {
+	while(!newRules.empty()) {
+		Rule newEntry = (Rule)newRules.back();
+		this->javascriptRules.push_front(newEntry);
+		newRules.pop_back();
+	}
+}
+
+/**
+ * Append a single js rule to the top of the main js rules list
+ *
+ * @param newRules - the rule to add
+ */
+void ConfigContainer::appendJavascriptRules(Rule newRule) {
+	this->javascriptRules.push_front(newRule);
 }
 
 /**

@@ -4,8 +4,8 @@
 		<title>Google Maps</title>
 		<url>http://maps.google.co.uk</url>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<http>
 			<external>http://maps.google.co.uk/local_url</external>
 			<internal>http://maps.google</internal>
 			<internal>https://www.google</internal>
@@ -18,8 +18,8 @@
 			<external>http://groups.google</external>
 			<external>http://scholar.google</external>
 			<advert>http://adwords.google</advert>
-		</rules>
-	</domains>
+		</http>
+	</rules>
 	<interface>
 		<menubar>
 			<item label="Start Again" group="Application">http://maps.google.co.uk</item>

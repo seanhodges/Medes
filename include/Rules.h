@@ -8,7 +8,7 @@
 	using std::endl;
 #include "ConfigContainer.h"
 
-class Handler {
+class Rules {
 
 	private:
 
@@ -17,6 +17,7 @@ class Handler {
 
 	protected:
 
+		bool allowRedirect;
 		deque<Rule> getRuleList() { return ruleList; }
 		string getDefaultRule() { return defaultRule; }
 
@@ -25,18 +26,18 @@ class Handler {
 
 	public:
 
-		Handler(deque<Rule> ruleList, string defaultRule);
-        virtual ~Handler() {}
+		Rules(deque<Rule> ruleList, string defaultRule);
+		Rules() {}
+        virtual ~Rules() {}
 
 		bool runRules(string target);
-
+		bool isRedirectAllowed() { return allowRedirect; }
 };
 
-class DomainHandler : public Handler {
+class HttpRules : public Rules {
 
 	private:
 
-		bool allowRedirect;
 		bool dropAdverts;
 
 		void handleInternal(string target);
@@ -49,11 +50,27 @@ class DomainHandler : public Handler {
 
 	public:
 
-		DomainHandler(ConfigContainer config);
-		virtual ~DomainHandler() {}
+		HttpRules(ConfigContainer config);
+		virtual ~HttpRules() {}
+};
 
-		bool isRedirectAllowed() { return allowRedirect; }
+class JavascriptRules : public Rules {
 
+	private:
+
+		bool dropAdverts;
+
+		void handleAllow(string target);
+		void handleAdvert(string target);
+		void handleDrop(string target);
+
+		bool ruleMatches(Rule rule, string target);
+		void execRule(Rule rule, string target);
+
+	public:
+
+		JavascriptRules(ConfigContainer config);
+		virtual ~JavascriptRules() {}
 };
 
 #endif

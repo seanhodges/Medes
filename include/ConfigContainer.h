@@ -80,9 +80,11 @@ class ConfigContainer {
 		Geometry windowGeom;
 
 		// Rules
-		string domainDefault;
+		string httpDefaultRule;
+		deque<Rule> httpRules;
+		string javascriptDefaultRule;
+		deque<Rule> javascriptRules;
 		bool hideAdverts;
-		deque<Rule> domainRules;
 
 		// Interface
 		vector<MenuElement> menuBar;
@@ -96,9 +98,11 @@ class ConfigContainer {
 		string getAppUrl() { return appUrl; }
 		string getAppTitle() { return appTitle; }
 		Geometry getWindowGeom() { return windowGeom; }
-		string getDomainDefault() { return domainDefault; }
+		string getHttpDefaultRule() { return httpDefaultRule; }
+		string getJavascriptDefaultRule() { return javascriptDefaultRule; }
 		bool isAdvertsHidden() { return hideAdverts; }
-		deque<Rule>& getDomainRules() { return domainRules; }
+		deque<Rule>& getHttpRules() { return httpRules; }
+		deque<Rule>& getJavascriptRules() { return javascriptRules; }
 		vector<MenuElement>& getMenuBar() { return menuBar; }
 		vector<MenuElement>& getContextMenu() { return contextMenu; }
 
@@ -106,12 +110,17 @@ class ConfigContainer {
 		void setAppUrl(string appUrl) { this->appUrl = appUrl; }
 		void setAppTitle(string appTitle) { this->appTitle = appTitle; }
 		void setWindowGeom(Geometry windowGeom) { this->windowGeom = windowGeom; }
-		void setDomainDefault(string domainDefault) { this->domainDefault = domainDefault; }
+		void setHttpDefaultRule(string httpDefaultRule) { this->httpDefaultRule = httpDefaultRule; }
+		void setJavascriptDefaultRule(string javascriptDefaultRule) { this->javascriptDefaultRule = javascriptDefaultRule; }
 		void setAdvertsHidden(bool hideAdverts) { this->hideAdverts = hideAdverts; }
 
-		void replaceDomainRules(deque<Rule> newRules) { domainRules = newRules; }
-		void appendDomainRules(vector<Rule> newRules);
-		void appendDomainRules(Rule newRule);
+		void replaceHttpRules(deque<Rule> newRules) { httpRules = newRules; }
+		void appendHttpRules(vector<Rule> newRules);
+		void appendHttpRules(Rule newRule);
+
+		void replaceJavascriptRules(deque<Rule> newRules) { javascriptRules = newRules; }
+		void appendJavascriptRules(vector<Rule> newRules);
+		void appendJavascriptRules(Rule newRule);
 
 		void replaceMenuBar(vector<MenuElement> newMenu) { menuBar = newMenu; }
 		void appendMenuBar(vector<MenuElement> newMenu);

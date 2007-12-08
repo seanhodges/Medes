@@ -10,10 +10,12 @@
 			<height>600</height>
 		</windowgeometry>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<httpdefault>external</httpdefault>
+		<javascriptdefault>allow</javascriptdefault>
+		<http>
 			<internal>file:///usr/share/medes/medes_home.html</internal>
 			<internal>jar:file:///usr/lib/firefox/chrome/toolkit.jar!/content/global/netError.xhtml</internal>
-		</rules>
-	</domains>
+		</http>
+	</rules>
 </webapp>

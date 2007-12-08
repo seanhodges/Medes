@@ -62,9 +62,11 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
 	if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); }
 	else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 	else if (configCode == "APPLICATION_WINDOWGEOMETRY") { config.setWindowGeom(convertToGeometry(key)); }
-	else if (configCode == "DOMAINS_DEFAULT") { config.setDomainDefault(keyValue); }
-	else if (configCode == "DOMAINS_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
-	else if (configCode == "DOMAINS_RULES") { config.appendDomainRules(convertToGroupedVector(key)); }
+	else if (configCode == "RULES_HTTP") { config.appendHttpRules(convertToGroupedVector(key)); }
+	else if (configCode == "RULES_JAVASCRIPT") { config.appendJavascriptRules(convertToGroupedVector(key)); }
+	else if (configCode == "RULES_HTTPDEFAULT") { config.setHttpDefaultRule(keyValue); }
+	else if (configCode == "RULES_JAVASCRIPTDEFAULT") { config.setJavascriptDefaultRule(keyValue); }
+	else if (configCode == "RULES_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
 	else if (configCode == "INTERFACE_MENUBAR") { config.appendMenuBar(convertToMenu(key)); }
 	else {
 		this->errors += ("<" + groupName + "><" + keyName + ">" + " is not a recognised key\n");

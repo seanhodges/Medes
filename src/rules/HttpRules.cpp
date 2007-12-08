@@ -1,14 +1,14 @@
-#include "RuleHandlers.h"
+#include "Rules.h"
 
 /**
  * Initialise the handler
  *
  * @param config - the config container containing the rules for this handler
  */
-DomainHandler::DomainHandler(ConfigContainer config)
-	: Handler::Handler(config.getDomainRules(), config.getDomainDefault()) {
-	this->allowRedirect = false;
-	this->dropAdverts = true;
+HttpRules::HttpRules(ConfigContainer config)
+	: Rules::Rules(config.getHttpRules(), config.getHttpDefaultRule()) {
+	allowRedirect = false;
+	dropAdverts = true;
 }
 
 /**
@@ -19,7 +19,7 @@ DomainHandler::DomainHandler(ConfigContainer config)
  *
  * @return true if a successful match was found
  */
-bool DomainHandler::ruleMatches(Rule rule, string target) { 
+bool HttpRules::ruleMatches(Rule rule, string target) { 
 	// TODO: add some regex matching in the future
 	if (target.find(rule.getValue()) == 0) {
 		return true;
@@ -33,7 +33,7 @@ bool DomainHandler::ruleMatches(Rule rule, string target) {
  * @param rule - the rule to execute
  * @param target - the URL to execute
  */
-void DomainHandler::execRule(Rule rule, string target) {
+void HttpRules::execRule(Rule rule, string target) {
 	string ruleName = rule.getGroup();
 	// Declare new domain rules here
 	if (ruleName == "internal") { handleInternal(target); }
@@ -50,9 +50,9 @@ void DomainHandler::execRule(Rule rule, string target) {
  *
  * @param target - the target URL
  */
-void DomainHandler::handleInternal(string target) {
+void HttpRules::handleInternal(string target) {
 	cout << "page redirection to: " + target << endl;
-	this->allowRedirect = true;
+	allowRedirect = true;
 }
 
 /**
@@ -60,11 +60,11 @@ void DomainHandler::handleInternal(string target) {
  *
  * @param target - the target URL
  */
-void DomainHandler::handleExternal(string target) {
+void HttpRules::handleExternal(string target) {
 	cout << "executing handler for domain: " + target << endl;
 	string cmd = "gnome-www-browser " + target;
 	system(cmd.c_str());
-	this->allowRedirect = false;
+	allowRedirect = false;
 }
 
 /**
@@ -72,14 +72,14 @@ void DomainHandler::handleExternal(string target) {
  *
  * @param target - the target URL
  */
-void DomainHandler::handleAdvert(string target) {
-	if (this->dropAdverts) {
+void HttpRules::handleAdvert(string target) {
+	if (dropAdverts) {
 		cout << "dropping advert: " + target << endl;
-		this->allowRedirect = false;
+		allowRedirect = false;
 	}
 	else {
 		cout << "accepting advert: " + target << endl;
-		this->allowRedirect = true;
+		allowRedirect = true;
 	}
 }
 
@@ -88,8 +88,8 @@ void DomainHandler::handleAdvert(string target) {
  *
  * @param target - the target URL
  */
-void DomainHandler::handleDrop(string target) {
+void HttpRules::handleDrop(string target) {
 	cout << "page redirection to: " + target << endl;
-	this->allowRedirect = false;
+	allowRedirect = false;
 }
 

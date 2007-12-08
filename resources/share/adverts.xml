@@ -1,7 +1,6 @@
 <?xml version="1.0" ?>
 <webapp>
-	<domains>
-		<rules>
-		</rules>
-	</domains>
+	<rules>
+		<dropadverts>false</dropadverts>
+	</rules>
 </webapp>

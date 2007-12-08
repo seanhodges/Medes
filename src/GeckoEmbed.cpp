@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "GeckoEmbed.h"
 #include "Environment.h"
-#include "RuleHandlers.h"
+#include "Rules.h"
 
 /**
  * Initialise the engine (must be called AFTER gtk_init())
@@ -69,9 +69,25 @@ void GeckoEmbed::tearDown() {
  * @return true to stop redirection event, otherwise false
  */
 gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent) {
-	DomainHandler handler(parent.getConfig());
 	string target = uri;
-	handler.runRules(target);
-	return !handler.isRedirectAllowed();
+	Rules *handler;
+	// Determine which rules to run
+	if (target.find("http:") == 0 || target.find("https:") == 0 || target.find("ftp:") == 0) {
+		cout << "applying http rules" << endl;
+		handler = new HttpRules(parent.getConfig());
+	}
+	else if (target.find("javascript:") == 0) {
+		cout << "applying javascript rules" << endl;
+		handler = new JavascriptRules(parent.getConfig());
+	}
+	else {
+		// URL support is limited to what the rules understand
+		cout << "an unsupported url was passed to the rules engine" << endl;
+		exit(1);
+	}
+	handler->runRules(target);
+	bool redirect = handler->isRedirectAllowed();
+	delete handler;
+	return !redirect;
 }
 
