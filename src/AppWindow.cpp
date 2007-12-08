@@ -28,28 +28,12 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	menuBar->init(config.getMenuBar());
 	setContent(menuBar->getMenuWidget(), false);
 
-/*	menuWidget = gtk_menu_bar_new();
-	testGroup = MenuGroup("hellogroup");
-	testItem = MenuItem("helloitem", "works");
-	gtk_menu_bar_append(GTK_MENU_BAR(menuWidget), testGroup.getItemWidget());
-	gtk_menu_shell_append(GTK_MENU_SHELL(testGroup.getMenuWidget()), testItem.getItemWidget());
-	testWidget = testItem.getItemWidget();
-	//gtk_signal_connect(GTK_OBJECT(testWidget), "activate", GTK_SIGNAL_FUNC(&AppWindow::testEvent), &testItem);
-	gtk_signal_connect(GTK_OBJECT(testWidget), "activate", G_CALLBACK(testEvent), &this->testItem);
-	setContent(menuWidget, false);*/
-
 	// Attach the Gecko engine
 	gecko.init(config);
 	setContent(gecko.getFrame(), true);
 
 	// Set up window callback events
 	setupCallbacks();
-
-}
-
-bool AppWindow::testEvent(GtkWidget *item, GdkEvent *event, MenuItem *parent) {
-	cout << "success" << parent->getLabel() << " " << parent->getTarget() << endl;
-	return true;
 }
 
 /**
@@ -57,8 +41,6 @@ bool AppWindow::testEvent(GtkWidget *item, GdkEvent *event, MenuItem *parent) {
  */
 AppWindow::~AppWindow() {
 	gecko.tearDown();
-	delete menuBar;
-	menuBar = NULL;
 }
 
 /**
