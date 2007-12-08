@@ -32,8 +32,6 @@ class AppWindow {
 
 		ConfigContainer *getConfig() { return &config; }
 
-		static bool testEvent(GtkWidget *item, GdkEvent *event, MenuItem *parent);
-
 		void setConfig(ConfigContainer &config) { this->config = config; }
 		void setContent(GtkWidget *gtkWidget, bool stretch);
 		void setTitle(string newTitle);

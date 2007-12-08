@@ -24,7 +24,7 @@
 		<menubar>
 			<item label="Start Again" group="Application">http://maps.google.co.uk</item>
 			<item label="Go Back a Page" group="Application">javascript:history.back()</item> 
-			<item label="Quit" group="Application">medes:/earlydays/action/quit()</item>
+			<item label="Quit" group="Application">medes://earlydays/action/quit</item>
 			<item label="Sign In" group="Account">https://www.google.com/accounts/ServiceLogin?service=local&amp;hl=en&amp;nui=1&amp;continue=http://maps.google.co.uk</item>
 			<item label="Saved Locations" group="Account">https://www.google.com/accounts/ServiceLogin?service=local&amp;hl=en&amp;nui=1&amp;continue=http://maps.google.co.uk</item>
 			<item label="Maps Help" group="Help">http://maps.google.co.uk/support/?hl=en_GB</item>

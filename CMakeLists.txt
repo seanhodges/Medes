@@ -15,8 +15,8 @@ set(MEDES_LIBRARIES
 
 set(MEDES_SRC
 	src/AppMain.cpp 
-	src/AppWindow.cpp 
 	src/Environment.cpp
+	src/TargetHandler.cpp
 	src/GeckoEmbed.cpp 
 	src/config/ConfigContainer.cpp 
 	src/config/ConfigIO.cpp 
@@ -24,6 +24,7 @@ set(MEDES_SRC
 	src/config/ConfigWriter.cpp 
 	src/rules/Handler.cpp 
 	src/rules/DomainHandler.cpp
+	src/gtk/AppWindow.cpp 
 	src/gtk/MenuBar.cpp
 )
 

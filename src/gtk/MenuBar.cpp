@@ -3,19 +3,21 @@
 	using std::endl;
 #include "MenuBar.h"
 #include "ConfigIO.h"
+#include "TargetHandler.h"
 
 /**
  * Create the menu bar
  *
  * @param menuItems - items to be added to the menu
+ * @param gecko - the running gecko engine instance
  */
-MenuBar::MenuBar(vector<MenuElement> menuItems) {
+MenuBar::MenuBar(vector<MenuElement> menuItems, GeckoEmbed *gecko) {
 	cout << "menu building started" << endl;
 	menuWidget = gtk_menu_bar_new();
 	// Create the menu items and groups
 	for (vector<MenuElement>::iterator it = menuItems.end() - 1; it >= menuItems.begin(); it--) {
 		MenuGroup* parentGroup = getMenuGroup(it->getGroup());
-		MenuItem* newItem = new MenuItem(it->getLabel(), it->getTarget());
+		MenuItem* newItem = new MenuItem(gecko, it->getLabel(), it->getTarget());
 		parentGroup->addItem(it->getLabel(), newItem);
 	}
 	cout << "menu building complete" << endl;
@@ -105,10 +107,12 @@ MenuItem &MenuGroup::getItem(string label) {
 /**
  * Create a new menu item
  *
+ * @param gecko - the running gecko engine instance
  * @param label - the caption for this item
  * @param target - the target URL when activated
  */
-MenuItem::MenuItem(const string& label, const string& target) {
+MenuItem::MenuItem(GeckoEmbed *gecko, const string& label, const string& target) {
+	this->gecko = gecko;
 	this->label = label;
 	this->target = target;
 	itemWidget = gtk_menu_item_new_with_label(label.c_str());
@@ -128,9 +132,17 @@ void MenuItem::setupCallbacks() {
  *
  * @param item - the widget that triggered the event
  * @param parent - the MenuItem object that triggered this event
+ *
+ * @return always true
  */
 bool MenuItem::eventClick(GtkWidget *item, MenuItem *parent) {
-	cout << "event from menu bar: " << ((MenuItem*)parent)->getLabel() << endl;
+	GeckoEmbed *gecko = ((MenuItem*)parent)->getGecko();
+	string label = ((MenuItem*)parent)->getLabel(); 
+	string target = ((MenuItem*)parent)->getTarget(); 
+	cout << "event from menu bar: item=" << label << "; target=" << target << endl;
+	// Send the target to the handler
+	TargetHandler handler(target, gecko);
+	handler.runAction();
 	return true;
 }
 

@@ -7,6 +7,7 @@
 #include <map>
 	using std::map;
 #include "ConfigContainer.h"
+#include "GeckoEmbed.h"
 
 class MenuItem {
 
@@ -15,12 +16,14 @@ class MenuItem {
 		string label;
 		string target;
 		GtkWidget *itemWidget;
+		GeckoEmbed *gecko;
 
 	public:
 
 		MenuItem() {}
-		MenuItem(const string& label, const string& target);
+		MenuItem(GeckoEmbed *gecko, const string& label, const string& target);
 
+		GeckoEmbed *getGecko() { return gecko; }
 		const string& getLabel() const { return label; }
 		const string& getTarget() const { return target; }
 		GtkWidget *getItemWidget() { return itemWidget; }
@@ -63,13 +66,11 @@ class MenuBar {
 	public:
 
 		MenuBar() {}
-		MenuBar(vector<MenuElement> menuItems);
+		MenuBar(vector<MenuElement> menuItems, GeckoEmbed *gecko);
 		~MenuBar();
 
 		MenuGroup *getMenuGroup(string label);
 		GtkWidget *getMenuWidget();
-
-		static bool testEvent(GtkWidget *item, MenuItem *testItem);
 };
 
 #endif
