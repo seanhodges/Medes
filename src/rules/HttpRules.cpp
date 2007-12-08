@@ -89,7 +89,7 @@ void HttpRules::handleAdvert(string target) {
  * @param target - the target URL
  */
 void HttpRules::handleDrop(string target) {
-	cout << "page redirection to: " + target << endl;
+	cout << "dropping http target: " + target << endl;
 	allowRedirect = false;
 }
 
