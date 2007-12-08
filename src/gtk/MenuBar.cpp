@@ -4,50 +4,31 @@
 #include "MenuBar.h"
 #include "ConfigIO.h"
 
-
 /**
  * Create the menu bar
  *
  * @param menuItems - items to be added to the menu
  */
-void MenuBar::init(vector<MenuElement> menuItems) {
+MenuBar::MenuBar(vector<MenuElement> menuItems) {
 	cout << "menu building started" << endl;
 	menuWidget = gtk_menu_bar_new();
-	MenuGroup* testGroup = new MenuGroup("hellogroup");
-	MenuItem* testItem = new MenuItem("helloitem", "works");
-	cout << "Mem1: " << testItem << endl;
-	gtk_menu_bar_append(GTK_MENU_BAR(menuWidget), testGroup->getItemWidget());
-	gtk_menu_shell_append(GTK_MENU_SHELL(testGroup->getMenuWidget()), testItem->getItemWidget());
-	GtkWidget *testWidget = testItem->getItemWidget();
-	gtk_signal_connect(GTK_OBJECT(testWidget), "activate", GTK_SIGNAL_FUNC(&MenuBar::testEvent), testItem);
-
-	// Create the menu items
+	// Create the menu items and groups
 	for (vector<MenuElement>::iterator it = menuItems.end() - 1; it >= menuItems.begin(); it--) {
 		MenuGroup* parentGroup = getMenuGroup(it->getGroup());
 		MenuItem* newItem = new MenuItem(it->getLabel(), it->getTarget());
-		cout << "Mem1: " << newItem << endl;
 		parentGroup->addItem(it->getLabel(), newItem);
 	}
 	cout << "menu building complete" << endl;
 }
 
 /**
- * A test callback for the hard-coded menu item
+ * Delete containing menu groups when bar is destroyed
  */
-bool MenuBar::testEvent(GtkWidget *item, MenuItem *parent) {
-	cout << "success" << endl;
-	cout << "event from menu bar: " << ((MenuItem*)parent)->getLabel() << endl;
-	return true;
-}
-
-/**
- * Delete containing menu items when group is destroyed
- */
-MenuGroup::~MenuGroup() {
-	for (map<string, MenuItem*>::iterator it = items.begin(); it != items.end(); ++it) {
+MenuBar::~MenuBar() {
+	for (map<string, MenuGroup*>::iterator it = groups.begin(); it != groups.end(); ++it) {
 		delete (*it).second;
 	}
-	items.clear();
+	groups.clear();
 }
 
 /**
@@ -89,6 +70,16 @@ MenuGroup::MenuGroup(string label) {
 	menuWidget = gtk_menu_new();
 	itemWidget = gtk_menu_item_new_with_label(label.c_str());
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(itemWidget), menuWidget);
+}
+
+/**
+ * Delete containing menu items when group is destroyed
+ */
+MenuGroup::~MenuGroup() {
+	for (map<string, MenuItem*>::iterator it = items.begin(); it != items.end(); ++it) {
+		delete (*it).second;
+	}
+	items.clear();
 }
 
 /**
@@ -139,8 +130,6 @@ void MenuItem::setupCallbacks() {
  * @param parent - the MenuItem object that triggered this event
  */
 bool MenuItem::eventClick(GtkWidget *item, MenuItem *parent) {
-	cout << "menu bar event triggered" << endl;
-	cout << "Mem2: " << parent << endl;
 	cout << "event from menu bar: " << ((MenuItem*)parent)->getLabel() << endl;
 	return true;
 }

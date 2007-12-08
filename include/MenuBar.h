@@ -63,8 +63,9 @@ class MenuBar {
 	public:
 
 		MenuBar() {}
+		MenuBar(vector<MenuElement> menuItems);
+		~MenuBar();
 
-		void init(vector<MenuElement> menuItems);
 		MenuGroup *getMenuGroup(string label);
 		GtkWidget *getMenuWidget();
 

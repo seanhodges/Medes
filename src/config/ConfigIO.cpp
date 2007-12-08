@@ -68,7 +68,7 @@ bool ConfigIO::saveFile() {
  * @return true if the save was successful
  */
 bool ConfigIO::saveFile(string xmlPath) {
-	cout << "Saving to " + xmlPath << endl;
+	cout << "saving to " + xmlPath << endl;
 	int fileSize = xmlSaveFormatFile(xmlPath.c_str(), this->xmlDoc, 1);
 	return (fileSize > -1);
 }

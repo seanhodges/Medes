@@ -10,9 +10,9 @@
  */
 AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_set_locale();
-	std::cout << "Locale set" << std::endl;
-	gtk_init(0, 0);
-	std::cout << "GTK init called" << std::endl;
+	std::cout << "locale set" << std::endl;
+	gtk_init(&argc, &argv);
+	std::cout << "gtk init() called" << std::endl;
 	window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	windowContainer = gtk_vbox_new(false, 0);
 
@@ -24,8 +24,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	setTitle(config.getAppTitle());
 
 	// Attach the menu bar
-	menuBar = new MenuBar();
-	menuBar->init(config.getMenuBar());
+	menuBar = new MenuBar(config.getMenuBar());
 	setContent(menuBar->getMenuWidget(), false);
 
 	// Attach the Gecko engine
@@ -41,6 +40,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
  */
 AppWindow::~AppWindow() {
 	gecko.tearDown();
+	delete menuBar;
 }
 
 /**
