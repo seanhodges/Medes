@@ -4,8 +4,8 @@
 		<title>Google Mail</title>
 		<url>http://mail.google.com</url>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<http>
 			<internal>http://mail.google</internal>
 			<internal>https://mail.google</internal>
 			<internal>https://www.google.com/accounts/ServiceLogin</internal>
@@ -18,7 +18,6 @@
 			<external>http://news.google</external>
 			<external>http://groups.google</external>
 			<external>http://scholar.google</external>
-			<advert>http://adwords.google</advert>
-		</rules>
-	</domains>
+		</http>
+	</rules>
 </webapp>

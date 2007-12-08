@@ -17,7 +17,6 @@
 			<external>http://news.google</external>
 			<external>http://groups.google</external>
 			<external>http://scholar.google</external>
-			<advert>http://adwords.google</advert>
 		</http>
 	</rules>
 	<interface>

@@ -2,5 +2,9 @@
 <webapp>
 	<rules>
 		<dropadverts>false</dropadverts>
+		<http>
+			<advert>http://adwords.google</advert>
+			<advert>http://www.googleadservices.com</advert>
+		</http>
 	</rules>
 </webapp>

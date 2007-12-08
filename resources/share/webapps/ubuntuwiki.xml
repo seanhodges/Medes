@@ -4,10 +4,10 @@
 		<title>Ubuntu Community Documentation</title>
 		<url>https://help.ubuntu.com/community/UserDocumentation</url>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<http>
 			<internal>https://help.ubuntu.com</internal>
 			<internal>https://wiki.ubuntu.com</internal>
-		</rules>
-	</domains>
+		</http>
+	</rules>
 </webapp>

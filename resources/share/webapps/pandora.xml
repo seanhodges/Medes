@@ -10,9 +10,9 @@
 			<height>400</height>
 		</windowgeometry>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<http>
 			<internal>http://pandora.com</internal>
-		</rules>
-	</domains>
+		</http>
+	</rules>
 </webapp>

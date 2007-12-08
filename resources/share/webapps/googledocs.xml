@@ -4,8 +4,8 @@
 		<title>Google Docs</title>
 		<url>http://docs.google.com</url>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<http>
 			<internal>http://docs.google</internal>
 			<internal>https://www.google</internal>
 			<internal>http://www.google.co.uk/intl/en_uk/help</internal>
@@ -17,7 +17,6 @@
 			<external>http://news.google</external>
 			<external>http://groups.google</external>
 			<external>http://scholar.google</external>
-			<advert>http://adwords.google</advert>
-		</rules>
-	</domains>
+		</http>
+	</rules>
 </webapp>
