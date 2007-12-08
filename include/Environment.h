@@ -16,7 +16,7 @@ class Environment {
 		Environment();
 
 		// User profile path
-		string getUserProfilePath() { return userHomePath + "/medes/"; }
+		string getUserProfilePath() { return userHomePath + "/.medes/"; }
 
 		// XML config files
 		string getGlobalXMLPath() { return (string)APP_RESOURCE_PATH + "/global.xml"; }
