@@ -9,6 +9,7 @@
 			<external>http://maps.google.co.uk/local_url</external>
 			<internal>http://maps.google</internal>
 			<internal>https://www.google</internal>
+			<internal>http://www.google.co.uk/accounts</internal>
 			<internal>http://www.google.co.uk/intl/en_uk/help</internal>
 			<internal>http://www.google.co.uk/help/maps</internal>
 			<internal>http://gmodules</internal>
@@ -24,8 +25,8 @@
 			<item label="Start Again" group="Application">http://maps.google.co.uk</item>
 			<item label="Go Back a Page" group="Application">javascript:history.back()</item> 
 			<item label="Quit" group="Application">medes://earlydays/action/quit</item>
-			<item label="Sign In" group="Account">https://www.google.com/accounts/ServiceLogin?service=local&amp;hl=en&amp;nui=1&amp;continue=http://maps.google.co.uk</item>
-			<item label="Saved Locations" group="Account">https://www.google.com/accounts/ServiceLogin?service=local&amp;hl=en&amp;nui=1&amp;continue=http://maps.google.co.uk</item>
+			<item label="My Profile" group="Account">http://maps.google.co.uk/maps/user?uid=115020434460022927147&amp;hl=en&amp;gl=uk</item>
+			<item label="Account Settings" group="Account">https://www.google.com/accounts/ManageAccount</item>
 			<item label="Maps Help" group="Help">http://maps.google.co.uk/support/?hl=en_GB</item>
 			<item label="Take a Tour" group="Help">http://www.google.co.uk/intl/en_uk/help/maps/tour/</item>
 			<item label="About Google Maps" group="Help">http://maps.google.co.uk/support/bin/topic.py?topic=10778</item>

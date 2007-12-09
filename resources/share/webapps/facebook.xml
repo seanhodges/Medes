@@ -4,12 +4,32 @@
 		<title>Facebook</title>
 		<url>http://www.facebook.com</url>
 	</application>
-	<domains>
-		<rules>
+	<rules>
+		<http>
 			<internal>https://login.facebook.com</internal>
 			<advert>http://ads.ak.facebook.com/ads</advert>
 			<internal>http://www.facebook</internal>
 			<internal>http://bathac.facebook</internal>
-		</rules>
-	</domains>
+		</http>
+	</rules>
+	<interface>
+		<menubar>
+			<item label="My Home" group="Application">http://www.facebook.com/home.php</item>
+			<item label="My Profile" group="Application">http://www.facebook.com/profile.php</item>
+			<item label="Quit" group="Application">medes://earlydays/action/quit</item>
+			<item label="My Friends" group="Friends">http://www.facebook.com/friends.php?r</item>
+			<item label="Currently Online" group="Friends">http://www.facebook.com/friends.php?online</item>
+			<item label="Search for Friends" group="Friends">https://register.facebook.com/findfriends.php?tabs</item>
+			<item label="Social Timeline" group="Friends">http://www.facebook.com/timeline.php</item>
+			<item label="My Groups" group="Friends">http://www.facebook.com/groups.php?ref=pb</item>
+			<item label="Browse Groups" group="Friends">http://www.facebook.com/s.php?k=200000010&amp;c1=4</item>
+			<item label="Write a Message" group="Messages">http://www.facebook.com/inbox/?compose</item>
+			<item label="Inbox" group="Messages">http://www.facebook.com/inbox/</item>
+			<item label="Outbox" group="Messages">http://www.facebook.com/inbox/?f=1</item>
+			<item label="Topics" group="Help">http://www.facebook.com/help.php</item>
+			<item label="Privacy Info" group="Help">http://www.facebook.com/help.php?page=9</item>
+			<item label="Suggestions Form" group="Help">http://www.facebook.com/help.php?tab=suggest</item>
+			<item label="About Facebook" group="Help">http://www.facebook.com/about.php</item>
+		</menubar>
+	</interface>
 </webapp>
