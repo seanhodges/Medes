@@ -1,4 +1,5 @@
 #include "ConfigContainer.h"
+#include "Environment.h"
 
 /**
  * Construct a rule pod
@@ -49,6 +50,7 @@ ConfigContainer::ConfigContainer() {
 	setSaveToConfig("save.xml");
 	setAppUrl("about:blank");
 	setAppTitle("No application loaded");
+	setAppIcon("");
 	Geometry geom(0, 0, 640, 480);
 	setWindowGeom(geom);
 	setHttpDefaultRule("external");
@@ -57,6 +59,16 @@ ConfigContainer::ConfigContainer() {
 	// Add about:blank as allowed, in case something else screws up
 	Rule defaultHttpEntry("internal", "about:blank");
 	this->httpRules.push_front(defaultHttpEntry);
+}
+
+/**
+ * Set the application icon relative to the icon store
+ *
+ * @param appIcon - the relative path to the icon image
+ */
+void ConfigContainer::setAppIcon(string appIcon) { 
+	Environment env;
+	this->appIcon = env.getIconStorePath() + appIcon;
 }
 
 /**

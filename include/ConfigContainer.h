@@ -77,6 +77,7 @@ class ConfigContainer {
 		// Application
 		string appUrl;
 		string appTitle;
+		string appIcon;
 		Geometry windowGeom;
 
 		// Rules
@@ -97,6 +98,7 @@ class ConfigContainer {
 		string getSaveToConfig() { return saveToConfig; }
 		string getAppUrl() { return appUrl; }
 		string getAppTitle() { return appTitle; }
+		string getAppIcon() { return appIcon; }
 		Geometry getWindowGeom() { return windowGeom; }
 		string getHttpDefaultRule() { return httpDefaultRule; }
 		string getJavascriptDefaultRule() { return javascriptDefaultRule; }
@@ -109,6 +111,7 @@ class ConfigContainer {
 		void setSaveToConfig(string saveToConfig) { this->saveToConfig = saveToConfig; }
 		void setAppUrl(string appUrl) { this->appUrl = appUrl; }
 		void setAppTitle(string appTitle) { this->appTitle = appTitle; }
+		void setAppIcon(string appIcon);
 		void setWindowGeom(Geometry windowGeom) { this->windowGeom = windowGeom; }
 		void setHttpDefaultRule(string httpDefaultRule) { this->httpDefaultRule = httpDefaultRule; }
 		void setJavascriptDefaultRule(string javascriptDefaultRule) { this->javascriptDefaultRule = javascriptDefaultRule; }

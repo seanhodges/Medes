@@ -22,6 +22,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_window_move(window, geom.getLeft(), geom.getTop());
 	gtk_window_set_default_size(window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
+	setIcon(config.getAppIcon());
 
 	// Attach the menu bar
 	menuBar = new MenuBar(config.getMenuBar(), &gecko);
@@ -69,6 +70,16 @@ void AppWindow::show() {
  */
 void AppWindow::setTitle(string newTitle) {
 	gtk_window_set_title(window, newTitle.c_str());
+}
+
+/**
+ * Change the application icon
+ *
+ * @param path - local path to icon image
+ */
+void AppWindow::setIcon(string path) {
+	if (path != "")
+		gtk_window_set_icon_from_file(window, path.c_str(), NULL);
 }
 
 /**

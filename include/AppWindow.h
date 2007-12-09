@@ -35,6 +35,7 @@ class AppWindow {
 		void setConfig(ConfigContainer &config) { this->config = config; }
 		void setContent(GtkWidget *gtkWidget, bool stretch);
 		void setTitle(string newTitle);
+		void setIcon(string path);
 
 		void show();
 		void start();

@@ -61,6 +61,7 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
 	string keyValue = (char*)xmlNodeGetContent(key);
 	if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); }
 	else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
+	else if (configCode == "APPLICATION_ICON") { config.setAppIcon(keyValue); }
 	else if (configCode == "APPLICATION_WINDOWGEOMETRY") { config.setWindowGeom(convertToGeometry(key)); }
 	else if (configCode == "RULES_HTTP") { config.appendHttpRules(convertToGroupedVector(key)); }
 	else if (configCode == "RULES_JAVASCRIPT") { config.appendJavascriptRules(convertToGroupedVector(key)); }
