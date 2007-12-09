@@ -2,6 +2,7 @@
 <webapp>
 	<application>
 		<title>Pandora Radio</title>
+		<icon>pandora.png</icon>
 		<url>http://pandora.com?cmd=mini</url>
 		<windowgeometry>
 			<left>0</left>

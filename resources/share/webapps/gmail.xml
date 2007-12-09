@@ -2,6 +2,7 @@
 <webapp>
 	<application>
 		<title>Google Mail</title>
+		<icon>gmail.png</icon>
 		<url>http://mail.google.com</url>
 	</application>
 	<rules>

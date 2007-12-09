@@ -3,8 +3,8 @@
 	<rules>
 		<dropadverts>false</dropadverts>
 		<http>
-			<advert>http://adwords.google</advert>
 			<advert>http://www.googleadservices.com</advert>
+			<advert>http://adwords.google</advert>
 		</http>
 	</rules>
 </webapp>

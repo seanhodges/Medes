@@ -2,6 +2,7 @@
 <webapp>
 	<application>
 		<title>Google Docs</title>
+		<icon>googledocs.png</icon>
 		<url>http://docs.google.com</url>
 	</application>
 	<rules>

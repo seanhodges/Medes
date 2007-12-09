@@ -2,6 +2,7 @@
 <webapp>
 	<application>
 		<title>Facebook</title>
+		<icon>facebook.png</icon>
 		<url>http://www.facebook.com</url>
 	</application>
 	<rules>

@@ -2,6 +2,7 @@
 <webapp>
 	<application>
 		<title>Google Maps</title>
+		<icon>googlemaps.png</icon>
 		<url>http://maps.google.co.uk</url>
 	</application>
 	<rules>

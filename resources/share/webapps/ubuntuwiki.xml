@@ -2,6 +2,7 @@
 <webapp>
 	<application>
 		<title>Ubuntu Community Documentation</title>
+		<icon>ubuntu.svg</icon>
 		<url>https://help.ubuntu.com/community/UserDocumentation</url>
 	</application>
 	<rules>
