@@ -1,3 +1,11 @@
+medes (0.0.2-0ubuntu1) gutsy; urgency=low
+
+  * New dynamic menu bar
+  * Javascript rules mechanism
+  * Patch from Luke Benstead for fixing menu callbacks
+
+ -- Sean Hodges <seanhodges@bluebottle.com>  Sun, 18 Nov 2007 13:18:58 +0000
+
 medes (0.0.1-0ubuntu1) gutsy; urgency=low
 
   * Initial release 
