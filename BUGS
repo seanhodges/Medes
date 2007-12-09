@@ -1,8 +1,15 @@
+9 December, 2007
+
+- Fix ".medes" profile directory bug in early versions of libboost::filesystem
+- Separate the AppWindow into a model/interface, and fix liberal passing of Gecko instance
+- Add keyboard shortcuts to menubar items
+- Move the contents of this file to Launchpad
+
 20 November, 2007
 
 - Creates user profiles for webapps that do not exist
-- *Window is repositioned approx. 5px right and 20px south of the last saved position
+- Window is repositioned approx. 5px right and 20px south of the last saved position
 - Requires a basic Mozilla profile template to be copied in place to avoid Firefox-esque messages etc
 - Seperate the webapps from the build, these should be individual Debian packages
-- *Use webapp icon in application (view in taskbar, etc)
-- *Restructure the code, so the source/headers are in relevant subdirectories, and add namespaces to classes
+- Use webapp icon in application (view in taskbar, etc)
+- Restructure the code, so the source/headers are in relevant subdirectories, and add namespaces to classes
