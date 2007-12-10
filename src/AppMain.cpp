@@ -38,13 +38,13 @@ int main(int argc, char* argv[]) {
 
 	// Build the user profile if it doesnt exist yet
 	cout << "checking for user profile" << endl;
-	fs::path profilePath(env.getUserProfilePath());
+	fs::path profilePath = fs::system_complete(fs::path(env.getUserProfilePath(), fs::native));
 	if (!fs::exists(profilePath)) {
 		cout << "user profile directory does not exist, creating a new one" << endl;
 		int profileCreated = fs::create_directory(profilePath);
 		// Build the profile, stopping if something fails to create/copy
-		if (profileCreated) profileCreated = fs::create_directory(env.getUserGeckoProfilePath());
-		if (profileCreated) profileCreated = fs::create_directory(env.getUserWebAppPath());
+		if (profileCreated) profileCreated = fs::create_directory(fs::system_complete(fs::path(env.getUserGeckoProfilePath(), fs::native)));
+		if (profileCreated) profileCreated = fs::create_directory(fs::system_complete(fs::path(env.getUserWebAppPath(), fs::native)));
 		if (profileCreated) {
 			cout << "new profile has been created" << endl;
 		}
