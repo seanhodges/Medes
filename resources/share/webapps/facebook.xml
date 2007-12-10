@@ -4,6 +4,12 @@
 		<title>Facebook</title>
 		<icon>facebook.png</icon>
 		<url>http://www.facebook.com</url>
+		<windowgeometry>
+			<left>50</left>
+			<top>50</top>
+			<width>815</width>
+			<height>700</height>
+		</windowgeometry>
 	</application>
 	<rules>
 		<http>
@@ -17,6 +23,7 @@
 		<menubar>
 			<item label="My Home" group="Application">http://www.facebook.com/home.php</item>
 			<item label="My Profile" group="Application">http://www.facebook.com/profile.php</item>
+			<item label="Go Back a Page" group="Application">javascript:history.back()</item> 
 			<item label="Quit" group="Application">medes://earlydays/action/quit</item>
 			<item label="My Friends" group="Friends">http://www.facebook.com/friends.php?r</item>
 			<item label="Currently Online" group="Friends">http://www.facebook.com/friends.php?online</item>
