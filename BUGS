@@ -1,6 +1,5 @@
 9 December, 2007
 
-- Fix ".medes" profile directory bug in early versions of libboost::filesystem
 - Separate the AppWindow into a model/interface, and fix liberal passing of Gecko instance
 - Add keyboard shortcuts to menubar items
 - Move the contents of this file to Launchpad
