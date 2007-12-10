@@ -11,5 +11,4 @@
 - Window is repositioned approx. 5px right and 20px south of the last saved position
 - Requires a basic Mozilla profile template to be copied in place to avoid Firefox-esque messages etc
 - Seperate the webapps from the build, these should be individual Debian packages
-- Use webapp icon in application (view in taskbar, etc)
 - Restructure the code, so the source/headers are in relevant subdirectories, and add namespaces to classes
