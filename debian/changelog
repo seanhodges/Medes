@@ -1,10 +1,18 @@
+medes (0.0.3-0ubuntu1) gutsy; urgency=low
+
+  * Keyboard accelerators and separators in menu bar
+  * Application icon attached to window/taskbar
+
+
+ -- Sean Hodges <seanhodges@bluebottle.com>  Tue, 11 Dec 2007 21:55:30 +0000
+
 medes (0.0.2-0ubuntu1) gutsy; urgency=low
 
   * New dynamic menu bar
   * Javascript rules mechanism
   * Patch from Luke Benstead for fixing menu callbacks
 
- -- Sean Hodges <seanhodges@bluebottle.com>  Sun, 18 Nov 2007 13:18:58 +0000
+ -- Sean Hodges <seanhodges@bluebottle.com>  Sun, 02 Dec 2007 23:36:53 +0000
 
 medes (0.0.1-0ubuntu1) gutsy; urgency=low
 
