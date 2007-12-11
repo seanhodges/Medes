@@ -35,11 +35,12 @@ Geometry::Geometry(int left, int top, int width, int height) {
  * @param condition - only show/enable this element if the condition returns true (ignored if "")
  * @param target - target URL action for this menu element
  */
-MenuElement::MenuElement(string label, string group, string condition, string target) {
+MenuElement::MenuElement(string label, string group, string condition, string target, string accel) {
 	this->label = label;
 	this->group = group;
 	this->condition = condition;
 	this->target = target;
+	this->accel = accel;
 }
 
 /**

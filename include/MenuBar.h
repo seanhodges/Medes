@@ -28,6 +28,8 @@ class MenuItem {
 		const string& getTarget() const { return target; }
 		GtkWidget *getItemWidget() { return itemWidget; }
 
+		void setAccelBinding(const string &code, GtkAccelGroup *globalAccel);
+
 		void setupCallbacks();
 		static bool eventClick(GtkWidget *item, MenuItem *parent);
 };
@@ -44,11 +46,11 @@ class MenuGroup {
 	public:
 
 		MenuGroup() {}
-		MenuGroup(string label);
+		MenuGroup(const string& label);
         ~MenuGroup();
 
-		void addItem(string label, MenuItem* item);
-		MenuItem& getItem(string label);
+		void addItem(const string& label, MenuItem* item);
+		MenuItem& getItem(const string& label);
 
 		GtkWidget* getMenuWidget() { return menuWidget; }
 		GtkWidget* getItemWidget() { return itemWidget; }
@@ -66,10 +68,10 @@ class MenuBar {
 	public:
 
 		MenuBar() {}
-		MenuBar(vector<MenuElement> menuItems, GeckoEmbed *gecko);
+		MenuBar(vector<MenuElement> menuItems, GeckoEmbed *gecko, GtkAccelGroup *accelGroup);
 		~MenuBar();
 
-		MenuGroup *getMenuGroup(string label);
+		MenuGroup *getMenuGroup(const string &label);
 		GtkWidget *getMenuWidget();
 };
 

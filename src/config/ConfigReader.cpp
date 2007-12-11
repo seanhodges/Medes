@@ -191,14 +191,17 @@ vector<MenuElement> ConfigReader::convertToMenu(const xmlNodePtr& xmlList) {
 			string label = "";
 			string group = "";
 			string condition = "";
+			string accel = "";
 			xmlChar* xmlLabel = xmlGetProp(entries, (xmlChar*)"label");
 			if (xmlLabel != 0) label = (char*)xmlLabel;
 			xmlChar* xmlGroup = xmlGetProp(entries, (xmlChar*)"group");
 			if (xmlGroup != 0) group = (char*)xmlGroup;
 			xmlChar* xmlCondition = xmlGetProp(entries, (xmlChar*)"condition");
 			if (xmlCondition != 0) condition = (char*)xmlCondition;
+			xmlChar* xmlAccel = xmlGetProp(entries, (xmlChar*)"shortcut");
+			if (xmlAccel != 0) accel = (char*)xmlAccel;
 			string target = (char*)xmlNodeGetContent(entries);
-			MenuElement entry(label, group, condition, target);
+			MenuElement entry(label, group, condition, target, accel);
 			out.push_back(entry);
 		}
 	}

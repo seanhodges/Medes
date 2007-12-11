@@ -16,6 +16,9 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	windowContainer = gtk_vbox_new(false, 0);
 
+	// Set up the global keyboard accelerator interface
+	accelGroup = gtk_accel_group_new();
+
 	// Set up the window
 	setConfig(config);
 	Geometry geom = config.getWindowGeom();
@@ -25,7 +28,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	setIcon(config.getAppIcon());
 
 	// Attach the menu bar
-	menuBar = new MenuBar(config.getMenuBar(), &gecko);
+	menuBar = new MenuBar(config.getMenuBar(), &gecko, accelGroup);
 	setContent(menuBar->getMenuWidget(), false);
 
 	// Attach the Gecko engine
@@ -34,6 +37,8 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 
 	// Set up window callback events
 	setupCallbacks();
+
+	gtk_window_add_accel_group(window, accelGroup);
 }
 
 /**

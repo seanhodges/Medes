@@ -20,6 +20,7 @@ class AppWindow {
 		ConfigContainer config;
 
 		GtkWindow* window;
+		GtkAccelGroup* accelGroup;
 		GtkWidget* windowContainer;
 		MenuBar* menuBar;
 		GeckoEmbed gecko;

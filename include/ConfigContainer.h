@@ -43,7 +43,6 @@ class Geometry {
 		int getTop() { return top; }
 		int getWidth() { return width; }
 		int getHeight() { return height; }
-
 };
 
 class MenuElement {
@@ -54,17 +53,18 @@ class MenuElement {
 		string group;
 		string condition;
 		string target;
+		string accel;
 
 	public:
 
 		MenuElement() {};
-		MenuElement(string label, string group, string condition, string target);
+		MenuElement(string label, string group, string condition, string target, string accel);
 		
 		string getLabel() { return this->label; }
 		string getGroup() { return this->group; }
 		string getCondition() { return this->condition; }
 		string getTarget() { return this->target; }
-
+		string getAccel() { return this->accel; }
 };
 
 class ConfigContainer {

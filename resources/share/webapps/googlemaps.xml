@@ -23,9 +23,9 @@
 	</rules>
 	<interface>
 		<menubar>
-			<item label="Start Again" group="Application">http://maps.google.co.uk</item>
-			<item label="Go Back a Page" group="Application">javascript:history.back()</item> 
-			<item label="Quit" group="Application">medes://earlydays/action/quit</item>
+			<item label="Start Again" group="Application" shortcut="ctrl+s">http://maps.google.co.uk</item>
+			<item label="Go Back a Page" group="Application" shortcut="ctrl+b">javascript:history.back()</item> 
+			<item label="Quit" group="Application" shortcut="ctrl+q">medes://earlydays/action/quit</item>
 			<item label="My Profile" group="Account">http://maps.google.co.uk/maps/user?uid=115020434460022927147&amp;hl=en&amp;gl=uk</item>
 			<item label="Account Settings" group="Account">https://www.google.com/accounts/ManageAccount</item>
 			<item label="Maps Help" group="Help">http://maps.google.co.uk/support/?hl=en_GB</item>
