@@ -54,17 +54,19 @@ class MenuElement {
 		string condition;
 		string target;
 		string accel;
+		bool separator;
 
 	public:
 
 		MenuElement() {};
-		MenuElement(string label, string group, string condition, string target, string accel);
+		MenuElement(string label, string group, string condition, string target, string accel, bool isSeparator);
 		
 		string getLabel() { return this->label; }
 		string getGroup() { return this->group; }
 		string getCondition() { return this->condition; }
 		string getTarget() { return this->target; }
 		string getAccel() { return this->accel; }
+		bool isSeparator() { return this->separator; }
 };
 
 class ConfigContainer {

@@ -22,9 +22,14 @@ MenuBar::MenuBar(vector<MenuElement> menuItems, GeckoEmbed *gecko, GtkAccelGroup
 	// Create the menu items and groups
 	for (vector<MenuElement>::iterator it = menuItems.end() - 1; it >= menuItems.begin(); it--) {
 		MenuGroup* parentGroup = getMenuGroup(it->getGroup());
-		MenuItem* newItem = new MenuItem(gecko, it->getLabel(), it->getTarget());
-		if (it->getAccel() != "") newItem->setAccelBinding(it->getAccel(), accelGroup);
-		parentGroup->addItem(it->getLabel(), newItem);
+		if (it->isSeparator()) {
+			parentGroup->addSeparator();
+		}
+		else {
+			MenuItem* newItem = new MenuItem(gecko, it->getLabel(), it->getTarget());
+			if (it->getAccel() != "") newItem->setAccelBinding(it->getAccel(), accelGroup);
+			parentGroup->addItem(it->getLabel(), newItem);
+		}
 	}
 	cout << "menu building complete" << endl;
 }
@@ -76,7 +81,7 @@ GtkWidget *MenuBar::getMenuWidget() {
 MenuGroup::MenuGroup(const string &label) {
 	this->label = label;
 	menuWidget = gtk_menu_new();
-	itemWidget = gtk_menu_item_new_with_label(label.c_str());
+	itemWidget = gtk_menu_item_new_with_mnemonic(label.c_str());
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(itemWidget), menuWidget);
 }
 
@@ -102,6 +107,14 @@ void MenuGroup::addItem(const string &label, MenuItem* item) {
 }
 
 /**
+ * Add a menu separator to this group
+ */
+void MenuGroup::addSeparator() {
+	GtkWidget *separator = gtk_separator_menu_item_new();
+	gtk_container_add(GTK_CONTAINER(menuWidget), separator);
+}
+
+/**
  * Get a menu item from this group
  *
  * @param label - the caption for this item
@@ -121,7 +134,7 @@ MenuItem::MenuItem(GeckoEmbed *gecko, const string& label, const string& target)
 	this->gecko = gecko;
 	this->label = label;
 	this->target = target;
-	itemWidget = gtk_menu_item_new_with_label(label.c_str());
+	itemWidget = gtk_menu_item_new_with_mnemonic(label.c_str());
 	setupCallbacks();
 	cout << "created menu item " << label << endl;
 }

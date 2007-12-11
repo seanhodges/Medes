@@ -50,6 +50,7 @@ class MenuGroup {
         ~MenuGroup();
 
 		void addItem(const string& label, MenuItem* item);
+		void addSeparator();
 		MenuItem& getItem(const string& label);
 
 		GtkWidget* getMenuWidget() { return menuWidget; }

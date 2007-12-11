@@ -192,16 +192,29 @@ vector<MenuElement> ConfigReader::convertToMenu(const xmlNodePtr& xmlList) {
 			string group = "";
 			string condition = "";
 			string accel = "";
-			xmlChar* xmlLabel = xmlGetProp(entries, (xmlChar*)"label");
-			if (xmlLabel != 0) label = (char*)xmlLabel;
+			bool isSeparator = false;
+			string type = (char*)entries->name; 
+			if (type == "item") {
+				// This element is a menu item
+				xmlChar* xmlLabel = xmlGetProp(entries, (xmlChar*)"label");
+				if (xmlLabel != 0) label = (char*)xmlLabel;
+				xmlChar* xmlAccel = xmlGetProp(entries, (xmlChar*)"shortcut");
+				if (xmlAccel != 0) accel = (char*)xmlAccel;
+			}
+			else if (type == "separator") {
+				// This element is a separator
+				isSeparator = true;
+			}
+			else {
+				cout << "invalid menu element in list, ignoring" << endl;
+				continue;
+			}
 			xmlChar* xmlGroup = xmlGetProp(entries, (xmlChar*)"group");
 			if (xmlGroup != 0) group = (char*)xmlGroup;
 			xmlChar* xmlCondition = xmlGetProp(entries, (xmlChar*)"condition");
 			if (xmlCondition != 0) condition = (char*)xmlCondition;
-			xmlChar* xmlAccel = xmlGetProp(entries, (xmlChar*)"shortcut");
-			if (xmlAccel != 0) accel = (char*)xmlAccel;
 			string target = (char*)xmlNodeGetContent(entries);
-			MenuElement entry(label, group, condition, target, accel);
+			MenuElement entry(label, group, condition, target, accel, isSeparator);
 			out.push_back(entry);
 		}
 	}
