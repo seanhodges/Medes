@@ -13,10 +13,12 @@
 	</rules>
 	<interface>
 		<menubar>
-			<item label="Start Again" group="Application">https://help.ubuntu.com/community/</item>
-			<item label="Go Back a Page" group="Application">javascript:history.back()</item> 
-			<item label="Preferences" group="Application">https://help.ubuntu.com/community/UserPreferences</item>
-			<item label="Quit" group="Application">medes://earlydays/action/quit</item>
+			<item label="_Start Again" group="_Application" shortcut="ctrl+s">https://help.ubuntu.com/community/</item>
+			<separator group="_Application"/>
+			<item label="_Preferences" group="_Application" shortcut="ctrl+p">https://help.ubuntu.com/community/UserPreferences</item>
+			<separator group="_Application"/>
+			<item label="Go _Back a Page" group="_Application">javascript:history.back()</item> 
+			<item label="_Quit" group="_Application" shortcut="ctrl+q">medes://earlydays/action/quit</item>
 		</menubar>
 	</interface>
 </webapp>

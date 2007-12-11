@@ -27,9 +27,10 @@
 			<item label="Go _Back a Page" group="_Application" shortcut="ctrl+b">javascript:history.back()</item> 
 			<separator group="_Application"/>
 			<item label="_Quit" group="_Application" shortcut="ctrl+q">medes://earlydays/action/quit</item>
-			<item label="My _Profile" group="A_ccount">http://maps.google.co.uk/maps/user?uid=115020434460022927147&amp;hl=en&amp;gl=uk</item>
+			<item label="My _Profile" group="A_ccount" shortcut="ctrl+shift+p">http://maps.google.co.uk/maps/user?uid=115020434460022927147&amp;hl=en&amp;gl=uk</item>
 			<item label="_Account Settings" group="A_ccount">https://www.google.com/accounts/ManageAccount</item>
 			<item label="Maps _Help" group="_Help">http://maps.google.co.uk/support/?hl=en_GB</item>
+			<separator group="_Help"/>
 			<item label="_Take a Tour" group="_Help">http://www.google.co.uk/intl/en_uk/help/maps/tour/</item>
 			<separator group="_Help"/>
 			<item label="_About Google Maps" group="_Help">http://maps.google.co.uk/support/bin/topic.py?topic=10778</item>
