@@ -1,0 +1,267 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+APPWINDOW_DEFINED	include/AppWindow.h	2;"	d
+APP_RESOURCE_PATH	include/Native.h	9;"	d
+AppWindow	include/AppWindow.h	/^class AppWindow {$/;"	c
+AppWindow	src/gtk/AppWindow.cpp	/^AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {$/;"	f	class:AppWindow
+COMMAND	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+CONFIGCONTAINER_DEFINED	include/ConfigContainer.h	2;"	d
+CONFIGIO_DEFINED	include/ConfigIO.h	2;"	d
+ConfigContainer	include/ConfigContainer.h	/^class ConfigContainer {$/;"	c
+ConfigContainer	src/config/ConfigContainer.cpp	/^ConfigContainer::ConfigContainer() {$/;"	f	class:ConfigContainer
+ConfigIO	include/ConfigIO.h	/^class ConfigIO {$/;"	c
+ConfigIO	src/config/ConfigIO.cpp	/^ConfigIO::ConfigIO() {$/;"	f	class:ConfigIO
+ConfigReader	include/ConfigIO.h	/^class ConfigReader : public ConfigIO {$/;"	c
+ConfigReader	src/config/ConfigReader.cpp	/^ConfigReader::ConfigReader() $/;"	f	class:ConfigReader
+ConfigWriter	include/ConfigIO.h	/^class ConfigWriter : public ConfigIO {$/;"	c
+ConfigWriter	src/config/ConfigWriter.cpp	/^ConfigWriter::ConfigWriter() $/;"	f	class:ConfigWriter
+ENVIRONMENT_DEFINED	include/Environment.h	2;"	d
+Environment	include/Environment.h	/^class Environment {$/;"	c
+Environment	src/Environment.cpp	/^Environment::Environment() {$/;"	f	class:Environment
+GECKOEMBED_DEFINED	include/GeckoEmbed.h	2;"	d
+GeckoEmbed	include/GeckoEmbed.h	/^class GeckoEmbed {$/;"	c
+Geometry	include/ConfigContainer.h	/^		Geometry() {};$/;"	f	class:Geometry
+Geometry	include/ConfigContainer.h	/^class Geometry {$/;"	c
+Geometry	src/config/ConfigContainer.cpp	/^Geometry::Geometry(int left, int top, int width, int height) {$/;"	f	class:Geometry
+HTTP	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+HttpRules	include/Rules.h	/^class HttpRules : public Rules {$/;"	c
+HttpRules	src/rules/HttpRules.cpp	/^HttpRules::HttpRules(ConfigContainer config)$/;"	f	class:HttpRules
+JAVASCRIPT	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+JavascriptRules	include/Rules.h	/^class JavascriptRules : public Rules {$/;"	c
+JavascriptRules	src/rules/JavascriptRules.cpp	/^JavascriptRules::JavascriptRules(ConfigContainer config)$/;"	f	class:JavascriptRules
+MENUBAR_DEFINED	include/MenuBar.h	2;"	d
+MOZILLA_FIVE_HOME	include/Native.h	11;"	d
+MenuBar	include/MenuBar.h	/^		MenuBar() {}$/;"	f	class:MenuBar
+MenuBar	include/MenuBar.h	/^class MenuBar {$/;"	c
+MenuBar	src/gtk/MenuBar.cpp	/^MenuBar::MenuBar(vector<MenuElement> menuItems, GeckoEmbed *gecko, GtkAccelGroup *accelGroup) {$/;"	f	class:MenuBar
+MenuElement	include/ConfigContainer.h	/^		MenuElement() {};$/;"	f	class:MenuElement
+MenuElement	include/ConfigContainer.h	/^class MenuElement {$/;"	c
+MenuElement	src/config/ConfigContainer.cpp	/^MenuElement::MenuElement(string label, string group, string condition, string target, string accel, bool isSeparator) {$/;"	f	class:MenuElement
+MenuGroup	include/MenuBar.h	/^		MenuGroup() {}$/;"	f	class:MenuGroup
+MenuGroup	include/MenuBar.h	/^class MenuGroup {$/;"	c
+MenuGroup	src/gtk/MenuBar.cpp	/^MenuGroup::MenuGroup(const string &label) {$/;"	f	class:MenuGroup
+MenuItem	include/MenuBar.h	/^		MenuItem() {}$/;"	f	class:MenuItem
+MenuItem	include/MenuBar.h	/^class MenuItem {$/;"	c
+MenuItem	src/gtk/MenuBar.cpp	/^MenuItem::MenuItem(GeckoEmbed *gecko, const string& label, const string& target) {$/;"	f	class:MenuItem
+NATIVE_DEFINED	include/Native.h	2;"	d
+PIXMAPS_PATH	include/Native.h	10;"	d
+RULES_DEFINED	include/Rules.h	2;"	d
+Rule	include/ConfigContainer.h	/^		Rule() {};$/;"	f	class:Rule
+Rule	include/ConfigContainer.h	/^class Rule {$/;"	c
+Rule	src/config/ConfigContainer.cpp	/^Rule::Rule(string group, string value) {$/;"	f	class:Rule
+Rules	include/Rules.h	/^		Rules() {}$/;"	f	class:Rules
+Rules	include/Rules.h	/^class Rules {$/;"	c
+Rules	src/rules/Rules.cpp	/^Rules::Rules(deque<Rule> ruleList, string defaultRule) {$/;"	f	class:Rules
+TARGETHANDLER_DEFINED	include/TargetHandler.h	2;"	d
+TargetHandler	include/TargetHandler.h	/^class TargetHandler {$/;"	c
+TargetHandler	src/TargetHandler.cpp	/^TargetHandler::TargetHandler(string target, GeckoEmbed *gecko) {$/;"	f	class:TargetHandler
+TargetType	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	g	class:TargetHandler
+UNKNOWN	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+accel	include/ConfigContainer.h	/^		string accel;$/;"	m	class:MenuElement
+accelGroup	include/AppWindow.h	/^		GtkAccelGroup* accelGroup;$/;"	m	class:AppWindow
+addItem	src/gtk/MenuBar.cpp	/^void MenuGroup::addItem(const string &label, MenuItem* item) {$/;"	f	class:MenuGroup
+addSeparator	src/gtk/MenuBar.cpp	/^void MenuGroup::addSeparator() {$/;"	f	class:MenuGroup
+allowRedirect	include/Rules.h	/^		bool allowRedirect;$/;"	m	class:Rules
+appIcon	include/ConfigContainer.h	/^		string appIcon;$/;"	m	class:ConfigContainer
+appTitle	include/ConfigContainer.h	/^		string appTitle;$/;"	m	class:ConfigContainer
+appUrl	include/ConfigContainer.h	/^		string appUrl;$/;"	m	class:ConfigContainer
+appendConfigToContainer	src/config/ConfigReader.cpp	/^bool ConfigReader::appendConfigToContainer(ConfigContainer& config) {$/;"	f	class:ConfigReader
+appendContextMenu	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendContextMenu(MenuElement newItem) {$/;"	f	class:ConfigContainer
+appendContextMenu	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendContextMenu(vector<MenuElement> newItems) {$/;"	f	class:ConfigContainer
+appendHttpRules	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendHttpRules(Rule newRule) {$/;"	f	class:ConfigContainer
+appendHttpRules	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendHttpRules(vector<Rule> newRules) {$/;"	f	class:ConfigContainer
+appendJavascriptRules	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendJavascriptRules(Rule newRule) {$/;"	f	class:ConfigContainer
+appendJavascriptRules	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendJavascriptRules(vector<Rule> newRules) {$/;"	f	class:ConfigContainer
+appendMenuBar	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendMenuBar(MenuElement newItem) {$/;"	f	class:ConfigContainer
+appendMenuBar	src/config/ConfigContainer.cpp	/^void ConfigContainer::appendMenuBar(vector<MenuElement> newItems) {$/;"	f	class:ConfigContainer
+bringUp	src/GeckoEmbed.cpp	/^void GeckoEmbed::bringUp() {$/;"	f	class:GeckoEmbed
+buildAncestors	src/config/ConfigIO.cpp	/^xmlNodePtr ConfigIO::buildAncestors(vector<string> parents) {$/;"	f	class:ConfigIO
+changeSetting	src/config/ConfigIO.cpp	/^void ConfigIO::changeSetting(string group, string key, string newValue) {$/;"	f	class:ConfigIO
+changeSetting	src/config/ConfigIO.cpp	/^void ConfigIO::changeSetting(string group, string key, vector<xmlNodePtr> newValue) {$/;"	f	class:ConfigIO
+condition	include/ConfigContainer.h	/^		string condition;$/;"	m	class:MenuElement
+config	include/AppWindow.h	/^		ConfigContainer config;$/;"	m	class:AppWindow
+config	include/GeckoEmbed.h	/^		ConfigContainer config;$/;"	m	class:GeckoEmbed
+contextMenu	include/ConfigContainer.h	/^		vector<MenuElement> contextMenu;$/;"	m	class:ConfigContainer
+convertForXML	src/config/ConfigWriter.cpp	/^string ConfigWriter::convertForXML(bool boolIn) {$/;"	f	class:ConfigWriter
+convertForXML	src/config/ConfigWriter.cpp	/^string ConfigWriter::convertForXML(const vector<Rule> &vectorIn) {$/;"	f	class:ConfigWriter
+convertForXML	src/config/ConfigWriter.cpp	/^string ConfigWriter::convertForXML(const vector<string> &vectorIn, string elementName) {$/;"	f	class:ConfigWriter
+convertForXML	src/config/ConfigWriter.cpp	/^string ConfigWriter::convertForXML(int intIn) {$/;"	f	class:ConfigWriter
+convertForXML	src/config/ConfigWriter.cpp	/^vector<xmlNodePtr> ConfigWriter::convertForXML(Geometry geomIn) {$/;"	f	class:ConfigWriter
+convertToBoolean	src/config/ConfigReader.cpp	/^bool ConfigReader::convertToBoolean(string strIn) {$/;"	f	class:ConfigReader
+convertToGeometry	src/config/ConfigReader.cpp	/^Geometry ConfigReader::convertToGeometry(const xmlNodePtr& xmlList) {$/;"	f	class:ConfigReader
+convertToGroupedVector	src/config/ConfigReader.cpp	/^vector<Rule> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {$/;"	f	class:ConfigReader
+convertToInt	src/config/ConfigReader.cpp	/^int ConfigReader::convertToInt(string strIn) {$/;"	f	class:ConfigReader
+convertToMenu	src/config/ConfigReader.cpp	/^vector<MenuElement> ConfigReader::convertToMenu(const xmlNodePtr& xmlList) {$/;"	f	class:ConfigReader
+convertToVector	src/config/ConfigReader.cpp	/^vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string elementName) {$/;"	f	class:ConfigReader
+defaultRule	include/Rules.h	/^		string defaultRule;$/;"	m	class:Rules
+doCommand	src/TargetHandler.cpp	/^void TargetHandler::doCommand() {$/;"	f	class:TargetHandler
+doHttp	src/TargetHandler.cpp	/^void TargetHandler::doHttp() {$/;"	f	class:TargetHandler
+doJavascript	src/TargetHandler.cpp	/^void TargetHandler::doJavascript() {$/;"	f	class:TargetHandler
+dropAdverts	include/Rules.h	/^		bool dropAdverts;$/;"	m	class:HttpRules
+dropAdverts	include/Rules.h	/^		bool dropAdverts;$/;"	m	class:JavascriptRules
+errors	include/ConfigIO.h	/^		string errors;$/;"	m	class:ConfigReader
+eventClick	src/gtk/MenuBar.cpp	/^bool MenuItem::eventClick(GtkWidget *item, MenuItem *parent) {$/;"	f	class:MenuItem
+eventDestroy	src/gtk/AppWindow.cpp	/^void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {$/;"	f	class:AppWindow
+eventWindowProperty	src/gtk/AppWindow.cpp	/^bool AppWindow::eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow& parent) {$/;"	f	class:AppWindow
+execRule	include/Rules.h	/^		virtual void execRule(Rule rule, string target) {}$/;"	f	class:Rules
+execRule	src/rules/HttpRules.cpp	/^void HttpRules::execRule(Rule rule, string target) {$/;"	f	class:HttpRules
+execRule	src/rules/JavascriptRules.cpp	/^void JavascriptRules::execRule(Rule rule, string target) {$/;"	f	class:JavascriptRules
+findSetting	src/config/ConfigIO.cpp	/^xmlNodePtr ConfigIO::findSetting(string group, string key) {$/;"	f	class:ConfigIO
+gecko	include/AppWindow.h	/^		GeckoEmbed gecko;$/;"	m	class:AppWindow
+gecko	include/MenuBar.h	/^		GeckoEmbed *gecko;$/;"	m	class:MenuItem
+gecko	include/TargetHandler.h	/^		GeckoEmbed *gecko;$/;"	m	class:TargetHandler
+getAccel	include/ConfigContainer.h	/^		string getAccel() { return this->accel; }$/;"	f	class:MenuElement
+getAdvertXMLPath	include/Environment.h	/^		string getAdvertXMLPath() { return (string)APP_RESOURCE_PATH + "\/adverts.xml"; }$/;"	f	class:Environment
+getAppIcon	include/ConfigContainer.h	/^		string getAppIcon() { return appIcon; }$/;"	f	class:ConfigContainer
+getAppTitle	include/ConfigContainer.h	/^		string getAppTitle() { return appTitle; }$/;"	f	class:ConfigContainer
+getAppUrl	include/ConfigContainer.h	/^		string getAppUrl() { return appUrl; }$/;"	f	class:ConfigContainer
+getCondition	include/ConfigContainer.h	/^		string getCondition() { return this->condition; }$/;"	f	class:MenuElement
+getConfig	include/AppWindow.h	/^		ConfigContainer *getConfig() { return &config; }$/;"	f	class:AppWindow
+getConfig	include/GeckoEmbed.h	/^		ConfigContainer getConfig() { return config; }$/;"	f	class:GeckoEmbed
+getContextMenu	include/ConfigContainer.h	/^		vector<MenuElement>& getContextMenu() { return contextMenu; }$/;"	f	class:ConfigContainer
+getDefaultRule	include/Rules.h	/^		string getDefaultRule() { return defaultRule; }$/;"	f	class:Rules
+getFilePath	include/ConfigIO.h	/^		string getFilePath() { return xmlFilePath; }$/;"	f	class:ConfigIO
+getFrame	src/GeckoEmbed.cpp	/^GtkWidget* GeckoEmbed::getFrame() {$/;"	f	class:GeckoEmbed
+getGecko	include/MenuBar.h	/^		GeckoEmbed *getGecko() { return gecko; }$/;"	f	class:MenuItem
+getGlobalWebAppPath	include/Environment.h	/^		string getGlobalWebAppPath() { return (string)APP_RESOURCE_PATH + "\/webapps\/"; }$/;"	f	class:Environment
+getGlobalXMLPath	include/Environment.h	/^		string getGlobalXMLPath() { return (string)APP_RESOURCE_PATH + "\/global.xml"; }$/;"	f	class:Environment
+getGroup	include/ConfigContainer.h	/^		string getGroup() { return group; }$/;"	f	class:Rule
+getGroup	include/ConfigContainer.h	/^		string getGroup() { return this->group; }$/;"	f	class:MenuElement
+getHeight	include/ConfigContainer.h	/^		int getHeight() { return height; }$/;"	f	class:Geometry
+getHttpDefaultRule	include/ConfigContainer.h	/^		string getHttpDefaultRule() { return httpDefaultRule; }$/;"	f	class:ConfigContainer
+getHttpRules	include/ConfigContainer.h	/^		deque<Rule>& getHttpRules() { return httpRules; }$/;"	f	class:ConfigContainer
+getIconStorePath	include/Environment.h	/^		string getIconStorePath() { return (string)PIXMAPS_PATH + "\/"; }$/;"	f	class:Environment
+getItem	src/gtk/MenuBar.cpp	/^MenuItem &MenuGroup::getItem(const string &label) {$/;"	f	class:MenuGroup
+getItemWidget	include/MenuBar.h	/^		GtkWidget *getItemWidget() { return itemWidget; }$/;"	f	class:MenuItem
+getItemWidget	include/MenuBar.h	/^		GtkWidget* getItemWidget() { return itemWidget; }$/;"	f	class:MenuGroup
+getJavascriptDefaultRule	include/ConfigContainer.h	/^		string getJavascriptDefaultRule() { return javascriptDefaultRule; }$/;"	f	class:ConfigContainer
+getJavascriptRules	include/ConfigContainer.h	/^		deque<Rule>& getJavascriptRules() { return javascriptRules; }$/;"	f	class:ConfigContainer
+getLabel	include/ConfigContainer.h	/^		string getLabel() { return this->label; }$/;"	f	class:MenuElement
+getLabel	include/MenuBar.h	/^		const string& getLabel() const { return label; }$/;"	f	class:MenuItem
+getLeft	include/ConfigContainer.h	/^		int getLeft() { return left; }$/;"	f	class:Geometry
+getMenuBar	include/ConfigContainer.h	/^		vector<MenuElement>& getMenuBar() { return menuBar; }$/;"	f	class:ConfigContainer
+getMenuGroup	src/gtk/MenuBar.cpp	/^MenuGroup* MenuBar::getMenuGroup(const string& label) {$/;"	f	class:MenuBar
+getMenuWidget	include/MenuBar.h	/^		GtkWidget* getMenuWidget() { return menuWidget; }$/;"	f	class:MenuGroup
+getMenuWidget	src/gtk/MenuBar.cpp	/^GtkWidget *MenuBar::getMenuWidget() {$/;"	f	class:MenuBar
+getMozEmbed	include/GeckoEmbed.h	/^		GtkMozEmbed* getMozEmbed() const {$/;"	f	class:GeckoEmbed
+getParseErrors	include/ConfigIO.h	/^		string getParseErrors() { return this->errors; };$/;"	f	class:ConfigReader
+getRuleList	include/Rules.h	/^		deque<Rule> getRuleList() { return ruleList; }$/;"	f	class:Rules
+getSaveToConfig	include/ConfigContainer.h	/^		string getSaveToConfig() { return saveToConfig; }$/;"	f	class:ConfigContainer
+getSetting	src/config/ConfigIO.cpp	/^string ConfigIO::getSetting(string group, string key, string defaultValue) {$/;"	f	class:ConfigIO
+getTarget	include/ConfigContainer.h	/^		string getTarget() { return this->target; }$/;"	f	class:MenuElement
+getTarget	include/MenuBar.h	/^		const string& getTarget() const { return target; }$/;"	f	class:MenuItem
+getTargetConfigs	src/AppMain.cpp	/^vector<string> getTargetConfigs(string targetAppXML) {$/;"	f
+getTargetType	include/TargetHandler.h	/^		TargetType getTargetType() { return targetType; }$/;"	f	class:TargetHandler
+getTop	include/ConfigContainer.h	/^		int getTop() { return top; }$/;"	f	class:Geometry
+getUserGeckoProfilePath	include/Environment.h	/^		string getUserGeckoProfilePath() { return getUserProfilePath() + "mozilla\/"; }$/;"	f	class:Environment
+getUserProfilePath	include/Environment.h	/^		string getUserProfilePath() { return userHomePath + "\/.medes\/"; }$/;"	f	class:Environment
+getUserWebAppPath	include/Environment.h	/^		string getUserWebAppPath() { return getUserProfilePath() + "webapps\/"; }$/;"	f	class:Environment
+getValue	include/ConfigContainer.h	/^		string getValue() { return value; }$/;"	f	class:Rule
+getWidth	include/ConfigContainer.h	/^		int getWidth() { return width; }$/;"	f	class:Geometry
+getWindowGeom	include/ConfigContainer.h	/^		Geometry getWindowGeom() { return windowGeom; }$/;"	f	class:ConfigContainer
+getXmlDoc	include/ConfigIO.h	/^		xmlDocPtr getXmlDoc() { return xmlDoc; }$/;"	f	class:ConfigIO
+group	include/ConfigContainer.h	/^		string group;$/;"	m	class:MenuElement
+group	include/ConfigContainer.h	/^		string group;$/;"	m	class:Rule
+groups	include/MenuBar.h	/^		map<string, MenuGroup*> groups;$/;"	m	class:MenuBar
+handleAdvert	src/rules/HttpRules.cpp	/^void HttpRules::handleAdvert(string target) {$/;"	f	class:HttpRules
+handleAdvert	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleAdvert(string target) {$/;"	f	class:JavascriptRules
+handleAllow	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleAllow(string target) {$/;"	f	class:JavascriptRules
+handleDrop	src/rules/HttpRules.cpp	/^void HttpRules::handleDrop(string target) {$/;"	f	class:HttpRules
+handleDrop	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleDrop(string target) {$/;"	f	class:JavascriptRules
+handleExternal	src/rules/HttpRules.cpp	/^void HttpRules::handleExternal(string target) {$/;"	f	class:HttpRules
+handleInternal	src/rules/HttpRules.cpp	/^void HttpRules::handleInternal(string target) {$/;"	f	class:HttpRules
+height	include/ConfigContainer.h	/^		int height;$/;"	m	class:Geometry
+hideAdverts	include/ConfigContainer.h	/^		bool hideAdverts;$/;"	m	class:ConfigContainer
+httpDefaultRule	include/ConfigContainer.h	/^		string httpDefaultRule;$/;"	m	class:ConfigContainer
+httpRules	include/ConfigContainer.h	/^		deque<Rule> httpRules;$/;"	m	class:ConfigContainer
+init	src/GeckoEmbed.cpp	/^void GeckoEmbed::init(ConfigContainer config) {$/;"	f	class:GeckoEmbed
+isAdvertsHidden	include/ConfigContainer.h	/^		bool isAdvertsHidden() { return hideAdverts; }$/;"	f	class:ConfigContainer
+isRedirectAllowed	include/Rules.h	/^		bool isRedirectAllowed() { return allowRedirect; }$/;"	f	class:Rules
+isSeparator	include/ConfigContainer.h	/^		bool isSeparator() { return this->separator; }$/;"	f	class:MenuElement
+itemWidget	include/MenuBar.h	/^		GtkWidget *itemWidget;$/;"	m	class:MenuGroup
+itemWidget	include/MenuBar.h	/^		GtkWidget *itemWidget;$/;"	m	class:MenuItem
+items	include/MenuBar.h	/^		map<string, MenuItem*> items;$/;"	m	class:MenuGroup
+javascriptDefaultRule	include/ConfigContainer.h	/^		string javascriptDefaultRule;$/;"	m	class:ConfigContainer
+javascriptRules	include/ConfigContainer.h	/^		deque<Rule> javascriptRules;$/;"	m	class:ConfigContainer
+label	include/ConfigContainer.h	/^		string label;$/;"	m	class:MenuElement
+label	include/MenuBar.h	/^		string label;$/;"	m	class:MenuGroup
+label	include/MenuBar.h	/^		string label;$/;"	m	class:MenuItem
+left	include/ConfigContainer.h	/^		int left;$/;"	m	class:Geometry
+loadFile	src/config/ConfigIO.cpp	/^bool ConfigIO::loadFile(string xmlPath) {$/;"	f	class:ConfigIO
+main	src/AppMain.cpp	/^int main(int argc, char* argv[]) {$/;"	f
+main	src/testing/gtkmozembed/test.cpp	/^int main(int argc, char **argv)$/;"	f
+menuBar	include/AppWindow.h	/^		MenuBar* menuBar;$/;"	m	class:AppWindow
+menuBar	include/ConfigContainer.h	/^		vector<MenuElement> menuBar;$/;"	m	class:ConfigContainer
+menuWidget	include/MenuBar.h	/^		GtkWidget *menuWidget;$/;"	m	class:MenuBar
+menuWidget	include/MenuBar.h	/^		GtkWidget *menuWidget;$/;"	m	class:MenuGroup
+mozEmbed	include/GeckoEmbed.h	/^		GtkMozEmbed* mozEmbed;$/;"	m	class:GeckoEmbed
+newFile	src/config/ConfigIO.cpp	/^void ConfigIO::newFile() {$/;"	f	class:ConfigIO
+open_uri_cb	src/GeckoEmbed.cpp	/^gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent) {$/;"	f	class:GeckoEmbed
+printUsage	src/AppMain.cpp	/^void printUsage() {$/;"	f
+replaceContextMenu	include/ConfigContainer.h	/^		void replaceContextMenu(vector<MenuElement> newMenu) { contextMenu = newMenu; }$/;"	f	class:ConfigContainer
+replaceHttpRules	include/ConfigContainer.h	/^		void replaceHttpRules(deque<Rule> newRules) { httpRules = newRules; }$/;"	f	class:ConfigContainer
+replaceJavascriptRules	include/ConfigContainer.h	/^		void replaceJavascriptRules(deque<Rule> newRules) { javascriptRules = newRules; }$/;"	f	class:ConfigContainer
+replaceMenuBar	include/ConfigContainer.h	/^		void replaceMenuBar(vector<MenuElement> newMenu) { menuBar = newMenu; }$/;"	f	class:ConfigContainer
+resolveConfigCode	src/config/ConfigReader.cpp	/^void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config, string groupName, xmlNodePtr &key) {$/;"	f	class:ConfigReader
+ruleList	include/Rules.h	/^		deque<Rule> ruleList;$/;"	m	class:Rules
+ruleMatches	include/Rules.h	/^		virtual bool ruleMatches(Rule rule, string target) { return true; }$/;"	f	class:Rules
+ruleMatches	src/rules/HttpRules.cpp	/^bool HttpRules::ruleMatches(Rule rule, string target) { $/;"	f	class:HttpRules
+ruleMatches	src/rules/JavascriptRules.cpp	/^bool JavascriptRules::ruleMatches(Rule rule, string target) { $/;"	f	class:JavascriptRules
+runAction	src/TargetHandler.cpp	/^void TargetHandler::runAction() {$/;"	f	class:TargetHandler
+runRules	src/rules/Rules.cpp	/^bool Rules::runRules(string target) { $/;"	f	class:Rules
+saveFile	src/config/ConfigIO.cpp	/^bool ConfigIO::saveFile() {$/;"	f	class:ConfigIO
+saveFile	src/config/ConfigIO.cpp	/^bool ConfigIO::saveFile(string xmlPath) {$/;"	f	class:ConfigIO
+saveToConfig	include/ConfigContainer.h	/^		string saveToConfig;$/;"	m	class:ConfigContainer
+saveWindowGeometry	src/config/ConfigWriter.cpp	/^void ConfigWriter::saveWindowGeometry(ConfigContainer *config) {$/;"	f	class:ConfigWriter
+separator	include/ConfigContainer.h	/^		bool separator;$/;"	m	class:MenuElement
+setAccelBinding	src/gtk/MenuBar.cpp	/^void MenuItem::setAccelBinding(const string &code, GtkAccelGroup *globalAccel) {$/;"	f	class:MenuItem
+setAdvertsHidden	include/ConfigContainer.h	/^		void setAdvertsHidden(bool hideAdverts) { this->hideAdverts = hideAdverts; }$/;"	f	class:ConfigContainer
+setAppIcon	src/config/ConfigContainer.cpp	/^void ConfigContainer::setAppIcon(string appIcon) { $/;"	f	class:ConfigContainer
+setAppTitle	include/ConfigContainer.h	/^		void setAppTitle(string appTitle) { this->appTitle = appTitle; }$/;"	f	class:ConfigContainer
+setAppUrl	include/ConfigContainer.h	/^		void setAppUrl(string appUrl) { this->appUrl = appUrl; }$/;"	f	class:ConfigContainer
+setConfig	include/AppWindow.h	/^		void setConfig(ConfigContainer &config) { this->config = config; }$/;"	f	class:AppWindow
+setConfig	include/GeckoEmbed.h	/^		void setConfig(const ConfigContainer& newConfig) { config = newConfig; }$/;"	f	class:GeckoEmbed
+setContent	src/gtk/AppWindow.cpp	/^void AppWindow::setContent(GtkWidget* gtkWidget, bool stretch) {$/;"	f	class:AppWindow
+setFilePath	include/ConfigIO.h	/^		void setFilePath(string newFilePath) { xmlFilePath = newFilePath; }$/;"	f	class:ConfigIO
+setHttpDefaultRule	include/ConfigContainer.h	/^		void setHttpDefaultRule(string httpDefaultRule) { this->httpDefaultRule = httpDefaultRule; }$/;"	f	class:ConfigContainer
+setIcon	src/gtk/AppWindow.cpp	/^void AppWindow::setIcon(string path) {$/;"	f	class:AppWindow
+setJavascriptDefaultRule	include/ConfigContainer.h	/^		void setJavascriptDefaultRule(string javascriptDefaultRule) { this->javascriptDefaultRule = javascriptDefaultRule; }$/;"	f	class:ConfigContainer
+setMozEmbed	include/GeckoEmbed.h	/^		void setMozEmbed(GtkMozEmbed* newMoz) {$/;"	f	class:GeckoEmbed
+setSaveToConfig	include/ConfigContainer.h	/^		void setSaveToConfig(string saveToConfig) { this->saveToConfig = saveToConfig; }$/;"	f	class:ConfigContainer
+setTitle	src/gtk/AppWindow.cpp	/^void AppWindow::setTitle(string newTitle) {$/;"	f	class:AppWindow
+setUrl	src/GeckoEmbed.cpp	/^void GeckoEmbed::setUrl(const string& newUrl) {$/;"	f	class:GeckoEmbed
+setWindowGeom	include/ConfigContainer.h	/^		void setWindowGeom(Geometry windowGeom) { this->windowGeom = windowGeom; }$/;"	f	class:ConfigContainer
+setXmlDoc	include/ConfigIO.h	/^		void setXmlDoc(xmlDocPtr newDoc) { xmlDoc = newDoc; }$/;"	f	class:ConfigIO
+setupCallbacks	src/gtk/AppWindow.cpp	/^void AppWindow::setupCallbacks() {$/;"	f	class:AppWindow
+setupCallbacks	src/gtk/MenuBar.cpp	/^void MenuItem::setupCallbacks() {$/;"	f	class:MenuItem
+show	src/gtk/AppWindow.cpp	/^void AppWindow::show() {$/;"	f	class:AppWindow
+start	src/gtk/AppWindow.cpp	/^void AppWindow::start() {$/;"	f	class:AppWindow
+target	include/ConfigContainer.h	/^		string target;$/;"	m	class:MenuElement
+target	include/MenuBar.h	/^		string target;$/;"	m	class:MenuItem
+target	include/TargetHandler.h	/^		string target;$/;"	m	class:TargetHandler
+targetType	include/TargetHandler.h	/^		TargetType targetType;$/;"	m	class:TargetHandler
+tearDown	src/GeckoEmbed.cpp	/^void GeckoEmbed::tearDown() {$/;"	f	class:GeckoEmbed
+testGroup	include/MenuBar.h	/^		MenuGroup testGroup;$/;"	m	class:MenuBar
+testItem	include/MenuBar.h	/^		MenuItem testItem;$/;"	m	class:MenuBar
+top	include/ConfigContainer.h	/^		int top;$/;"	m	class:Geometry
+userHomePath	include/Environment.h	/^		string userHomePath;$/;"	m	class:Environment
+value	include/ConfigContainer.h	/^		string value;$/;"	m	class:Rule
+width	include/ConfigContainer.h	/^		int width;$/;"	m	class:Geometry
+window	include/AppWindow.h	/^		GtkWindow* window;$/;"	m	class:AppWindow
+windowContainer	include/AppWindow.h	/^		GtkWidget* windowContainer;$/;"	m	class:AppWindow
+windowGeom	include/ConfigContainer.h	/^		Geometry windowGeom;$/;"	m	class:ConfigContainer
+xmlDoc	include/ConfigIO.h	/^		xmlDocPtr xmlDoc;$/;"	m	class:ConfigIO
+xmlFilePath	include/ConfigIO.h	/^		string xmlFilePath;$/;"	m	class:ConfigIO
+~AppWindow	src/gtk/AppWindow.cpp	/^AppWindow::~AppWindow() {$/;"	f	class:AppWindow
+~ConfigIO	src/config/ConfigIO.cpp	/^ConfigIO::~ConfigIO() {$/;"	f	class:ConfigIO
+~ConfigReader	include/ConfigIO.h	/^		~ConfigReader() {};$/;"	f	class:ConfigReader
+~ConfigWriter	include/ConfigIO.h	/^		~ConfigWriter() {};$/;"	f	class:ConfigWriter
+~HttpRules	include/Rules.h	/^		virtual ~HttpRules() {}$/;"	f	class:HttpRules
+~JavascriptRules	include/Rules.h	/^		virtual ~JavascriptRules() {}$/;"	f	class:JavascriptRules
+~MenuBar	src/gtk/MenuBar.cpp	/^MenuBar::~MenuBar() {$/;"	f	class:MenuBar
+~MenuGroup	src/gtk/MenuBar.cpp	/^MenuGroup::~MenuGroup() {$/;"	f	class:MenuGroup
+~Rules	include/Rules.h	/^        virtual ~Rules() {}$/;"	f	class:Rules
