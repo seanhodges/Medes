@@ -72,7 +72,10 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 	string target = uri;
 	Rules *handler;
 	// Determine which rules to run
-	if (target.find("http:") == 0 || target.find("https:") == 0 || target.find("ftp:") == 0) {
+	if (target.find("http:") == 0 
+			|| target.find("https:") == 0 
+			|| target.find("about:") == 0 
+			|| target.find("ftp:") == 0) {
 		cout << "applying http rules" << endl;
 		handler = new HttpRules(parent.getConfig());
 	}
@@ -83,6 +86,7 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 	else {
 		// URL support is limited to what the rules understand
 		cout << "an unsupported url was passed to the rules engine" << endl;
+		cout << "url string was: " << target << endl;
 		exit(1);
 	}
 	handler->runRules(target);
