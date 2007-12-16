@@ -41,6 +41,7 @@ class GeckoEmbed {
 		}
 
 		static gint open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent);
+		static void progress_change_cb (GtkMozEmbed *embed, gint cur, gint max, GeckoEmbed& parent);
 
 };
 

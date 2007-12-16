@@ -16,6 +16,7 @@ void GeckoEmbed::init(ConfigContainer config) {
 	gtk_moz_embed_set_chrome_mask(mozEmbed, GTK_MOZ_EMBED_FLAG_ALLCHROME);
 	// Attach to functors
 	gtk_signal_connect(GTK_OBJECT(mozEmbed), "open_uri", GTK_SIGNAL_FUNC(&GeckoEmbed::open_uri_cb), this);
+	gtk_signal_connect(GTK_OBJECT(mozEmbed), "progress", GTK_SIGNAL_FUNC(&GeckoEmbed::progress_change_cb), this);
 	// Initial object configuration
 	setMozEmbed(mozEmbed);
 	setConfig(config);
@@ -95,3 +96,6 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 	return !redirect;
 }
 
+void GeckoEmbed::progress_change_cb(GtkMozEmbed *embed, gint cur, gint max, GeckoEmbed& parent) {
+	cout << "loading progress " << cur << "B / " << max << "B" << endl;
+}

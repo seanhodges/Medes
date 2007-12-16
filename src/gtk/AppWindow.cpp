@@ -35,6 +35,10 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gecko.init(config);
 	setContent(gecko.getFrame(), true);
 
+	// Attach the status bar
+	statusBar = new StatusBar();
+	setContent(statusBar->getWidget(), false);
+
 	// Set up window callback events
 	setupCallbacks();
 
@@ -47,6 +51,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 AppWindow::~AppWindow() {
 	gecko.tearDown();
 	delete menuBar;
+	delete statusBar;
 }
 
 /**

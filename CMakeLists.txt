@@ -27,6 +27,7 @@ set(MEDES_SRC
 	src/rules/JavascriptRules.cpp
 	src/gtk/AppWindow.cpp 
 	src/gtk/MenuBar.cpp
+	src/gtk/StatusBar.cpp
 )
 
 find_package(PkgConfig)

@@ -7,6 +7,7 @@
 #include "GeckoEmbed.h"
 #include "ConfigContainer.h"
 #include "MenuBar.h"
+#include "StatusBar.h"
 
 class AppWindow {
 
@@ -19,10 +20,11 @@ class AppWindow {
 
 		ConfigContainer config;
 
-		GtkWindow* window;
-		GtkAccelGroup* accelGroup;
-		GtkWidget* windowContainer;
-		MenuBar* menuBar;
+		GtkWindow *window;
+		GtkAccelGroup *accelGroup;
+		GtkWidget *windowContainer;
+		MenuBar *menuBar;
+		StatusBar *statusBar;
 		GeckoEmbed gecko;
 
 	public:
