@@ -22,7 +22,7 @@ void StatusBar::setMessage(const string &message) {
 }
 
 void StatusBar::updateProgress(int current, int max) {
-	if (current >= 0 && max >= current) {
+	if (current > 0 && max >= current) {
 		double progress = (double)current / max;
 		cout << progress << endl;
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressBar), progress);

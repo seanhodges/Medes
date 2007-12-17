@@ -5,6 +5,8 @@
 
 /**
  * Initialise the engine (must be called AFTER gtk_init())
+ *
+ * @param config - the config container in use
  */
 void GeckoEmbed::init(ConfigContainer config) {
 	// Set the environment
@@ -17,10 +19,13 @@ void GeckoEmbed::init(ConfigContainer config) {
 	// Attach to functors
 	gtk_signal_connect(GTK_OBJECT(mozEmbed), "open_uri", GTK_SIGNAL_FUNC(&GeckoEmbed::open_uri_cb), this);
 	gtk_signal_connect(GTK_OBJECT(mozEmbed), "progress", GTK_SIGNAL_FUNC(&GeckoEmbed::progress_change_cb), this);
+	gtk_signal_connect(GTK_OBJECT(mozEmbed), "net_start", GTK_SIGNAL_FUNC(&GeckoEmbed::load_started_cb), this);
+	gtk_signal_connect(GTK_OBJECT(mozEmbed), "net_stop", GTK_SIGNAL_FUNC(&GeckoEmbed::load_finished_cb), this);
 	// Initial object configuration
 	setMozEmbed(mozEmbed);
 	setConfig(config);
 	setUrl(config.getAppUrl());
+	dataSize = 0;
 }
 
 /**
@@ -44,6 +49,15 @@ GtkWidget* GeckoEmbed::getFrame() {
  */
 void GeckoEmbed::setUrl(const string& newUrl) {
 	gtk_moz_embed_load_url(GeckoEmbed::getMozEmbed(), newUrl.c_str());
+}
+
+/**
+ * Attach the status bar
+ *
+ * @param status - the status bar instance
+ */
+void GeckoEmbed::attachStatusBar(StatusBar *status) {
+	this->status = status;
 }
 
 /**
@@ -97,5 +111,25 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 }
 
 void GeckoEmbed::progress_change_cb(GtkMozEmbed *embed, gint cur, gint max, GeckoEmbed& parent) {
-	cout << "loading progress " << cur << "B / " << max << "B" << endl;
+	cout << "loading process " << cur << "B / " << max << "B" << endl;
+	// "max" is per resource, whilst "cur" is the overall data transferred
+	int dataSize = parent.getDataSize();
+	if (cur > dataSize || dataSize == 0) {
+		dataSize += max;
+		parent.setDataSize(dataSize);
+	}
+	parent.getStatusBar()->updateProgress(cur, dataSize);
 }
+
+void GeckoEmbed::load_started_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
+	cout << "loading started" << endl;
+	parent.setDataSize(0);
+	parent.getStatusBar()->updateProgress(1, 100);
+}
+
+void GeckoEmbed::load_finished_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
+	cout << "loading finished" << endl;
+	parent.setDataSize(100);
+	parent.getStatusBar()->updateProgress(100, 100);
+}
+

@@ -38,6 +38,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	// Attach the status bar
 	statusBar = new StatusBar();
 	setContent(statusBar->getWidget(), false);
+	gecko.attachStatusBar(statusBar);
 
 	// Set up window callback events
 	setupCallbacks();
