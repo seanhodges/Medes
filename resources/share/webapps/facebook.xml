@@ -19,7 +19,6 @@
 	</rules>
 	<interface>
 		<menubarenabled>true</menubarenabled>
-		<statusbarenabled>true</statusbarenabled>
 		<menubar>
 			<item label="My _Home" group="_Application" shortcut="ctrl+h">http://www.facebook.com/home.php</item>
 			<item label="My _Profile" group="_Application" shortcut="ctrl+p">http://www.facebook.com/profile.php</item>

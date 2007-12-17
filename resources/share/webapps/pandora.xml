@@ -16,4 +16,8 @@
 			<internal>http://pandora.com</internal>
 		</http>
 	</rules>
+	<interface>
+		<menubarenabled>false</menubarenabled>
+		<statusbarenabled>false</statusbarenabled>
+	</interface>
 </webapp>

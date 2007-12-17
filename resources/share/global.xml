@@ -20,6 +20,6 @@
 	</rules>
 	<interface>
 		<menubarenabled>false</menubarenabled>
-		<statusbarenabled>false</statusbarenabled>
+		<statusbarenabled>true</statusbarenabled>
 	</interface>
 </webapp>

@@ -27,7 +27,6 @@
 	</rules>
 	<interface>
 		<menubarenabled>true</menubarenabled>
-		<statusbarenabled>true</statusbarenabled>
 		<menubar>
 			<item label="_Compose Message" group="_Application" shortcut="ctrl+shift+m">http://mail.google.com/mail/#compose</item> 
 			<separator group="_Application"/>

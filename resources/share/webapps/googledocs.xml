@@ -20,7 +20,4 @@
 			<external>http://scholar.google</external>
 		</http>
 	</rules>
-	<interface>
-		<statusbarenabled>true</statusbarenabled>
-	</interface>
 </webapp>
