@@ -182,6 +182,9 @@ handleDrop	src/rules/HttpRules.cpp	/^void HttpRules::handleDrop(string target) {
 handleDrop	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleDrop(string target) {$/;"	f	class:JavascriptRules
 handleExternal	src/rules/HttpRules.cpp	/^void HttpRules::handleExternal(string target) {$/;"	f	class:HttpRules
 handleInternal	src/rules/HttpRules.cpp	/^void HttpRules::handleInternal(string target) {$/;"	f	class:HttpRules
+hasMenuBar	include/ConfigContainer.h	/^		bool hasMenuBar() { return menuBarEnabled; }$/;"	f	class:ConfigContainer
+hasStatusBar	include/ConfigContainer.h	/^		bool hasStatusBar() { return statusBarEnabled; }$/;"	f	class:ConfigContainer
+hasStatusBar	include/GeckoEmbed.h	/^		bool hasStatusBar() { return (status != NULL); }$/;"	f	class:GeckoEmbed
 height	include/ConfigContainer.h	/^		int height;$/;"	m	class:Geometry
 hideAdverts	include/ConfigContainer.h	/^		bool hideAdverts;$/;"	m	class:ConfigContainer
 httpDefaultRule	include/ConfigContainer.h	/^		string httpDefaultRule;$/;"	m	class:ConfigContainer
@@ -206,6 +209,7 @@ main	src/AppMain.cpp	/^int main(int argc, char* argv[]) {$/;"	f
 main	src/testing/gtkmozembed/test.cpp	/^int main(int argc, char **argv)$/;"	f
 menuBar	include/AppWindow.h	/^		MenuBar *menuBar;$/;"	m	class:AppWindow
 menuBar	include/ConfigContainer.h	/^		vector<MenuElement> menuBar;$/;"	m	class:ConfigContainer
+menuBarEnabled	include/ConfigContainer.h	/^		bool menuBarEnabled;$/;"	m	class:ConfigContainer
 menuWidget	include/MenuBar.h	/^		GtkWidget *menuWidget;$/;"	m	class:MenuBar
 menuWidget	include/MenuBar.h	/^		GtkWidget *menuWidget;$/;"	m	class:MenuGroup
 mozEmbed	include/GeckoEmbed.h	/^		GtkMozEmbed* mozEmbed;$/;"	m	class:GeckoEmbed
@@ -243,9 +247,12 @@ setFilePath	include/ConfigIO.h	/^		void setFilePath(string newFilePath) { xmlFil
 setHttpDefaultRule	include/ConfigContainer.h	/^		void setHttpDefaultRule(string httpDefaultRule) { this->httpDefaultRule = httpDefaultRule; }$/;"	f	class:ConfigContainer
 setIcon	src/gtk/AppWindow.cpp	/^void AppWindow::setIcon(string path) {$/;"	f	class:AppWindow
 setJavascriptDefaultRule	include/ConfigContainer.h	/^		void setJavascriptDefaultRule(string javascriptDefaultRule) { this->javascriptDefaultRule = javascriptDefaultRule; }$/;"	f	class:ConfigContainer
+setMenuBarEnabled	include/ConfigContainer.h	/^		void setMenuBarEnabled(bool menuBarEnabled) { this->menuBarEnabled = menuBarEnabled; }$/;"	f	class:ConfigContainer
 setMessage	src/gtk/StatusBar.cpp	/^void StatusBar::setMessage(const string &message) {$/;"	f	class:StatusBar
 setMozEmbed	include/GeckoEmbed.h	/^		void setMozEmbed(GtkMozEmbed* newMoz) { mozEmbed = newMoz; }$/;"	f	class:GeckoEmbed
+setProgressVisible	src/gtk/StatusBar.cpp	/^void StatusBar::setProgressVisible(bool visible) {$/;"	f	class:StatusBar
 setSaveToConfig	include/ConfigContainer.h	/^		void setSaveToConfig(string saveToConfig) { this->saveToConfig = saveToConfig; }$/;"	f	class:ConfigContainer
+setStatusBarEnabled	include/ConfigContainer.h	/^		void setStatusBarEnabled(bool statusBarEnabled) { this->statusBarEnabled = statusBarEnabled; }$/;"	f	class:ConfigContainer
 setTitle	src/gtk/AppWindow.cpp	/^void AppWindow::setTitle(string newTitle) {$/;"	f	class:AppWindow
 setUrl	src/GeckoEmbed.cpp	/^void GeckoEmbed::setUrl(const string& newUrl) {$/;"	f	class:GeckoEmbed
 setWindowGeom	include/ConfigContainer.h	/^		void setWindowGeom(Geometry windowGeom) { this->windowGeom = windowGeom; }$/;"	f	class:ConfigContainer
@@ -256,6 +263,7 @@ show	src/gtk/AppWindow.cpp	/^void AppWindow::show() {$/;"	f	class:AppWindow
 start	src/gtk/AppWindow.cpp	/^void AppWindow::start() {$/;"	f	class:AppWindow
 status	include/GeckoEmbed.h	/^		StatusBar *status;$/;"	m	class:GeckoEmbed
 statusBar	include/AppWindow.h	/^		StatusBar *statusBar;$/;"	m	class:AppWindow
+statusBarEnabled	include/ConfigContainer.h	/^		bool statusBarEnabled;$/;"	m	class:ConfigContainer
 target	include/ConfigContainer.h	/^		string target;$/;"	m	class:MenuElement
 target	include/MenuBar.h	/^		string target;$/;"	m	class:MenuItem
 target	include/TargetHandler.h	/^		string target;$/;"	m	class:TargetHandler

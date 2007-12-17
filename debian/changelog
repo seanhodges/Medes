@@ -1,3 +1,12 @@
+medes (0.0.4-0ubuntu1) gutsy; urgency=low
+
+  * Added progress bar
+  * Status bar and menu bar can be enabled in config
+  * Google Docs webapp example replaced with G-Mail and Ubuntu Wiki
+
+
+ -- Sean Hodges <seanhodges@bluebottle.com>  Tue, 17 Dec 2007 22:29:30 +0000
+
 medes (0.0.3-0ubuntu1) gutsy; urgency=low
 
   * Keyboard accelerators and separators in menu bar
