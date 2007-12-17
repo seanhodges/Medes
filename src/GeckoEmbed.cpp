@@ -26,6 +26,7 @@ void GeckoEmbed::init(ConfigContainer config) {
 	setConfig(config);
 	setUrl(config.getAppUrl());
 	dataSize = 0;
+	status = NULL;
 }
 
 /**
@@ -111,25 +112,33 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 }
 
 void GeckoEmbed::progress_change_cb(GtkMozEmbed *embed, gint cur, gint max, GeckoEmbed& parent) {
-	cout << "loading process " << cur << "B / " << max << "B" << endl;
-	// "max" is per resource, whilst "cur" is the overall data transferred
-	int dataSize = parent.getDataSize();
-	if (cur > dataSize || dataSize == 0) {
-		dataSize += max;
-		parent.setDataSize(dataSize);
+	if (parent.hasStatusBar()) {
+		// "max" is per resource, whilst "cur" is the overall data transferred
+		int dataSize = parent.getDataSize();
+		if (cur > dataSize || dataSize == 0) {
+			dataSize += max;
+			parent.setDataSize(dataSize);
+		}
+		parent.getStatusBar()->setMessage("Transferring data");
+		parent.getStatusBar()->updateProgress(cur, dataSize);
 	}
-	parent.getStatusBar()->updateProgress(cur, dataSize);
 }
 
 void GeckoEmbed::load_started_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
-	cout << "loading started" << endl;
-	parent.setDataSize(0);
-	parent.getStatusBar()->updateProgress(1, 100);
+	cout << "page loading started" << endl;
+	if (parent.hasStatusBar()) {
+		parent.setDataSize(0);
+		parent.getStatusBar()->updateProgress(0, 100);
+		parent.getStatusBar()->setMessage("Waiting for server");
+		parent.getStatusBar()->setProgressVisible(true);
+	}
 }
 
 void GeckoEmbed::load_finished_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
-	cout << "loading finished" << endl;
-	parent.setDataSize(100);
-	parent.getStatusBar()->updateProgress(100, 100);
+	cout << "page loading finished" << endl;
+	if (parent.hasStatusBar()) {
+		parent.getStatusBar()->setMessage("Done");
+		parent.getStatusBar()->setProgressVisible(false);
+	}
 }
 

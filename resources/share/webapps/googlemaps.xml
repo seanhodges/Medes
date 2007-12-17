@@ -22,6 +22,8 @@
 		</http>
 	</rules>
 	<interface>
+		<menubarenabled>true</menubarenabled>
+		<statusbarenabled>true</statusbarenabled>
 		<menubar>
 			<item label="_Start Again" group="_Application" shortcut="ctrl+s">http://maps.google.co.uk</item>
 			<item label="Go _Back a Page" group="_Application" shortcut="ctrl+b">javascript:history.back()</item> 

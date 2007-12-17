@@ -68,7 +68,9 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
 	else if (configCode == "RULES_HTTPDEFAULT") { config.setHttpDefaultRule(keyValue); }
 	else if (configCode == "RULES_JAVASCRIPTDEFAULT") { config.setJavascriptDefaultRule(keyValue); }
 	else if (configCode == "RULES_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
+	else if (configCode == "INTERFACE_MENUBARENABLED") { config.setMenuBarEnabled(convertToBoolean(keyValue)); }
 	else if (configCode == "INTERFACE_MENUBAR") { config.appendMenuBar(convertToMenu(key)); }
+	else if (configCode == "INTERFACE_STATUSBARENABLED") { config.setStatusBarEnabled(convertToBoolean(keyValue)); }
 	else {
 		this->errors += ("<" + groupName + "><" + keyName + ">" + " is not a recognised key\n");
 	}

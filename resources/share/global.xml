@@ -18,4 +18,8 @@
 			<internal>jar:file:///usr/lib/firefox/chrome/toolkit.jar!/content/global/netError.xhtml</internal>
 		</http>
 	</rules>
+	<interface>
+		<menubarenabled>false</menubarenabled>
+		<statusbarenabled>false</statusbarenabled>
+	</interface>
 </webapp>

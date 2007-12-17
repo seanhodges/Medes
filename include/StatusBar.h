@@ -21,6 +21,7 @@ class StatusBar {
 		void setMessage(const string &message);
 		void updateProgress(int current, int max);
 		void updateProgress();
+		void setProgressVisible(bool visible);
 };
 
 #endif

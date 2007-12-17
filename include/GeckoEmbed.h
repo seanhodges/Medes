@@ -40,6 +40,8 @@ class GeckoEmbed {
 		void attachStatusBar(StatusBar *status);
 		void setDataSize(int dataSize) { this->dataSize = dataSize; }
 
+		bool hasStatusBar() { return (status != NULL); }
+
 		static gint open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& parent);
 		static void progress_change_cb(GtkMozEmbed *embed, gint cur, gint max, GeckoEmbed& parent);
 		static void load_started_cb(GtkMozEmbed *embed, GeckoEmbed& parent);

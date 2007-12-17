@@ -61,7 +61,9 @@ ConfigContainer::ConfigContainer() {
 	setAdvertsHidden(false);
 	// Add about:blank as allowed, in case something else screws up
 	Rule defaultHttpEntry("internal", "about:blank");
-	this->httpRules.push_front(defaultHttpEntry);
+	httpRules.push_front(defaultHttpEntry);
+	setMenuBarEnabled(false);
+	setStatusBarEnabled(true);
 }
 
 /**
@@ -82,7 +84,7 @@ void ConfigContainer::setAppIcon(string appIcon) {
 void ConfigContainer::appendHttpRules(vector<Rule> newRules) {
 	while(!newRules.empty()) {
 		Rule newEntry = (Rule)newRules.back();
-		this->httpRules.push_front(newEntry);
+		httpRules.push_front(newEntry);
 		newRules.pop_back();
 	}
 }
@@ -93,7 +95,7 @@ void ConfigContainer::appendHttpRules(vector<Rule> newRules) {
  * @param newRules - the rule to add
  */
 void ConfigContainer::appendHttpRules(Rule newRule) {
-	this->httpRules.push_front(newRule);
+	httpRules.push_front(newRule);
 }
 
 /**
@@ -104,7 +106,7 @@ void ConfigContainer::appendHttpRules(Rule newRule) {
 void ConfigContainer::appendJavascriptRules(vector<Rule> newRules) {
 	while(!newRules.empty()) {
 		Rule newEntry = (Rule)newRules.back();
-		this->javascriptRules.push_front(newEntry);
+		javascriptRules.push_front(newEntry);
 		newRules.pop_back();
 	}
 }
@@ -115,7 +117,7 @@ void ConfigContainer::appendJavascriptRules(vector<Rule> newRules) {
  * @param newRules - the rule to add
  */
 void ConfigContainer::appendJavascriptRules(Rule newRule) {
-	this->javascriptRules.push_front(newRule);
+	javascriptRules.push_front(newRule);
 }
 
 /**
@@ -126,7 +128,7 @@ void ConfigContainer::appendJavascriptRules(Rule newRule) {
 void ConfigContainer::appendMenuBar(vector<MenuElement> newItems) {
 	while(!newItems.empty()) {
 		MenuElement newItem = (MenuElement)newItems.back();
-		this->menuBar.push_back(newItem);
+		menuBar.push_back(newItem);
 		newItems.pop_back();
 	}
 }
@@ -137,7 +139,7 @@ void ConfigContainer::appendMenuBar(vector<MenuElement> newItems) {
  * @param newItem - the menu item to add
  */
 void ConfigContainer::appendMenuBar(MenuElement newItem) {
-	this->menuBar.push_back(newItem);
+	menuBar.push_back(newItem);
 }
 
 /**
@@ -148,7 +150,7 @@ void ConfigContainer::appendMenuBar(MenuElement newItem) {
 void ConfigContainer::appendContextMenu(vector<MenuElement> newItems) {
 	while(!newItems.empty()) {
 		MenuElement newItem = (MenuElement)newItems.back();
-		this->contextMenu.push_back(newItem);
+		contextMenu.push_back(newItem);
 		newItems.pop_back();
 	}
 }
@@ -159,6 +161,6 @@ void ConfigContainer::appendContextMenu(vector<MenuElement> newItems) {
  * @param newItem - the menu item to add
  */
 void ConfigContainer::appendContextMenu(MenuElement newItem) {
-	this->contextMenu.push_back(newItem);
+	contextMenu.push_back(newItem);
 }
 

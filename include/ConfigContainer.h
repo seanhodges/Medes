@@ -90,6 +90,8 @@ class ConfigContainer {
 		bool hideAdverts;
 
 		// Interface
+		bool menuBarEnabled;
+		bool statusBarEnabled;
 		vector<MenuElement> menuBar;
 		vector<MenuElement> contextMenu;
 
@@ -118,6 +120,11 @@ class ConfigContainer {
 		void setHttpDefaultRule(string httpDefaultRule) { this->httpDefaultRule = httpDefaultRule; }
 		void setJavascriptDefaultRule(string javascriptDefaultRule) { this->javascriptDefaultRule = javascriptDefaultRule; }
 		void setAdvertsHidden(bool hideAdverts) { this->hideAdverts = hideAdverts; }
+		void setMenuBarEnabled(bool menuBarEnabled) { this->menuBarEnabled = menuBarEnabled; }
+		void setStatusBarEnabled(bool statusBarEnabled) { this->statusBarEnabled = statusBarEnabled; }
+
+		bool hasMenuBar() { return menuBarEnabled; }
+		bool hasStatusBar() { return statusBarEnabled; }
 
 		void replaceHttpRules(deque<Rule> newRules) { httpRules = newRules; }
 		void appendHttpRules(vector<Rule> newRules);

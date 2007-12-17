@@ -9,7 +9,10 @@
 		<http>
 			<internal>http://mail.google</internal>
 			<internal>https://mail.google</internal>
-			<internal>https://www.google.com/accounts/ServiceLogin</internal>
+			<internal>https://www.google.com/accounts</internal>
+			<internal>http://www.google.com/accounts</internal>
+			<internal>https://www.google.co.uk/accounts</internal>
+			<internal>http://www.google.co.uk/accounts</internal>
 			<internal>http://www.google.co.uk/intl/en_uk/help</internal>
 			<internal>http://www.google.co.uk/help/mail</internal>
 			<internal>http://gmodules</internal>
@@ -23,6 +26,8 @@
 		</http>
 	</rules>
 	<interface>
+		<menubarenabled>true</menubarenabled>
+		<statusbarenabled>true</statusbarenabled>
 		<menubar>
 			<item label="_Compose Message" group="_Application" shortcut="ctrl+shift+m">http://mail.google.com/mail/#compose</item> 
 			<separator group="_Application"/>

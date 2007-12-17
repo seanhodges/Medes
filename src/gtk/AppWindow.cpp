@@ -9,6 +9,8 @@
  * @param config - the application configuration settings
  */
 AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
+	menuBar = NULL;
+	statusBar = NULL;
 	gtk_set_locale();
 	std::cout << "locale set" << std::endl;
 	gtk_init(&argc, &argv);
@@ -28,17 +30,21 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	setIcon(config.getAppIcon());
 
 	// Attach the menu bar
-	menuBar = new MenuBar(config.getMenuBar(), &gecko, accelGroup);
-	setContent(menuBar->getMenuWidget(), false);
+	if (config.hasMenuBar() == true) {
+		menuBar = new MenuBar(config.getMenuBar(), &gecko, accelGroup);
+		setContent(menuBar->getMenuWidget(), false);
+	}
 
 	// Attach the Gecko engine
 	gecko.init(config);
 	setContent(gecko.getFrame(), true);
 
 	// Attach the status bar
-	statusBar = new StatusBar();
-	setContent(statusBar->getWidget(), false);
-	gecko.attachStatusBar(statusBar);
+	if (config.hasStatusBar() == true) {
+		statusBar = new StatusBar();
+		setContent(statusBar->getWidget(), false);
+		gecko.attachStatusBar(statusBar);
+	}
 
 	// Set up window callback events
 	setupCallbacks();
@@ -51,8 +57,8 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
  */
 AppWindow::~AppWindow() {
 	gecko.tearDown();
-	delete menuBar;
-	delete statusBar;
+	if (menuBar != NULL) delete menuBar;
+	if (statusBar != NULL) delete statusBar;
 }
 
 /**

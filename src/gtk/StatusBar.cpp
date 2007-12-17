@@ -22,9 +22,8 @@ void StatusBar::setMessage(const string &message) {
 }
 
 void StatusBar::updateProgress(int current, int max) {
-	if (current > 0 && max >= current) {
+	if (current >= 0 && max >= current && max > 0) {
 		double progress = (double)current / max;
-		cout << progress << endl;
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressBar), progress);
 	}
 	else {
@@ -37,3 +36,7 @@ void StatusBar::updateProgress() {
 	gtk_progress_bar_pulse(GTK_PROGRESS_BAR(progressBar));
 }
 
+void StatusBar::setProgressVisible(bool visible) {
+	if (visible) gtk_widget_show(progressBar);
+	else gtk_widget_hide(progressBar);
+}
