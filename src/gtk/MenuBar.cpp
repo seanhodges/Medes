@@ -118,6 +118,8 @@ void MenuGroup::addSeparator() {
  * Get a menu item from this group
  *
  * @param label - the caption for this item
+ *
+ * @return the menu item
  */
 MenuItem &MenuGroup::getItem(const string &label) {
 	return *items[label];
@@ -141,6 +143,9 @@ MenuItem::MenuItem(GeckoEmbed *gecko, const string& label, const string& target)
 
 /**
  * Bind a new keyboard accelerator to this item
+ *
+ * @param code - the keyboard combination as a human-readable string
+ * @globalAccel - the GTK window accelerator handle
  */
 void MenuItem::setAccelBinding(const string &code, GtkAccelGroup *globalAccel) {
 	int mods = 0;

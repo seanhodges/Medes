@@ -111,6 +111,14 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 	return !redirect;
 }
 
+/**
+ * Callback event for redirection progress pulse
+ *
+ * @param embed - the mozilla object
+ * @param cur - the amount of data transferred for this redirect (bytes)
+ * @param max - the size of the current resource being downloaded (bytes)
+ * @param parent - the parent instance for this callback
+ */
 void GeckoEmbed::progress_change_cb(GtkMozEmbed *embed, gint cur, gint max, GeckoEmbed& parent) {
 	if (parent.hasStatusBar()) {
 		// "max" is per resource, whilst "cur" is the overall data transferred
@@ -124,6 +132,12 @@ void GeckoEmbed::progress_change_cb(GtkMozEmbed *embed, gint cur, gint max, Geck
 	}
 }
 
+/**
+ * Callback event for redirection start indicator
+ *
+ * @param embed - the mozilla object
+ * @param parent - the parent instance for this callback
+ */
 void GeckoEmbed::load_started_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
 	cout << "page loading started" << endl;
 	if (parent.hasStatusBar()) {
@@ -134,6 +148,12 @@ void GeckoEmbed::load_started_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
 	}
 }
 
+/**
+ * Callback event for redirection finish indicator
+ *
+ * @param embed - the mozilla object
+ * @param parent - the parent instance for this callback
+ */
 void GeckoEmbed::load_finished_cb(GtkMozEmbed *embed, GeckoEmbed& parent) {
 	cout << "page loading finished" << endl;
 	if (parent.hasStatusBar()) {

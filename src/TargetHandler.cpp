@@ -45,7 +45,6 @@ void TargetHandler::runAction() {
 		default:
 			cout << "internal targethandler error, no action assigned for " << target << endl;
 	}
-
 }
 
 /**
