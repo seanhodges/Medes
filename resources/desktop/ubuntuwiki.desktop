@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Ubuntu Wiki
-GenericName=Ubuntu Wiki
-Comment=
-Exec=medes ubuntuwiki
-Icon=ubuntu
-Terminal=false
-Type=Application
-Categories=Ubuntu;Wiki;System;Medes;
