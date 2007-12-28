@@ -29,6 +29,7 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	setConfig(config);
 	Geometry geom = config.getWindowGeom();
 	gtk_window_move(window, geom.getLeft(), geom.getTop());
+	posEventFirstPass = true; 
 	gtk_window_set_default_size(window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
 	string iconPath = config.getAppIcon();
@@ -151,6 +152,13 @@ void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {
  * @return always false
  */
 bool AppWindow::eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow& parent) {
+	if (parent.posEventFirstPass) {
+		// Get original coords
+		Geometry geom = parent.getConfig()->getWindowGeom();
+		// Correct the position on first pass
+		gtk_window_move(window, geom.getLeft(), geom.getTop());
+		parent.posEventFirstPass = false;
+	}
 	// Retrieve the new window size
 	ConfigContainer *config = parent.getConfig();
 	Geometry geom(event->x, event->y, event->width, event->height);

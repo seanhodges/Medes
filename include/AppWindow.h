@@ -42,6 +42,8 @@ class AppWindow {
 
 		void show();
 		void start();
+
+		bool posEventFirstPass; // Hack for WM positioning bugs
 };
 
 #endif
