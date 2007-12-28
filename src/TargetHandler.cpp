@@ -13,9 +13,10 @@ TargetHandler::TargetHandler(string target, GeckoEmbed *gecko) {
 	int endOfScheme = target.find(":");
 	if (endOfScheme > 0) {
 		string scheme = target.substr(0, endOfScheme);
-		if (scheme == "http") targetType = TargetHandler::HTTP;
-		else if (scheme == "https") targetType = TargetHandler::HTTP;
-		else if (scheme == "ftp") targetType = TargetHandler::HTTP;
+		if (scheme == "http") targetType = TargetHandler::REMOTE;
+		else if (scheme == "https") targetType = TargetHandler::REMOTE;
+		else if (scheme == "ftp") targetType = TargetHandler::REMOTE;
+		else if (scheme == "file") targetType = TargetHandler::LOCAL;
 		else if (scheme == "javascript") targetType = TargetHandler::JAVASCRIPT;
 		else if (scheme == "medes") targetType = TargetHandler::COMMAND;
 		else {
@@ -33,13 +34,20 @@ TargetHandler::TargetHandler(string target, GeckoEmbed *gecko) {
  */
 void TargetHandler::runAction() {
 	switch (targetType) {
-		case TargetHandler::HTTP:
-			doHttp();
+		case TargetHandler::REMOTE:
+			cout << "target is remote" << endl;
+			doGecko();
+			break;
+		case TargetHandler::LOCAL:
+			cout << "target is local" << endl;
+			doGecko();
 			break;
 		case TargetHandler::JAVASCRIPT:
-			doJavascript();
+			cout << "target is javascript" << endl;
+			doGecko();
 			break;
 		case TargetHandler::COMMAND:
+			cout << "target is a command" << endl;
 			doCommand();
 			break;
 		default:
@@ -50,16 +58,7 @@ void TargetHandler::runAction() {
 /**
  * Perform an HTTP action
  */
-void TargetHandler::doHttp() {
-	cout << "target is http" << endl;
-	gecko->setUrl(target);
-}
-
-/**
- * Perform a javascript action
- */
-void TargetHandler::doJavascript() {
-	cout << "target is javascript" << endl;
+void TargetHandler::doGecko() {
 	gecko->setUrl(target);
 }
 
@@ -67,7 +66,6 @@ void TargetHandler::doJavascript() {
  * Execute a Medes command
  */
 void TargetHandler::doCommand() {
-	cout << "target is a command" << endl;
 	// Commands are currently not implemented, assume "quit"
 	// TODO: Implement the command handling
 	exit(0);

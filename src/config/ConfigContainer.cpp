@@ -56,12 +56,12 @@ ConfigContainer::ConfigContainer() {
 	setAppIcon("");
 	Geometry geom(0, 0, 640, 480);
 	setWindowGeom(geom);
-	setHttpDefaultRule("external");
+	setRemoteDefaultRule("external");
 	setJavascriptDefaultRule("allow");
 	setAdvertsHidden(false);
 	// Add about:blank as allowed, in case something else screws up
-	Rule defaultHttpEntry("internal", "about:blank");
-	httpRules.push_front(defaultHttpEntry);
+	Rule defaultRemoteEntry("internal", "about:blank");
+	remoteRules.push_front(defaultRemoteEntry);
 	setMenuBarEnabled(false);
 	setStatusBarEnabled(true);
 }
@@ -77,25 +77,47 @@ void ConfigContainer::setAppIcon(string appIcon) {
 }
 
 /**
- * Append a set of domain rules to the top of the main domain rules list
+ * Append a set of domain rules to the top of the local rules list
  *
  * @param newRules - the rules to add
  */
-void ConfigContainer::appendHttpRules(vector<Rule> newRules) {
+void ConfigContainer::appendLocalRules(vector<Rule> newRules) {
 	while(!newRules.empty()) {
 		Rule newEntry = (Rule)newRules.back();
-		httpRules.push_front(newEntry);
+		localRules.push_front(newEntry);
 		newRules.pop_back();
 	}
 }
 
 /**
- * Append a single domain rule to the top of the main domain rules list
+ * Append a single domain rule to the top of the local rules list
  *
  * @param newRules - the rule to add
  */
-void ConfigContainer::appendHttpRules(Rule newRule) {
-	httpRules.push_front(newRule);
+void ConfigContainer::appendLocalRules(Rule newRule) {
+	localRules.push_front(newRule);
+}
+
+/**
+ * Append a set of domain rules to the top of the remote rules list
+ *
+ * @param newRules - the rules to add
+ */
+void ConfigContainer::appendRemoteRules(vector<Rule> newRules) {
+	while(!newRules.empty()) {
+		Rule newEntry = (Rule)newRules.back();
+		remoteRules.push_front(newEntry);
+		newRules.pop_back();
+	}
+}
+
+/**
+ * Append a single domain rule to the top of the remote rules list
+ *
+ * @param newRules - the rule to add
+ */
+void ConfigContainer::appendRemoteRules(Rule newRule) {
+	remoteRules.push_front(newRule);
 }
 
 /**

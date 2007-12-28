@@ -11,12 +11,15 @@
 		</windowgeometry>
 	</application>
 	<rules>
-		<httpdefault>external</httpdefault>
+		<remotedefault>external</remotedefault>
+		<localdefault>drop</localdefault>
 		<javascriptdefault>allow</javascriptdefault>
-		<http>
-			<internal>file:///usr/share/medes/medes_home.html</internal>
+		<remote>
 			<internal>jar:file:///usr/lib/firefox/chrome/toolkit.jar!/content/global/netError.xhtml</internal>
-		</http>
+		</remote>
+		<local>
+			<internal>file:///usr/share/medes/medes_home.html</internal>
+		</local>
 	</rules>
 	<interface>
 		<menubarenabled>false</menubarenabled>

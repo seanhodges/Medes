@@ -23,7 +23,8 @@ set(MEDES_SRC
 	src/config/ConfigReader.cpp 
 	src/config/ConfigWriter.cpp 
 	src/rules/Rules.cpp 
-	src/rules/HttpRules.cpp
+	src/rules/LocalRules.cpp
+	src/rules/RemoteRules.cpp
 	src/rules/JavascriptRules.cpp
 	src/gtk/AppWindow.cpp 
 	src/gtk/MenuBar.cpp

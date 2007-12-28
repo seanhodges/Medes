@@ -92,8 +92,12 @@ gint GeckoEmbed::open_uri_cb(GtkMozEmbed *embed, const char *uri, GeckoEmbed& pa
 			|| target.find("https:") == 0 
 			|| target.find("about:") == 0 
 			|| target.find("ftp:") == 0) {
-		cout << "applying http rules" << endl;
-		handler = new HttpRules(parent.getConfig());
+		cout << "applying remote rules" << endl;
+		handler = new RemoteRules(parent.getConfig());
+	}
+	else if (target.find("file:") == 0) {
+		cout << "applying local rules" << endl;
+		handler = new LocalRules(parent.getConfig());
 	}
 	else if (target.find("javascript:") == 0) {
 		cout << "applying javascript rules" << endl;

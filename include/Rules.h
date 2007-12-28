@@ -34,7 +34,7 @@ class Rules {
 		bool isRedirectAllowed() { return allowRedirect; }
 };
 
-class HttpRules : public Rules {
+class RemoteRules : public Rules {
 
 	private:
 
@@ -50,8 +50,25 @@ class HttpRules : public Rules {
 
 	public:
 
-		HttpRules(ConfigContainer config);
-		virtual ~HttpRules() {}
+		RemoteRules(ConfigContainer config);
+		virtual ~RemoteRules() {}
+};
+
+class LocalRules : public Rules {
+
+	private:
+
+		void handleInternal(string target);
+		void handleExternal(string target);
+		void handleDrop(string target);
+
+		bool ruleMatches(Rule rule, string target);
+		void execRule(Rule rule, string target);
+
+	public:
+
+		LocalRules(ConfigContainer config);
+		virtual ~LocalRules() {}
 };
 
 class JavascriptRules : public Rules {

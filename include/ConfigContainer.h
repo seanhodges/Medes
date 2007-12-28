@@ -83,11 +83,13 @@ class ConfigContainer {
 		Geometry windowGeom;
 
 		// Rules
-		string httpDefaultRule;
-		deque<Rule> httpRules;
+		string localDefaultRule;
+		deque<Rule> localRules;
+		string remoteDefaultRule;
+		deque<Rule> remoteRules;
+		bool hideAdverts;
 		string javascriptDefaultRule;
 		deque<Rule> javascriptRules;
-		bool hideAdverts;
 
 		// Interface
 		bool menuBarEnabled;
@@ -104,10 +106,12 @@ class ConfigContainer {
 		string getAppTitle() { return appTitle; }
 		string getAppIcon() { return appIcon; }
 		Geometry getWindowGeom() { return windowGeom; }
-		string getHttpDefaultRule() { return httpDefaultRule; }
+		string getLocalDefaultRule() { return localDefaultRule; }
+		string getRemoteDefaultRule() { return remoteDefaultRule; }
 		string getJavascriptDefaultRule() { return javascriptDefaultRule; }
 		bool isAdvertsHidden() { return hideAdverts; }
-		deque<Rule>& getHttpRules() { return httpRules; }
+		deque<Rule>& getLocalRules() { return localRules; }
+		deque<Rule>& getRemoteRules() { return remoteRules; }
 		deque<Rule>& getJavascriptRules() { return javascriptRules; }
 		vector<MenuElement>& getMenuBar() { return menuBar; }
 		vector<MenuElement>& getContextMenu() { return contextMenu; }
@@ -117,7 +121,8 @@ class ConfigContainer {
 		void setAppTitle(string appTitle) { this->appTitle = appTitle; }
 		void setAppIcon(string appIcon);
 		void setWindowGeom(Geometry windowGeom) { this->windowGeom = windowGeom; }
-		void setHttpDefaultRule(string httpDefaultRule) { this->httpDefaultRule = httpDefaultRule; }
+		void setLocalDefaultRule(string defaultRule) { this->localDefaultRule = defaultRule; }
+		void setRemoteDefaultRule(string defaultRule) { this->remoteDefaultRule = defaultRule; }
 		void setJavascriptDefaultRule(string javascriptDefaultRule) { this->javascriptDefaultRule = javascriptDefaultRule; }
 		void setAdvertsHidden(bool hideAdverts) { this->hideAdverts = hideAdverts; }
 		void setMenuBarEnabled(bool menuBarEnabled) { this->menuBarEnabled = menuBarEnabled; }
@@ -126,10 +131,12 @@ class ConfigContainer {
 		bool hasMenuBar() { return menuBarEnabled; }
 		bool hasStatusBar() { return statusBarEnabled; }
 
-		void replaceHttpRules(deque<Rule> newRules) { httpRules = newRules; }
-		void appendHttpRules(vector<Rule> newRules);
-		void appendHttpRules(Rule newRule);
-
+		void replaceLocalRules(deque<Rule> newRules) { localRules = newRules; }
+		void appendLocalRules(vector<Rule> newRules);
+		void appendLocalRules(Rule newRule);
+		void replaceRemoteRules(deque<Rule> newRules) { remoteRules = newRules; }
+		void appendRemoteRules(vector<Rule> newRules);
+		void appendRemoteRules(Rule newRule);
 		void replaceJavascriptRules(deque<Rule> newRules) { javascriptRules = newRules; }
 		void appendJavascriptRules(vector<Rule> newRules);
 		void appendJavascriptRules(Rule newRule);

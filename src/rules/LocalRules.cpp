@@ -5,10 +5,9 @@
  *
  * @param config - the config container containing the rules for this handler
  */
-HttpRules::HttpRules(ConfigContainer config)
-	: Rules::Rules(config.getHttpRules(), config.getHttpDefaultRule()) {
+LocalRules::LocalRules(ConfigContainer config)
+	: Rules::Rules(config.getLocalRules(), config.getLocalDefaultRule()) {
 	allowRedirect = false;
-	dropAdverts = true;
 }
 
 /**
@@ -19,7 +18,7 @@ HttpRules::HttpRules(ConfigContainer config)
  *
  * @return true if a successful match was found
  */
-bool HttpRules::ruleMatches(Rule rule, string target) { 
+bool LocalRules::ruleMatches(Rule rule, string target) { 
 	// TODO: add some regex matching in the future
 	if (target.find(rule.getValue()) == 0) {
 		return true;
@@ -33,12 +32,11 @@ bool HttpRules::ruleMatches(Rule rule, string target) {
  * @param rule - the rule to execute
  * @param target - the URL to execute
  */
-void HttpRules::execRule(Rule rule, string target) {
+void LocalRules::execRule(Rule rule, string target) {
 	string ruleName = rule.getGroup();
 	// Declare new domain rules here
 	if (ruleName == "internal") { handleInternal(target); }
 	else if (ruleName == "external") { handleExternal(target); }
-	else if (ruleName == "advert") { handleAdvert(target); }
 	else if (ruleName == "drop") { handleDrop(target); }
 	else { 
 		cout << "(!!!) rule is not recognised and could not be applied: " + ruleName << endl; 
@@ -50,7 +48,7 @@ void HttpRules::execRule(Rule rule, string target) {
  *
  * @param target - the target URL
  */
-void HttpRules::handleInternal(string target) {
+void LocalRules::handleInternal(string target) {
 	cout << "page redirection to: " + target << endl;
 	allowRedirect = true;
 }
@@ -60,27 +58,11 @@ void HttpRules::handleInternal(string target) {
  *
  * @param target - the target URL
  */
-void HttpRules::handleExternal(string target) {
-	cout << "executing handler for domain: " + target << endl;
+void LocalRules::handleExternal(string target) {
+	cout << "executing handler for target: " + target << endl;
 	string cmd = "gnome-www-browser " + target;
 	system(cmd.c_str());
 	allowRedirect = false;
-}
-
-/**
- * Action an advert domain rule
- *
- * @param target - the target URL
- */
-void HttpRules::handleAdvert(string target) {
-	if (dropAdverts) {
-		cout << "dropping advert: " + target << endl;
-		allowRedirect = false;
-	}
-	else {
-		cout << "accepting advert: " + target << endl;
-		allowRedirect = true;
-	}
 }
 
 /**
@@ -88,8 +70,8 @@ void HttpRules::handleAdvert(string target) {
  *
  * @param target - the target URL
  */
-void HttpRules::handleDrop(string target) {
-	cout << "dropping http target: " + target << endl;
+void LocalRules::handleDrop(string target) {
+	cout << "dropping local target: " + target << endl;
 	allowRedirect = false;
 }
 

@@ -63,9 +63,15 @@ void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config,
 	else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 	else if (configCode == "APPLICATION_ICON") { config.setAppIcon(keyValue); }
 	else if (configCode == "APPLICATION_WINDOWGEOMETRY") { config.setWindowGeom(convertToGeometry(key)); }
-	else if (configCode == "RULES_HTTP") { config.appendHttpRules(convertToGroupedVector(key)); }
+	else if (configCode == "RULES_REMOTE" || configCode == "RULES_HTTP") { 
+		config.appendRemoteRules(convertToGroupedVector(key)); 
+	}
+	else if (configCode == "RULES_LOCAL") { config.appendLocalRules(convertToGroupedVector(key)); }
 	else if (configCode == "RULES_JAVASCRIPT") { config.appendJavascriptRules(convertToGroupedVector(key)); }
-	else if (configCode == "RULES_HTTPDEFAULT") { config.setHttpDefaultRule(keyValue); }
+	else if (configCode == "RULES_REMOTEDEFAULT" || configCode == "RULES_HTTPDEFAULT") { 
+		config.setRemoteDefaultRule(keyValue); 
+	}
+	else if (configCode == "RULES_LOCALDEFAULT") { config.setLocalDefaultRule(keyValue); }
 	else if (configCode == "RULES_JAVASCRIPTDEFAULT") { config.setJavascriptDefaultRule(keyValue); }
 	else if (configCode == "RULES_DROPADVERTS") { config.setAdvertsHidden(convertToBoolean(keyValue)); }
 	else if (configCode == "INTERFACE_MENUBARENABLED") { config.setMenuBarEnabled(convertToBoolean(keyValue)); }

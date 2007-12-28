@@ -8,7 +8,7 @@ APPWINDOW_DEFINED	include/AppWindow.h	2;"	d
 APP_RESOURCE_PATH	include/Native.h	9;"	d
 AppWindow	include/AppWindow.h	/^class AppWindow {$/;"	c
 AppWindow	src/gtk/AppWindow.cpp	/^AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {$/;"	f	class:AppWindow
-COMMAND	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+COMMAND	include/TargetHandler.h	/^		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
 CONFIGCONTAINER_DEFINED	include/ConfigContainer.h	2;"	d
 CONFIGIO_DEFINED	include/ConfigIO.h	2;"	d
 ConfigContainer	include/ConfigContainer.h	/^class ConfigContainer {$/;"	c
@@ -27,12 +27,12 @@ GeckoEmbed	include/GeckoEmbed.h	/^class GeckoEmbed {$/;"	c
 Geometry	include/ConfigContainer.h	/^		Geometry() {};$/;"	f	class:Geometry
 Geometry	include/ConfigContainer.h	/^class Geometry {$/;"	c
 Geometry	src/config/ConfigContainer.cpp	/^Geometry::Geometry(int left, int top, int width, int height) {$/;"	f	class:Geometry
-HTTP	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
-HttpRules	include/Rules.h	/^class HttpRules : public Rules {$/;"	c
-HttpRules	src/rules/HttpRules.cpp	/^HttpRules::HttpRules(ConfigContainer config)$/;"	f	class:HttpRules
-JAVASCRIPT	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+JAVASCRIPT	include/TargetHandler.h	/^		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
 JavascriptRules	include/Rules.h	/^class JavascriptRules : public Rules {$/;"	c
 JavascriptRules	src/rules/JavascriptRules.cpp	/^JavascriptRules::JavascriptRules(ConfigContainer config)$/;"	f	class:JavascriptRules
+LOCAL	include/TargetHandler.h	/^		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+LocalRules	include/Rules.h	/^class LocalRules : public Rules {$/;"	c
+LocalRules	src/rules/LocalRules.cpp	/^LocalRules::LocalRules(ConfigContainer config)$/;"	f	class:LocalRules
 MENUBAR_DEFINED	include/MenuBar.h	2;"	d
 MOZILLA_FIVE_HOME	include/Native.h	11;"	d
 MenuBar	include/MenuBar.h	/^		MenuBar() {}$/;"	f	class:MenuBar
@@ -49,7 +49,10 @@ MenuItem	include/MenuBar.h	/^class MenuItem {$/;"	c
 MenuItem	src/gtk/MenuBar.cpp	/^MenuItem::MenuItem(GeckoEmbed *gecko, const string& label, const string& target) {$/;"	f	class:MenuItem
 NATIVE_DEFINED	include/Native.h	2;"	d
 PIXMAPS_PATH	include/Native.h	10;"	d
+REMOTE	include/TargetHandler.h	/^		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
 RULES_DEFINED	include/Rules.h	2;"	d
+RemoteRules	include/Rules.h	/^class RemoteRules : public Rules {$/;"	c
+RemoteRules	src/rules/RemoteRules.cpp	/^RemoteRules::RemoteRules(ConfigContainer config)$/;"	f	class:RemoteRules
 Rule	include/ConfigContainer.h	/^		Rule() {};$/;"	f	class:Rule
 Rule	include/ConfigContainer.h	/^class Rule {$/;"	c
 Rule	src/config/ConfigContainer.cpp	/^Rule::Rule(string group, string value) {$/;"	f	class:Rule
@@ -62,8 +65,8 @@ StatusBar	src/gtk/StatusBar.cpp	/^StatusBar::StatusBar() {$/;"	f	class:StatusBar
 TARGETHANDLER_DEFINED	include/TargetHandler.h	2;"	d
 TargetHandler	include/TargetHandler.h	/^class TargetHandler {$/;"	c
 TargetHandler	src/TargetHandler.cpp	/^TargetHandler::TargetHandler(string target, GeckoEmbed *gecko) {$/;"	f	class:TargetHandler
-TargetType	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	g	class:TargetHandler
-UNKNOWN	include/TargetHandler.h	/^		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
+TargetType	include/TargetHandler.h	/^		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	g	class:TargetHandler
+UNKNOWN	include/TargetHandler.h	/^		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};$/;"	e	enum:TargetHandler::TargetType
 accel	include/ConfigContainer.h	/^		string accel;$/;"	m	class:MenuElement
 accelGroup	include/AppWindow.h	/^		GtkAccelGroup *accelGroup;$/;"	m	class:AppWindow
 addItem	src/gtk/MenuBar.cpp	/^void MenuGroup::addItem(const string &label, MenuItem* item) {$/;"	f	class:MenuGroup
@@ -104,17 +107,17 @@ convertToVector	src/config/ConfigReader.cpp	/^vector<string> ConfigReader::conve
 dataSize	include/GeckoEmbed.h	/^		int dataSize;$/;"	m	class:GeckoEmbed
 defaultRule	include/Rules.h	/^		string defaultRule;$/;"	m	class:Rules
 doCommand	src/TargetHandler.cpp	/^void TargetHandler::doCommand() {$/;"	f	class:TargetHandler
-doHttp	src/TargetHandler.cpp	/^void TargetHandler::doHttp() {$/;"	f	class:TargetHandler
-doJavascript	src/TargetHandler.cpp	/^void TargetHandler::doJavascript() {$/;"	f	class:TargetHandler
-dropAdverts	include/Rules.h	/^		bool dropAdverts;$/;"	m	class:HttpRules
+doGecko	src/TargetHandler.cpp	/^void TargetHandler::doGecko() {$/;"	f	class:TargetHandler
 dropAdverts	include/Rules.h	/^		bool dropAdverts;$/;"	m	class:JavascriptRules
+dropAdverts	include/Rules.h	/^		bool dropAdverts;$/;"	m	class:RemoteRules
 errors	include/ConfigIO.h	/^		string errors;$/;"	m	class:ConfigReader
 eventClick	src/gtk/MenuBar.cpp	/^bool MenuItem::eventClick(GtkWidget *item, MenuItem *parent) {$/;"	f	class:MenuItem
 eventDestroy	src/gtk/AppWindow.cpp	/^void AppWindow::eventDestroy(GtkWindow *window, AppWindow& parent) {$/;"	f	class:AppWindow
 eventWindowProperty	src/gtk/AppWindow.cpp	/^bool AppWindow::eventWindowProperty(GtkWindow *window, GdkEventConfigure* event, AppWindow& parent) {$/;"	f	class:AppWindow
 execRule	include/Rules.h	/^		virtual void execRule(Rule rule, string target) {}$/;"	f	class:Rules
-execRule	src/rules/HttpRules.cpp	/^void HttpRules::execRule(Rule rule, string target) {$/;"	f	class:HttpRules
 execRule	src/rules/JavascriptRules.cpp	/^void JavascriptRules::execRule(Rule rule, string target) {$/;"	f	class:JavascriptRules
+execRule	src/rules/LocalRules.cpp	/^void LocalRules::execRule(Rule rule, string target) {$/;"	f	class:LocalRules
+execRule	src/rules/RemoteRules.cpp	/^void RemoteRules::execRule(Rule rule, string target) {$/;"	f	class:RemoteRules
 findSetting	src/config/ConfigIO.cpp	/^xmlNodePtr ConfigIO::findSetting(string group, string key) {$/;"	f	class:ConfigIO
 gecko	include/AppWindow.h	/^		GeckoEmbed gecko;$/;"	m	class:AppWindow
 gecko	include/MenuBar.h	/^		GeckoEmbed *gecko;$/;"	m	class:MenuItem
@@ -175,13 +178,16 @@ getXmlDoc	include/ConfigIO.h	/^		xmlDocPtr getXmlDoc() { return xmlDoc; }$/;"	f	
 group	include/ConfigContainer.h	/^		string group;$/;"	m	class:MenuElement
 group	include/ConfigContainer.h	/^		string group;$/;"	m	class:Rule
 groups	include/MenuBar.h	/^		map<string, MenuGroup*> groups;$/;"	m	class:MenuBar
-handleAdvert	src/rules/HttpRules.cpp	/^void HttpRules::handleAdvert(string target) {$/;"	f	class:HttpRules
 handleAdvert	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleAdvert(string target) {$/;"	f	class:JavascriptRules
+handleAdvert	src/rules/RemoteRules.cpp	/^void RemoteRules::handleAdvert(string target) {$/;"	f	class:RemoteRules
 handleAllow	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleAllow(string target) {$/;"	f	class:JavascriptRules
-handleDrop	src/rules/HttpRules.cpp	/^void HttpRules::handleDrop(string target) {$/;"	f	class:HttpRules
 handleDrop	src/rules/JavascriptRules.cpp	/^void JavascriptRules::handleDrop(string target) {$/;"	f	class:JavascriptRules
-handleExternal	src/rules/HttpRules.cpp	/^void HttpRules::handleExternal(string target) {$/;"	f	class:HttpRules
-handleInternal	src/rules/HttpRules.cpp	/^void HttpRules::handleInternal(string target) {$/;"	f	class:HttpRules
+handleDrop	src/rules/LocalRules.cpp	/^void LocalRules::handleDrop(string target) {$/;"	f	class:LocalRules
+handleDrop	src/rules/RemoteRules.cpp	/^void RemoteRules::handleDrop(string target) {$/;"	f	class:RemoteRules
+handleExternal	src/rules/LocalRules.cpp	/^void LocalRules::handleExternal(string target) {$/;"	f	class:LocalRules
+handleExternal	src/rules/RemoteRules.cpp	/^void RemoteRules::handleExternal(string target) {$/;"	f	class:RemoteRules
+handleInternal	src/rules/LocalRules.cpp	/^void LocalRules::handleInternal(string target) {$/;"	f	class:LocalRules
+handleInternal	src/rules/RemoteRules.cpp	/^void RemoteRules::handleInternal(string target) {$/;"	f	class:RemoteRules
 hasMenuBar	include/ConfigContainer.h	/^		bool hasMenuBar() { return menuBarEnabled; }$/;"	f	class:ConfigContainer
 hasStatusBar	include/ConfigContainer.h	/^		bool hasStatusBar() { return statusBarEnabled; }$/;"	f	class:ConfigContainer
 hasStatusBar	include/GeckoEmbed.h	/^		bool hasStatusBar() { return (status != NULL); }$/;"	f	class:GeckoEmbed
@@ -225,8 +231,9 @@ replaceMenuBar	include/ConfigContainer.h	/^		void replaceMenuBar(vector<MenuElem
 resolveConfigCode	src/config/ConfigReader.cpp	/^void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config, string groupName, xmlNodePtr &key) {$/;"	f	class:ConfigReader
 ruleList	include/Rules.h	/^		deque<Rule> ruleList;$/;"	m	class:Rules
 ruleMatches	include/Rules.h	/^		virtual bool ruleMatches(Rule rule, string target) { return true; }$/;"	f	class:Rules
-ruleMatches	src/rules/HttpRules.cpp	/^bool HttpRules::ruleMatches(Rule rule, string target) { $/;"	f	class:HttpRules
 ruleMatches	src/rules/JavascriptRules.cpp	/^bool JavascriptRules::ruleMatches(Rule rule, string target) { $/;"	f	class:JavascriptRules
+ruleMatches	src/rules/LocalRules.cpp	/^bool LocalRules::ruleMatches(Rule rule, string target) { $/;"	f	class:LocalRules
+ruleMatches	src/rules/RemoteRules.cpp	/^bool RemoteRules::ruleMatches(Rule rule, string target) { $/;"	f	class:RemoteRules
 runAction	src/TargetHandler.cpp	/^void TargetHandler::runAction() {$/;"	f	class:TargetHandler
 runRules	src/rules/Rules.cpp	/^bool Rules::runRules(string target) { $/;"	f	class:Rules
 saveFile	src/config/ConfigIO.cpp	/^bool ConfigIO::saveFile() {$/;"	f	class:ConfigIO
@@ -287,8 +294,9 @@ xmlFilePath	include/ConfigIO.h	/^		string xmlFilePath;$/;"	m	class:ConfigIO
 ~ConfigIO	src/config/ConfigIO.cpp	/^ConfigIO::~ConfigIO() {$/;"	f	class:ConfigIO
 ~ConfigReader	include/ConfigIO.h	/^		~ConfigReader() {};$/;"	f	class:ConfigReader
 ~ConfigWriter	include/ConfigIO.h	/^		~ConfigWriter() {};$/;"	f	class:ConfigWriter
-~HttpRules	include/Rules.h	/^		virtual ~HttpRules() {}$/;"	f	class:HttpRules
 ~JavascriptRules	include/Rules.h	/^		virtual ~JavascriptRules() {}$/;"	f	class:JavascriptRules
+~LocalRules	include/Rules.h	/^		virtual ~LocalRules() {}$/;"	f	class:LocalRules
 ~MenuBar	src/gtk/MenuBar.cpp	/^MenuBar::~MenuBar() {$/;"	f	class:MenuBar
 ~MenuGroup	src/gtk/MenuBar.cpp	/^MenuGroup::~MenuGroup() {$/;"	f	class:MenuGroup
+~RemoteRules	include/Rules.h	/^		virtual ~RemoteRules() {}$/;"	f	class:RemoteRules
 ~Rules	include/Rules.h	/^        virtual ~Rules() {}$/;"	f	class:Rules

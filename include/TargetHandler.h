@@ -12,7 +12,7 @@ class TargetHandler {
 
 	public:
 
-		enum TargetType {HTTP, JAVASCRIPT, COMMAND, UNKNOWN};
+		enum TargetType {REMOTE, LOCAL, JAVASCRIPT, COMMAND, UNKNOWN};
 
 		TargetHandler(string target, GeckoEmbed *gecko);
 
@@ -21,8 +21,7 @@ class TargetHandler {
 
 	private:
 		
-		void doHttp();
-		void doJavascript();
+		void doGecko();
 		void doCommand();
 
 		GeckoEmbed *gecko;
