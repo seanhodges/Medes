@@ -1,5 +1,9 @@
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 #include "AppWindow.h"
 #include "ConfigIO.h"
+
+namespace fs = boost::filesystem;
 
 /**
  * Create the application window
@@ -27,8 +31,14 @@ AppWindow::AppWindow(int argc, char *argv[], ConfigContainer config) {
 	gtk_window_move(window, geom.getLeft(), geom.getTop());
 	gtk_window_set_default_size(window, geom.getWidth(), geom.getHeight());
 	setTitle(config.getAppTitle());
-	setIcon(config.getAppIcon());
-
+	string iconPath = config.getAppIcon();
+	if (fs::is_regular(fs::path(iconPath))) {
+		// Set the icon, if it exists
+		setIcon(iconPath);
+	}
+	else {
+		cout << "could not load icon, file does not exist: " << iconPath << endl;
+	}
 	// Attach the menu bar
 	if (config.hasMenuBar() == true) {
 		menuBar = new MenuBar(config.getMenuBar(), &gecko, accelGroup);
