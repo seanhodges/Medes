@@ -13,7 +13,7 @@
 namespace fs = boost::filesystem;
 
 void printUsage() {
-	cout << "medes 0.1" << endl;
+	cout << "medes 0.1.0" << endl;
 	cout << "Usage: medes [webapp name]" << endl;
 	cout << endl;
 }
