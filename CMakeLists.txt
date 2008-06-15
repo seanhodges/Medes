@@ -33,7 +33,7 @@ set(MEDES_SRC
 
 find_package(PkgConfig)
 pkg_check_modules(GTK2 REQUIRED gtk+-2.0)
-pkg_check_modules(GTKMOZEMBED REQUIRED firefox-gtkmozembed)
+pkg_search_module(GTKMOZEMBED REQUIRED firefox-gtkmozembed xulrunner-gtkmozembed)
 pkg_check_modules(XML2 REQUIRED libxml-2.0)
 
 configure_file(
