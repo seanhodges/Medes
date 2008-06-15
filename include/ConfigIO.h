@@ -55,9 +55,11 @@ class ConfigReader : public ConfigIO {
 		int convertToInt(string strIn);
 		bool convertToBoolean(string strIn);
 		vector<string> convertToVector(const xmlNodePtr &xmlList, string elementName);
-		vector<Rule> convertToGroupedVector(const xmlNodePtr &xmlList);
+		vector<Rule> convertToRule(const xmlNodePtr &xmlList);
 		Geometry convertToGeometry(const xmlNodePtr &xmlList);
 		vector<MenuElement> convertToMenu(const xmlNodePtr &xmlList);
+
+		string varExpand(string testString);
 
 	public:
 

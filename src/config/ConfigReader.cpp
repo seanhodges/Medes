@@ -3,7 +3,10 @@
 #include <iostream>
 	using std::cout;
 	using std::endl;
+#include <cctype>
+	using std::transform;
 #include "ConfigIO.h"
+#include "Environment.h"
 
 /**
  * Create a new ConfigReader object
@@ -59,15 +62,15 @@ bool ConfigReader::appendConfigToContainer(ConfigContainer& config) {
 void ConfigReader::resolveConfigCode(string configCode, ConfigContainer &config, string groupName, xmlNodePtr &key) {
 	string keyName = (char*)key->name;
 	string keyValue = (char*)xmlNodeGetContent(key);
-	if (configCode == "APPLICATION_URL") { config.setAppUrl(keyValue); }
+	if (configCode == "APPLICATION_URL") { config.setAppUrl(varExpand(keyValue)); }
 	else if (configCode == "APPLICATION_TITLE") { config.setAppTitle(keyValue); }
 	else if (configCode == "APPLICATION_ICON") { config.setAppIcon(keyValue); }
 	else if (configCode == "APPLICATION_WINDOWGEOMETRY") { config.setWindowGeom(convertToGeometry(key)); }
 	else if (configCode == "RULES_REMOTE" || configCode == "RULES_HTTP") { 
-		config.appendRemoteRules(convertToGroupedVector(key)); 
+		config.appendRemoteRules(convertToRule(key)); 
 	}
-	else if (configCode == "RULES_LOCAL") { config.appendLocalRules(convertToGroupedVector(key)); }
-	else if (configCode == "RULES_JAVASCRIPT") { config.appendJavascriptRules(convertToGroupedVector(key)); }
+	else if (configCode == "RULES_LOCAL") { config.appendLocalRules(convertToRule(key)); }
+	else if (configCode == "RULES_JAVASCRIPT") { config.appendJavascriptRules(convertToRule(key)); }
 	else if (configCode == "RULES_REMOTEDEFAULT" || configCode == "RULES_HTTPDEFAULT") { 
 		config.setRemoteDefaultRule(keyValue); 
 	}
@@ -134,20 +137,20 @@ vector<string> ConfigReader::convertToVector(const xmlNodePtr& xmlList, string e
 }
 
 /**
- * Cast the children of an XML element to a 2D vector<string> (group->value)
+ * Cast the children of an XML element to a Rule
  *
  * @param xmlList - pointer to the node to parse
  *
  * @return the vector of items (key = group->value)
  */
-vector<Rule> ConfigReader::convertToGroupedVector(const xmlNodePtr& xmlList) {
+vector<Rule> ConfigReader::convertToRule(const xmlNodePtr& xmlList) {
 	vector<Rule> out;
 	xmlNodePtr entries;
 	for(entries = xmlList->children; entries != NULL; entries = entries->next) {
 		if (entries->type == XML_ELEMENT_NODE) {
 			string group = (char*)entries->name;
 			string entryValue = (char*)xmlNodeGetContent(entries);
-			Rule entry(group, entryValue);
+			Rule entry(group, varExpand(entryValue));
 			out.push_back(entry);
 		}
 	}
@@ -229,3 +232,26 @@ vector<MenuElement> ConfigReader::convertToMenu(const xmlNodePtr& xmlList) {
 	return out;
 }
 
+/**
+ * Quick-and-dirty var expand for local resources
+ * TODO: Move this to a helper and expand it for more specific variables
+ *
+ * @param testString - the string to expand
+ *
+ * @return the string after variables have been resolved
+ */
+string ConfigReader::varExpand(string testString) {
+	// Change testString to lowercase for match precision
+	string stringOut = testString;
+	transform(testString.begin(), testString.end(), testString.begin(), tolower); 
+
+	string varName = "${local_resource}";
+	Environment env;
+	string resPath = env.getGlobalLocalResources();
+	int pos = testString.find(varName);
+	if (pos > 0) {
+		testString.replace(pos, varName.size(), resPath);
+		stringOut.replace(pos, varName.size(), resPath);
+	}
+	return stringOut;
+}

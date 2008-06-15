@@ -16,6 +16,7 @@ class Environment {
 		Environment();
 
 		// Global application paths
+		string getGlobalLocalResources() { return (string)APP_RESOURCE_PATH; }
 		string getGlobalWebAppPath() { return (string)APP_RESOURCE_PATH + "/webapps/"; }
 		string getUserWebAppPath() { return getUserProfilePath() + "webapps/"; }
 		string getUserGeckoProfilePath() { return getUserProfilePath() + "mozilla/"; }
