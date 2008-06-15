@@ -10,7 +10,7 @@ Medes depends on the following components, corresponding Ubuntu packages are in 
 - CMake			(cmake)
 - GCC & make	(build-essential)
 - pkg-config	(pkg-config)
-- gtkmozembed 	(firefox-dev)
+- gtkmozembed 	(firefox-dev or libxul-dev in Hardy)
 - GTK 2.x		(libgtk2.0-dev)
 - XML2			(libxml2-dev)
 - libboost		(libboost-filesystem-dev)
