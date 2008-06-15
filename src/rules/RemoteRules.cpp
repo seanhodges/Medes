@@ -62,7 +62,7 @@ void RemoteRules::handleInternal(string target) {
  */
 void RemoteRules::handleExternal(string target) {
 	cout << "executing handler for target: " + target << endl;
-	string cmd = "gnome-www-browser " + target;
+	string cmd = "x-www-browser " + target;
 	system(cmd.c_str());
 	allowRedirect = false;
 }
