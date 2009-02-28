@@ -1,4 +1,7 @@
+#include <cstdlib>
+	using std::system;
 #include "Rules.h"
+
 
 /**
  * Initialise the handler

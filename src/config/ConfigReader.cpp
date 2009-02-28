@@ -5,6 +5,8 @@
 	using std::endl;
 #include <cctype>
 	using std::transform;
+#include <algorithm>
+	using std::transform;
 #include "ConfigIO.h"
 #include "Environment.h"
 
